@@ -7,6 +7,8 @@
 //
 
 #import "BussyAppDelegate.h"
+#import "Adapter.h"
+#import "StopRoute.h"
 
 @implementation BussyAppDelegate
 
@@ -21,7 +23,22 @@
     // Add the navigation controller's view to the window and display.
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
-    return YES;
+    
+    Adapter * adapter = [[Adapter alloc] init];
+    Stop * stop = [adapter getStop:@"50119"];
+    NSArray * stopRoutes = [adapter getStopRoutesForStop:stop];
+    
+    for (StopRoute * route in stopRoutes)
+    {
+        NSLog(@"Route ID: %@", [route getRouteID]);
+        
+        for (NSString * stopTime in [route getArrivalTimes])
+        {
+            NSLog(@"Time: %@", stopTime);
+        }
+    }
+    
+    return YES;		
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
