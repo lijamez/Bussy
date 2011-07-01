@@ -59,9 +59,9 @@
 		A063462713BC537300CB5168 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A063462913BC537300CB5168 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A063462B13BC537300CB5168 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A063462F13BC537300CB5168 /* Bussy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bussy-Info.plist"; sourceTree = "<group>"; };
+		A063462F13BC537300CB5168 /* Bussy-Info.plist */ = {isa = PBXFileReference; path = "Bussy-Info.plist"; sourceTree = "<group>"; };
 		A063463113BC537300CB5168 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A063463313BC537300CB5168 /* Bussy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bussy-Prefix.pch"; sourceTree = "<group>"; };
+		A063463313BC537300CB5168 /* Bussy-Prefix.pch */ = {isa = PBXFileReference; path = "Bussy-Prefix.pch"; sourceTree = "<group>"; };
 		A063463413BC537300CB5168 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A063463613BC537300CB5168 /* BussyAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BussyAppDelegate.h; sourceTree = "<group>"; };
 		A063463713BC537300CB5168 /* BussyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BussyAppDelegate.m; sourceTree = "<group>"; };
@@ -70,9 +70,9 @@
 		A063463D13BC537300CB5168 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		A063464013BC537300CB5168 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
 		A063464713BC537300CB5168 /* BussyTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BussyTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A063464F13BC537300CB5168 /* BussyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BussyTests-Info.plist"; sourceTree = "<group>"; };
+		A063464F13BC537300CB5168 /* BussyTests-Info.plist */ = {isa = PBXFileReference; path = "BussyTests-Info.plist"; sourceTree = "<group>"; };
 		A063465113BC537300CB5168 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A063465313BC537300CB5168 /* BussyTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BussyTests-Prefix.pch"; sourceTree = "<group>"; };
+		A063465313BC537300CB5168 /* BussyTests-Prefix.pch */ = {isa = PBXFileReference; path = "BussyTests-Prefix.pch"; sourceTree = "<group>"; };
 		A063465413BC537300CB5168 /* BussyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BussyTests.h; sourceTree = "<group>"; };
 		A063465613BC537300CB5168 /* BussyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BussyTests.m; sourceTree = "<group>"; };
 		A063466013BC5AFA00CB5168 /* Translink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Translink.h; sourceTree = "<group>"; };
@@ -469,7 +469,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bussy/Bussy-Prefix.pch";
 				INFOPLIST_FILE = "Bussy/Bussy-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Bussy;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -482,7 +482,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bussy/Bussy-Prefix.pch";
 				INFOPLIST_FILE = "Bussy/Bussy-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Bussy;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -504,7 +504,7 @@
 					"-framework",
 					SenTestingKit,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BussyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -526,7 +526,7 @@
 					"-framework",
 					SenTestingKit,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BussyTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
