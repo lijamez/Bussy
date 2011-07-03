@@ -11,6 +11,14 @@
 
 @interface SubViewController : UIViewController {
     
+    IBOutlet UILabel * label;
+    IBOutlet UIButton * button;
+    
 }
+
+@property (retain, nonatomic) IBOutlet UILabel * label;
+@property (retain, nonatomic) IBOutlet UIButton * button;
+
+- (IBAction) OnButtonClick:(id) sender;
 
 @end

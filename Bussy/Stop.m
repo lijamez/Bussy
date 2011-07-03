@@ -16,9 +16,11 @@
     self = [super init];
     if (self)
     {
+        [inputId retain];
+        [inputName retain];
         stopId = inputId;
         name = inputName;
-        routes = [routes init];
+        routes = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -49,5 +51,12 @@
     return [NSArray arrayWithArray:routes];
 }
 
+-(void) dealloc
+{
+    [stopId release];
+    [name release];
+    [routes release];
+    [super dealloc];
+}
 
 @end

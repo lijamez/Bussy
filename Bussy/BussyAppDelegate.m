@@ -7,8 +7,6 @@
 //
 
 #import "BussyAppDelegate.h"
-#import "Adapter.h"
-#import "StopRoute.h"
 
 @implementation BussyAppDelegate
 
@@ -24,19 +22,7 @@
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     
-    Adapter * adapter = [[Adapter alloc] init];
-    Stop * stop = [adapter getStop:@"50119"];
-    NSArray * stopRoutes = [adapter getStopRoutesForStop:stop];
-    
-    for (StopRoute * route in stopRoutes)
-    {
-        NSLog(@"Route ID: %@", [route getRouteID]);
-        
-        for (NSString * stopTime in [route getArrivalTimes])
-        {
-            NSLog(@"Time: %@", stopTime);
-        }
-    }
+
     
     return YES;		
 }

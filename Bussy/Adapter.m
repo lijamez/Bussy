@@ -54,7 +54,7 @@
         
         if ([result count] >= 2)
         {
-            NSString * resultStopID = [result objectAtIndex:0];
+            NSString * resultStopID = [[result objectAtIndex:0] stringValue];
             NSString * resultStopName = [result objectAtIndex:1];
             stop = [stop stopId:resultStopID name:resultStopName];
         }

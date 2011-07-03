@@ -7,12 +7,41 @@
 //
 
 #import "RootViewController.h"
+#import "Adapter.h"
+#import "StopRoute.h"
 
 @implementation RootViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
+    temporaryBarButtonItem.title = @"Back";
+    self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+    
+    self.title = @"Bussy";
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    
+    Adapter * adapter = [[Adapter alloc] init];
+    Stop * stop = [adapter getStop:@"50119"];
+    watchedStops = [[NSMutableArray alloc] init];
+    [watchedStops addObject:stop];
+    
+    //NSArray * stopRoutes = [adapter getStopRoutesForStop:stop];
+    
+    /*
+    for (StopRoute * route in stopRoutes)
+    {
+        NSLog(@"Route ID: %@", [route getRouteID]);
+        
+        for (NSString * stopTime in [route getArrivalTimes])
+        {
+            NSLog(@"Time: %@", stopTime);
+        }
+    }
+    */
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -51,7 +80,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [watchedStops count];
 }
 
 // Customize the appearance of table view cells.
@@ -61,8 +90,12 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
+    
+    Stop * stop = [watchedStops objectAtIndex:indexPath.row];
+    cell.textLabel.text = [stop stopName];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Stop Number: %@", [stop stopID]];
 
     // Configure the cell.
     return cell;

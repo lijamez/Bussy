@@ -15,7 +15,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title = NSLocalizedString(@"Subview one", @"");
     }
     return self;
 }
@@ -23,6 +23,11 @@
 - (void)dealloc
 {
     [super dealloc];
+}
+
+- (IBAction) OnButtonClick:(id)sender
+{
+    
 }
 
 - (void)didReceiveMemoryWarning
