@@ -38,6 +38,10 @@
 		A075241713BD722C000D9419 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240913BD722C000D9419 /* SBJsonTokeniser.m */; };
 		A075241813BD722C000D9419 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240B13BD722C000D9419 /* SBJsonUTF8Stream.m */; };
 		A075241913BD722C000D9419 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240D13BD722C000D9419 /* SBJsonWriter.m */; };
+		A094550C13C04E7A00100ACC /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
+		A094550F13C04EA400100ACC /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550E13C04EA400100ACC /* 57.png */; };
+		A0AC868E13BDB31300B22405 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AC868C13BDB31300B22405 /* SubViewController.m */; };
+		A0AC868F13BDB31300B22405 /* SubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0AC868D13BDB31300B22405 /* SubViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,9 +63,9 @@
 		A063462713BC537300CB5168 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A063462913BC537300CB5168 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A063462B13BC537300CB5168 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A063462F13BC537300CB5168 /* Bussy-Info.plist */ = {isa = PBXFileReference; path = "Bussy-Info.plist"; sourceTree = "<group>"; };
+		A063462F13BC537300CB5168 /* Bussy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bussy-Info.plist"; sourceTree = "<group>"; };
 		A063463113BC537300CB5168 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A063463313BC537300CB5168 /* Bussy-Prefix.pch */ = {isa = PBXFileReference; path = "Bussy-Prefix.pch"; sourceTree = "<group>"; };
+		A063463313BC537300CB5168 /* Bussy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bussy-Prefix.pch"; sourceTree = "<group>"; };
 		A063463413BC537300CB5168 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A063463613BC537300CB5168 /* BussyAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BussyAppDelegate.h; sourceTree = "<group>"; };
 		A063463713BC537300CB5168 /* BussyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BussyAppDelegate.m; sourceTree = "<group>"; };
@@ -70,9 +74,9 @@
 		A063463D13BC537300CB5168 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		A063464013BC537300CB5168 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
 		A063464713BC537300CB5168 /* BussyTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BussyTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A063464F13BC537300CB5168 /* BussyTests-Info.plist */ = {isa = PBXFileReference; path = "BussyTests-Info.plist"; sourceTree = "<group>"; };
+		A063464F13BC537300CB5168 /* BussyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BussyTests-Info.plist"; sourceTree = "<group>"; };
 		A063465113BC537300CB5168 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A063465313BC537300CB5168 /* BussyTests-Prefix.pch */ = {isa = PBXFileReference; path = "BussyTests-Prefix.pch"; sourceTree = "<group>"; };
+		A063465313BC537300CB5168 /* BussyTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BussyTests-Prefix.pch"; sourceTree = "<group>"; };
 		A063465413BC537300CB5168 /* BussyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BussyTests.h; sourceTree = "<group>"; };
 		A063465613BC537300CB5168 /* BussyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BussyTests.m; sourceTree = "<group>"; };
 		A063466013BC5AFA00CB5168 /* Translink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Translink.h; sourceTree = "<group>"; };
@@ -105,6 +109,11 @@
 		A075240B13BD722C000D9419 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonUTF8Stream.m; path = ../../../Downloads/SBJson_v3.0/Classes/SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		A075240C13BD722C000D9419 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonWriter.h; path = ../../../Downloads/SBJson_v3.0/Classes/SBJsonWriter.h; sourceTree = "<group>"; };
 		A075240D13BD722C000D9419 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = ../../../Downloads/SBJson_v3.0/Classes/SBJsonWriter.m; sourceTree = "<group>"; };
+		A094550B13C04E7A00100ACC /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
+		A094550E13C04EA400100ACC /* 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57.png; sourceTree = "<group>"; };
+		A0AC868B13BDB31300B22405 /* SubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
+		A0AC868C13BDB31300B22405 /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
+		A0AC868D13BDB31300B22405 /* SubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +143,8 @@
 		A063461813BC537300CB5168 = {
 			isa = PBXGroup;
 			children = (
+				A094550E13C04EA400100ACC /* 57.png */,
+				A094550B13C04E7A00100ACC /* 114.png */,
 				A063462D13BC537300CB5168 /* Bussy */,
 				A063464D13BC537300CB5168 /* BussyTests */,
 				A063462613BC537300CB5168 /* Frameworks */,
@@ -167,6 +178,9 @@
 				A063463613BC537300CB5168 /* BussyAppDelegate.h */,
 				A063463713BC537300CB5168 /* BussyAppDelegate.m */,
 				A063463913BC537300CB5168 /* MainWindow.xib */,
+				A0AC868B13BDB31300B22405 /* SubViewController.h */,
+				A0AC868C13BDB31300B22405 /* SubViewController.m */,
+				A0AC868D13BDB31300B22405 /* SubViewController.xib */,
 				A063463C13BC537300CB5168 /* RootViewController.h */,
 				A063463D13BC537300CB5168 /* RootViewController.m */,
 				A063463F13BC537300CB5168 /* RootViewController.xib */,
@@ -317,6 +331,9 @@
 				A063463213BC537300CB5168 /* InfoPlist.strings in Resources */,
 				A063463B13BC537300CB5168 /* MainWindow.xib in Resources */,
 				A063464113BC537300CB5168 /* RootViewController.xib in Resources */,
+				A0AC868F13BDB31300B22405 /* SubViewController.xib in Resources */,
+				A094550C13C04E7A00100ACC /* 114.png in Resources */,
+				A094550F13C04EA400100ACC /* 57.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +388,7 @@
 				A075241913BD722C000D9419 /* SBJsonWriter.m in Sources */,
 				A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */,
 				A02B3E6013BD93A7009FCCE3 /* Adapter.m in Sources */,
+				A0AC868E13BDB31300B22405 /* SubViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
