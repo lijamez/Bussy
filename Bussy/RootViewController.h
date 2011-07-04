@@ -8,8 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RootViewController : UITableViewController {
+@protocol ModalViewDelegate
+
+- (void) didReceiveStopNumber: (NSString*) newStopNumber;
+
+@end
+
+@interface RootViewController : UITableViewController<ModalViewDelegate> {
     NSMutableArray * watchedStops;
+    
+    UIBarButtonItem	* addBarButton;
+    
+    
 }
+
+@property (nonatomic, retain) UIBarButtonItem * addBarButton;
+
+- (IBAction)	addWatchedStop:		(id) sender;
 
 @end

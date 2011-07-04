@@ -38,10 +38,10 @@
 		A075241713BD722C000D9419 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240913BD722C000D9419 /* SBJsonTokeniser.m */; };
 		A075241813BD722C000D9419 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240B13BD722C000D9419 /* SBJsonUTF8Stream.m */; };
 		A075241913BD722C000D9419 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240D13BD722C000D9419 /* SBJsonWriter.m */; };
+		A07E596913C16CE5004EBC0D /* AddStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07E596713C16CE5004EBC0D /* AddStopViewController.m */; };
+		A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07E596813C16CE5004EBC0D /* AddStopViewController.xib */; };
 		A094550C13C04E7A00100ACC /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
 		A094550F13C04EA400100ACC /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550E13C04EA400100ACC /* 57.png */; };
-		A0AC868E13BDB31300B22405 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AC868C13BDB31300B22405 /* SubViewController.m */; };
-		A0AC868F13BDB31300B22405 /* SubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0AC868D13BDB31300B22405 /* SubViewController.xib */; };
 		A0B5948313C05692008A48CD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B5948213C05692008A48CD /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -110,11 +110,11 @@
 		A075240B13BD722C000D9419 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonUTF8Stream.m; path = ../../../Downloads/SBJson_v3.0/Classes/SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		A075240C13BD722C000D9419 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonWriter.h; path = ../../../Downloads/SBJson_v3.0/Classes/SBJsonWriter.h; sourceTree = "<group>"; };
 		A075240D13BD722C000D9419 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = ../../../Downloads/SBJson_v3.0/Classes/SBJsonWriter.m; sourceTree = "<group>"; };
+		A07E596613C16CE5004EBC0D /* AddStopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddStopViewController.h; path = ../AddStopViewController.h; sourceTree = "<group>"; };
+		A07E596713C16CE5004EBC0D /* AddStopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddStopViewController.m; path = ../AddStopViewController.m; sourceTree = "<group>"; };
+		A07E596813C16CE5004EBC0D /* AddStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddStopViewController.xib; path = ../AddStopViewController.xib; sourceTree = "<group>"; };
 		A094550B13C04E7A00100ACC /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		A094550E13C04EA400100ACC /* 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57.png; sourceTree = "<group>"; };
-		A0AC868B13BDB31300B22405 /* SubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
-		A0AC868C13BDB31300B22405 /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
-		A0AC868D13BDB31300B22405 /* SubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubViewController.xib; sourceTree = "<group>"; };
 		A0B5948213C05692008A48CD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,13 +177,13 @@
 		A063462D13BC537300CB5168 /* Bussy */ = {
 			isa = PBXGroup;
 			children = (
+				A07E596613C16CE5004EBC0D /* AddStopViewController.h */,
+				A07E596713C16CE5004EBC0D /* AddStopViewController.m */,
+				A07E596813C16CE5004EBC0D /* AddStopViewController.xib */,
 				A07523F213BD7216000D9419 /* JSON */,
 				A063463613BC537300CB5168 /* BussyAppDelegate.h */,
 				A063463713BC537300CB5168 /* BussyAppDelegate.m */,
 				A063463913BC537300CB5168 /* MainWindow.xib */,
-				A0AC868B13BDB31300B22405 /* SubViewController.h */,
-				A0AC868C13BDB31300B22405 /* SubViewController.m */,
-				A0AC868D13BDB31300B22405 /* SubViewController.xib */,
 				A063463C13BC537300CB5168 /* RootViewController.h */,
 				A063463D13BC537300CB5168 /* RootViewController.m */,
 				A063463F13BC537300CB5168 /* RootViewController.xib */,
@@ -334,10 +334,10 @@
 				A063463213BC537300CB5168 /* InfoPlist.strings in Resources */,
 				A063463B13BC537300CB5168 /* MainWindow.xib in Resources */,
 				A063464113BC537300CB5168 /* RootViewController.xib in Resources */,
-				A0AC868F13BDB31300B22405 /* SubViewController.xib in Resources */,
 				A094550C13C04E7A00100ACC /* 114.png in Resources */,
 				A094550F13C04EA400100ACC /* 57.png in Resources */,
 				A0B5948313C05692008A48CD /* Default@2x.png in Resources */,
+				A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +392,7 @@
 				A075241913BD722C000D9419 /* SBJsonWriter.m in Sources */,
 				A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */,
 				A02B3E6013BD93A7009FCCE3 /* Adapter.m in Sources */,
-				A0AC868E13BDB31300B22405 /* SubViewController.m in Sources */,
+				A07E596913C16CE5004EBC0D /* AddStopViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,24 +9,51 @@
 #import "RootViewController.h"
 #import "Adapter.h"
 #import "StopRoute.h"
+#import "AddStopViewController.h"
 
 @implementation RootViewController
+
+@synthesize addBarButton;
+
+- (void) didReceiveStopNumber: (NSString*) newStopNumber
+{
+    [newStopNumber retain];
+    
+    Adapter * adapter = [[Adapter alloc] init];
+    Stop * stop = [adapter getStop:newStopNumber];
+    [watchedStops addObject:stop];
+    
+    [newStopNumber release];
+    
+    [self.tableView reloadData];
+}
+
+- (IBAction) addWatchedStop: (id) sender
+{
+    AddStopViewController * addStopView = [[[AddStopViewController alloc] init] autorelease];
+    addStopView.delegate = self;
+    [self presentModalViewController:addStopView animated:YES];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
-    temporaryBarButtonItem.title = @"Back";
-    self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+    [self setAddBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWatchedStop:)]];
+    self.navigationController.navigationBar.topItem.rightBarButtonItem = addBarButton;
     
     self.title = @"Bussy";
     self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
+    watchedStops = [[NSMutableArray alloc] init];
+    
+    /*
     Adapter * adapter = [[Adapter alloc] init];
     Stop * stop = [adapter getStop:@"50119"];
     watchedStops = [[NSMutableArray alloc] init];
     [watchedStops addObject:stop];
+    */
     
     //NSArray * stopRoutes = [adapter getStopRoutesForStop:stop];
     
