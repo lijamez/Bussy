@@ -8,6 +8,8 @@
 
 #import "AddStopViewController.h"
 #import "RootViewController.h"
+#import "Adapter.h"
+#import "Stop.h"
 
 @implementation AddStopViewController
 
@@ -25,10 +27,25 @@
 
 - (IBAction) notifyIsDone: (id) sender
 {
-    NSLog(@"Done");
-    [delegate didReceiveStopNumber:[textField text]];
-    [self dismissModalViewControllerAnimated:YES];
+    NSString * newStopNumber = [self.textField text];
+    
+    Adapter * adapter = [[Adapter alloc] init];
+    Stop * stop = [adapter getStop:newStopNumber];
+    
+    if ([newStopNumber isEqualToString:[stop stopID]])
+    {
+        [delegate didReceiveStop:stop];
+        [self dismissModalViewControllerAnimated:YES];
+    }
+    else
+    {
+        NSString * alertMessage = [NSString stringWithFormat:@"Stop number '%@' not found.", newStopNumber];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
 }
+
 
 - (IBAction) notifyIsCancelled: (id) sender
 {

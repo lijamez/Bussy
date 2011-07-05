@@ -10,7 +10,7 @@
 
 @protocol ModalViewDelegate;
 
-@interface AddStopViewController : UIViewController {
+@interface AddStopViewController : UIViewController <UIAlertViewDelegate>{
     UIBarButtonItem * doneButton;
     UIBarButtonItem * cancelButton;
     UITextField * textField;

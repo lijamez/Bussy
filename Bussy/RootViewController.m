@@ -15,6 +15,41 @@
 
 @synthesize addBarButton;
 
+- (NSString*) getWatchedStopsSavePath
+{
+    NSArray *saveDataPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *saveDataFolder = [saveDataPath objectAtIndex:0];
+    return [saveDataFolder stringByAppendingFormat:@"/watchedStops.plist"];
+}
+
+- (void) save
+{
+    NSString* watchedStopsSavePath = [self getWatchedStopsSavePath];
+    NSLog(@"Saving to %@...", watchedStopsSavePath);
+    
+    //Construct serializable array
+    NSMutableArray * watchedStopNumbers = [[NSMutableArray alloc] init]; 
+    
+    for (Stop * stop in watchedStops)
+    {
+        [watchedStopNumbers addObject:[stop stopID]];
+    }
+    
+    [watchedStopNumbers writeToFile:watchedStopsSavePath atomically:YES];
+    [watchedStopNumbers release];
+    NSLog(@"Saved!");
+}
+
+- (void) didReceiveStop: (Stop*) newStop
+{
+    if (![watchedStops containsObject:newStop])
+    {
+        [watchedStops addObject:newStop];
+        [self.tableView reloadData];
+    }
+}
+
+
 - (void) didReceiveStopNumber: (NSString*) newStopNumber
 {
     [newStopNumber retain];
@@ -48,26 +83,22 @@
     
     watchedStops = [[NSMutableArray alloc] init];
     
-    /*
-    Adapter * adapter = [[Adapter alloc] init];
-    Stop * stop = [adapter getStop:@"50119"];
-    watchedStops = [[NSMutableArray alloc] init];
-    [watchedStops addObject:stop];
-    */
-    
-    //NSArray * stopRoutes = [adapter getStopRoutesForStop:stop];
-    
-    /*
-    for (StopRoute * route in stopRoutes)
+    NSString *pathToWatchedStopsSaveFile = [self getWatchedStopsSavePath];
+    NSLog(@"Loading watched stops from %@...", pathToWatchedStopsSaveFile);
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToWatchedStopsSaveFile])
     {
-        NSLog(@"Route ID: %@", [route getRouteID]);
-        
-        for (NSString * stopTime in [route getArrivalTimes])
+        NSArray * watchedStopNumbers = [[NSArray alloc] initWithContentsOfFile:pathToWatchedStopsSaveFile];
+        for ( NSString * stopNumber in watchedStopNumbers)
         {
-            NSLog(@"Time: %@", stopTime);
+            [self didReceiveStopNumber:stopNumber];
         }
+        NSLog(@"Loaded!");
     }
-    */
+    else
+    {
+        watchedStops = [[NSMutableArray alloc] init];
+        NSLog(@"Save file not found.");
+    }
 
 }
 
@@ -137,13 +168,14 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         // Delete the row from the data source.
+        [watchedStops removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)
@@ -151,7 +183,7 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
