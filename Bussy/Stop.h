@@ -11,15 +11,16 @@
 
 @interface Stop : NSObject {
     @private
-    NSString * stopId;
-    NSString * name;
+    NSString * stopID;
+    NSString * stopName;
     NSMutableArray * routes;
 }
 
 -(Stop*) stopId: (NSString*) inputId name: (NSString*) inputName;
 
--(NSString*) stopID;
--(NSString*) stopName;
--(NSArray*) routes;
+@property (readonly) NSString * stopID;
+@property (readonly) NSString * stopName;
+@property (readonly) NSArray * routes;
+
 
 @end

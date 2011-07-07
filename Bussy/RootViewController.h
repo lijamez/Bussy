@@ -7,25 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Stop.h"
+#import "StopRoute.h"
 
 @protocol ModalViewDelegate
 
-- (void) didReceiveStop: (Stop*) newStop;
+- (void) didReceiveStopRoute: (StopRoute*) newStopRoute;
 
 @end
 
 @interface RootViewController : UITableViewController<ModalViewDelegate> {
-    NSMutableArray * watchedStops;
     
+    NSMutableArray * watchedStopRoutes;
     UIBarButtonItem	* addBarButton;
-    
-    
 }
 
 @property (nonatomic, retain) UIBarButtonItem * addBarButton;
-
-@property (nonatomic, retain) NSMutableArray * watchedStops;
+@property (nonatomic, retain) NSMutableArray * watchedStopRoutes;
 
 - (IBAction)	addWatchedStop:		(id) sender;
 

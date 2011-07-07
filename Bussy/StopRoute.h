@@ -9,19 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "Stop.h"
 
-typedef enum 
-{
-    North, 
-    East, 
-    South, 
-    West,
-    Unknown
-} Direction;
-
 @interface StopRoute : NSObject {
     
     Stop * stop;
-    Direction direction;
+    NSString * direction;
     NSString * routeID;
     NSString * routeName;
     NSArray * times;
@@ -29,8 +20,15 @@ typedef enum
     bool favourite;
 }
 
--(StopRoute*) stop: (Stop*) inputStop direction: (Direction) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes;
--(NSString*) getRouteID;
--(NSArray*) getArrivalTimes;
+-(StopRoute*) stop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes;
+
+@property (readonly) NSString * routeName;
+@property (readonly) NSArray * times;
+@property (readonly) NSString * routeID;
+@property (readonly) bool favourite;
+@property (readonly) NSString * direction;
+@property (readonly) Stop * stop;
+
+- (NSString*) generateTimesString;
 
 @end

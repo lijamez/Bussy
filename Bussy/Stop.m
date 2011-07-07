@@ -10,30 +10,24 @@
 #import "StopRoute.h"
 
 @implementation Stop
+@synthesize stopID, stopName, routes;
 
 -(Stop*) stopId: (NSString*) inputId name: (NSString*) inputName
 {
     self = [super init];
     if (self)
     {
-        [inputId retain];
-        [inputName retain];
-        stopId = inputId;
-        name = inputName;
+        stopID = inputId;
+        [stopID retain];
+        
+        stopName = inputName;
+        [stopName retain];
+        
         routes = [[NSMutableArray alloc] init];
+        [routes retain];
     }
     
     return self;
-}
-
--(NSString*) stopID
-{
-    return stopId;
-}
-
--(NSString*) stopName
-{
-    return name;
 }
 
 -(void) addRoute: (StopRoute*) sr
@@ -46,15 +40,10 @@
     [routes removeAllObjects];
 }
 
--(NSArray*) routes
-{
-    return [NSArray arrayWithArray:routes];
-}
-
 -(void) dealloc
 {
-    [stopId release];
-    [name release];
+    [stopID release];
+    [stopName release];
     [routes release];
     [super dealloc];
 }

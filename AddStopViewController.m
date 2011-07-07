@@ -10,6 +10,7 @@
 #import "RootViewController.h"
 #import "Adapter.h"
 #import "Stop.h"
+#import "StopRouteChooserViewController.h"
 
 @implementation AddStopViewController
 
@@ -21,11 +22,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"Stop Number";
     }
     return self;
 }
 
-- (IBAction) notifyIsDone: (id) sender
+- (IBAction) notifyNext: (id) sender
 {
     NSString * newStopNumber = [self.textField text];
     
@@ -34,8 +36,18 @@
     
     if ([newStopNumber isEqualToString:[stop stopID]])
     {
-        [delegate didReceiveStop:stop];
-        [self dismissModalViewControllerAnimated:YES];
+        
+        NSArray * stopRoutes = [adapter getStopRoutesForStop:stop];
+        StopRouteChooserViewController * stopRouteChooserView = [[[StopRouteChooserViewController alloc] init] autorelease];
+        stopRouteChooserView.stopRoutes = stopRoutes;
+        stopRouteChooserView.delegate = self.delegate;
+        
+        [self.navigationController pushViewController:stopRouteChooserView animated:YES];
+        
+        
+        
+        //[delegate didReceiveStop:stop];
+        //[self dismissModalViewControllerAnimated:YES];
     }
     else
     {
@@ -74,6 +86,12 @@
 {
     [super viewDidLoad];
     [textField becomeFirstResponder];
+    
+    UIBarButtonItem * cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(notifyIsCancelled:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
+    UIBarButtonItem * nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(notifyNext:)];
+    self.navigationItem.rightBarButtonItem = nextButton;
     
 }
 

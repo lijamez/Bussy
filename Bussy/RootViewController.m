@@ -13,61 +13,54 @@
 
 @implementation RootViewController
 
-@synthesize addBarButton;
+@synthesize addBarButton, watchedStopRoutes;
 
-- (NSString*) getWatchedStopsSavePath
+- (NSString*) watchedStopRoutesSavePath
 {
     NSArray *saveDataPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *saveDataFolder = [saveDataPath objectAtIndex:0];
-    return [saveDataFolder stringByAppendingFormat:@"/watchedStops.plist"];
+    return [saveDataFolder stringByAppendingFormat:@"/watchedStopRoutes.plist"];
 }
 
 - (void) save
 {
-    NSString* watchedStopsSavePath = [self getWatchedStopsSavePath];
-    NSLog(@"Saving to %@...", watchedStopsSavePath);
+    NSString* watchedStopRoutesSavePath = [self watchedStopRoutesSavePath];
+    NSLog(@"Saving to %@...", watchedStopRoutesSavePath);
     
     //Construct serializable array
-    NSMutableArray * watchedStopNumbers = [[NSMutableArray alloc] init]; 
+    NSMutableArray * watchedStopRouteDictionaries = [[[NSMutableArray alloc] init] autorelease]; 
     
-    for (Stop * stop in watchedStops)
+    for (StopRoute * stopRoute in watchedStopRoutes)
     {
-        [watchedStopNumbers addObject:[stop stopID]];
+        NSMutableDictionary * stopRouteDictionary = [[NSMutableDictionary alloc] init];
+        
+        [stopRouteDictionary setObject:[stopRoute.stop stopID] forKey:@"StopID"];
+        [stopRouteDictionary setObject:[stopRoute routeID] forKey:@"RouteID"];
+        [stopRouteDictionary setObject:[stopRoute direction] forKey:@"Direction"];
+        
+        [watchedStopRouteDictionaries addObject:stopRouteDictionary];
     }
     
-    [watchedStopNumbers writeToFile:watchedStopsSavePath atomically:YES];
-    [watchedStopNumbers release];
+    [watchedStopRouteDictionaries writeToFile:watchedStopRoutesSavePath atomically:YES];
     NSLog(@"Saved!");
 }
 
-- (void) didReceiveStop: (Stop*) newStop
+- (void) didReceiveStopRoute: (StopRoute*) newStopRoute
 {
-    if (![watchedStops containsObject:newStop])
+    if (![watchedStopRoutes containsObject:newStopRoute])
     {
-        [watchedStops addObject:newStop];
+        [watchedStopRoutes addObject:newStopRoute];
         [self.tableView reloadData];
     }
-}
-
-
-- (void) didReceiveStopNumber: (NSString*) newStopNumber
-{
-    [newStopNumber retain];
-    
-    Adapter * adapter = [[Adapter alloc] init];
-    Stop * stop = [adapter getStop:newStopNumber];
-    [watchedStops addObject:stop];
-    
-    [newStopNumber release];
-    
-    [self.tableView reloadData];
 }
 
 - (IBAction) addWatchedStop: (id) sender
 {
     AddStopViewController * addStopView = [[[AddStopViewController alloc] init] autorelease];
     addStopView.delegate = self;
-    [self presentModalViewController:addStopView animated:YES];
+    UINavigationController * addStopRouteNavigationController = [[UINavigationController alloc] initWithRootViewController:addStopView];
+    
+    [self presentModalViewController:addStopRouteNavigationController animated:YES];
 }
 
 - (void)viewDidLoad
@@ -81,22 +74,41 @@
     self.navigationController.navigationBar.tintColor = [UIColor blueColor];
     self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
-    watchedStops = [[NSMutableArray alloc] init];
+    watchedStopRoutes = [[NSMutableArray alloc] init];
     
-    NSString *pathToWatchedStopsSaveFile = [self getWatchedStopsSavePath];
-    NSLog(@"Loading watched stops from %@...", pathToWatchedStopsSaveFile);
-    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToWatchedStopsSaveFile])
+    NSString *pathToWatchedStopRoutesSaveFile = [self watchedStopRoutesSavePath];
+    NSLog(@"Loading watched stops from %@...", pathToWatchedStopRoutesSaveFile);
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToWatchedStopRoutesSaveFile])
     {
-        NSArray * watchedStopNumbers = [[NSArray alloc] initWithContentsOfFile:pathToWatchedStopsSaveFile];
-        for ( NSString * stopNumber in watchedStopNumbers)
+        NSArray * watchedStopRouteDictionaries = [[NSArray alloc] initWithContentsOfFile:pathToWatchedStopRoutesSaveFile];
+        Adapter * adapter = [[[Adapter alloc] init] autorelease];
+        for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
         {
-            [self didReceiveStopNumber:stopNumber];
+            
+            NSString * savedStopID = [stopRouteDictionary objectForKey:@"StopID"];
+            NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
+            NSString * savedDirection = [stopRouteDictionary objectForKey:@"Direction"];
+            
+            Stop * stop = [adapter getStop:savedStopID];
+            NSArray * stopRoutes = [adapter getStopRoutesForStop:stop];
+            
+            for (StopRoute * stopRoute in stopRoutes)
+            {
+                if ([[stopRoute routeID] isEqualToString:savedRouteID] &&
+                    [[stopRoute direction] isEqualToString:savedDirection])
+                {
+                    [self didReceiveStopRoute:stopRoute];
+                    break;
+                }
+                     
+            }
+            
         }
         NSLog(@"Loaded!");
     }
     else
     {
-        watchedStops = [[NSMutableArray alloc] init];
+        watchedStopRoutes = [[NSMutableArray alloc] init];
         NSLog(@"Save file not found.");
     }
 
@@ -138,7 +150,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [watchedStops count];
+    return [watchedStopRoutes count];
 }
 
 // Customize the appearance of table view cells.
@@ -151,9 +163,9 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    Stop * stop = [watchedStops objectAtIndex:indexPath.row];
-    cell.textLabel.text = [stop stopName];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Stop Number: %@", [stop stopID]];
+    StopRoute * stopRoute = [watchedStopRoutes objectAtIndex:indexPath.row];
+    cell.textLabel.text = [stopRoute routeName];
+    cell.detailTextLabel.text = [stopRoute generateTimesString];
 
     // Configure the cell.
     return cell;
@@ -175,7 +187,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         // Delete the row from the data source.
-        [watchedStops removeObjectAtIndex:[indexPath row]];
+        [watchedStopRoutes removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)

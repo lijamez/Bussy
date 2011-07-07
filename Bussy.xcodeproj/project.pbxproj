@@ -40,6 +40,8 @@
 		A075241913BD722C000D9419 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240D13BD722C000D9419 /* SBJsonWriter.m */; };
 		A07E596913C16CE5004EBC0D /* AddStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07E596713C16CE5004EBC0D /* AddStopViewController.m */; };
 		A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07E596813C16CE5004EBC0D /* AddStopViewController.xib */; };
+		A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */; };
+		A080847113C56B7D00DEC160 /* StopRouteChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */; };
 		A094550C13C04E7A00100ACC /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
 		A094550F13C04EA400100ACC /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550E13C04EA400100ACC /* 57.png */; };
 		A0B5948313C05692008A48CD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B5948213C05692008A48CD /* Default@2x.png */; };
@@ -113,6 +115,9 @@
 		A07E596613C16CE5004EBC0D /* AddStopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddStopViewController.h; path = ../AddStopViewController.h; sourceTree = "<group>"; };
 		A07E596713C16CE5004EBC0D /* AddStopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddStopViewController.m; path = ../AddStopViewController.m; sourceTree = "<group>"; };
 		A07E596813C16CE5004EBC0D /* AddStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddStopViewController.xib; path = ../AddStopViewController.xib; sourceTree = "<group>"; };
+		A080846D13C56B7D00DEC160 /* StopRouteChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteChooserViewController.h; sourceTree = "<group>"; };
+		A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteChooserViewController.m; sourceTree = "<group>"; };
+		A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteChooserViewController.xib; sourceTree = "<group>"; };
 		A094550B13C04E7A00100ACC /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		A094550E13C04EA400100ACC /* 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57.png; sourceTree = "<group>"; };
 		A0B5948213C05692008A48CD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -196,6 +201,9 @@
 				A02B3E5C13BD83E7009FCCE3 /* Stop.m */,
 				A02B3E5E13BD93A7009FCCE3 /* Adapter.h */,
 				A02B3E5F13BD93A7009FCCE3 /* Adapter.m */,
+				A080846D13C56B7D00DEC160 /* StopRouteChooserViewController.h */,
+				A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */,
+				A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */,
 			);
 			path = Bussy;
 			sourceTree = "<group>";
@@ -338,6 +346,7 @@
 				A094550F13C04EA400100ACC /* 57.png in Resources */,
 				A0B5948313C05692008A48CD /* Default@2x.png in Resources */,
 				A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */,
+				A080847113C56B7D00DEC160 /* StopRouteChooserViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +402,7 @@
 				A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */,
 				A02B3E6013BD93A7009FCCE3 /* Adapter.m in Sources */,
 				A07E596913C16CE5004EBC0D /* AddStopViewController.m in Sources */,
+				A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

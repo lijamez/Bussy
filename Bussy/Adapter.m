@@ -10,34 +10,6 @@
 
 @implementation Adapter
 
--(Direction) convertToDirection: (NSString*) directionString
-{
-    
-    if (directionString == (id) [NSNull null])
-    {
-        return Unknown; 
-    }
-    
-    if ([directionString compare:@"North" options:NSCaseInsensitiveSearch])
-    {
-        return North;
-    }
-    else if ([directionString compare:@"East" options:NSCaseInsensitiveSearch])
-    {
-        return East;
-    }
-    else if ([directionString compare:@"South" options:NSCaseInsensitiveSearch])
-    {
-        return South;
-    }
-    else if ([directionString compare:@"West" options:NSCaseInsensitiveSearch])
-    {
-        return West;
-    }
-    
-    return Unknown;
-}
-
 -(Stop*) getStop: (NSString*) stopID
 {
     NSString * json = [Translink requestStop:stopID];
@@ -78,8 +50,7 @@
     for (NSDictionary *entry in entries)
     {
         
-        NSString * directionString = [entry objectForKey:@"direction"];
-        Direction direction = [self convertToDirection:directionString];
+        NSString * direction = [entry objectForKey:@"direction"];
         NSString * routeID = [entry objectForKey:@"routeID"];
         NSString * routeName = [entry objectForKey:@"routeName"];
         NSArray * times = [entry objectForKey:@"times"];
