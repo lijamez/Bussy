@@ -18,6 +18,9 @@
 @synthesize doneButton, cancelButton, textField;
 @synthesize delegate;
 
+int const MAX_FIELD_CHARS = 5;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -74,6 +77,12 @@
 {
     [self dismissModalViewControllerAnimated:YES];
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return (newLength > MAX_FIELD_CHARS) ? NO : YES;
+}
+
 
 - (void)dealloc
 {
