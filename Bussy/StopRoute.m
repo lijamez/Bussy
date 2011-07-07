@@ -10,7 +10,7 @@
 
 
 @implementation StopRoute
-@synthesize times, routeName, routeID, stop, favourite, direction;
+@synthesize times, routeName, routeID, stop, direction;
 
 -(StopRoute*) stop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes
 {
@@ -36,6 +36,12 @@
     
     return self;
     
+}
+
+- (NSString*) generateTitle
+{
+    NSString * title = [NSString stringWithFormat:@"%@: %@", [stop stopID], routeName];
+    return title;
 }
 
 - (NSString*) generateTimesString

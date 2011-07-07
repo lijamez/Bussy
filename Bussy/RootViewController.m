@@ -59,7 +59,7 @@
     AddStopViewController * addStopView = [[[AddStopViewController alloc] init] autorelease];
     addStopView.delegate = self;
     UINavigationController * addStopRouteNavigationController = [[UINavigationController alloc] initWithRootViewController:addStopView];
-    
+    addStopRouteNavigationController.navigationBar.tintColor = [UIColor blueColor];
     [self presentModalViewController:addStopRouteNavigationController animated:YES];
 }
 
@@ -164,7 +164,7 @@
     }
     
     StopRoute * stopRoute = [watchedStopRoutes objectAtIndex:indexPath.row];
-    cell.textLabel.text = [stopRoute routeName];
+    cell.textLabel.text = [stopRoute generateTitle];
     cell.detailTextLabel.text = [stopRoute generateTimesString];
 
     // Configure the cell.

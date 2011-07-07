@@ -16,8 +16,6 @@
     NSString * routeID;
     NSString * routeName;
     NSArray * times;
-
-    bool favourite;
 }
 
 -(StopRoute*) stop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes;
@@ -25,10 +23,10 @@
 @property (readonly) NSString * routeName;
 @property (readonly) NSArray * times;
 @property (readonly) NSString * routeID;
-@property (readonly) bool favourite;
 @property (readonly) NSString * direction;
 @property (readonly) Stop * stop;
 
 - (NSString*) generateTimesString;
+- (NSString*) generateTitle;
 
 @end

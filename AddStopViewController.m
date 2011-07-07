@@ -11,6 +11,7 @@
 #import "Adapter.h"
 #import "Stop.h"
 #import "StopRouteChooserViewController.h"
+#import "DSActivityView.h"
 
 @implementation AddStopViewController
 
@@ -31,8 +32,22 @@
 {
     NSString * newStopNumber = [self.textField text];
     
+    if ([newStopNumber length] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a stop number." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+    
+    
+    [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.view];
+    
     Adapter * adapter = [[Adapter alloc] init];
     Stop * stop = [adapter getStop:newStopNumber];
+    
+    [DSBezelActivityView removeViewAnimated:NO];
+    
     
     if ([newStopNumber isEqualToString:[stop stopID]])
     {
@@ -43,19 +58,15 @@
         stopRouteChooserView.delegate = self.delegate;
         
         [self.navigationController pushViewController:stopRouteChooserView animated:YES];
-        
-        
-        
-        //[delegate didReceiveStop:stop];
-        //[self dismissModalViewControllerAnimated:YES];
     }
     else
     {
-        NSString * alertMessage = [NSString stringWithFormat:@"Stop number '%@' not found.", newStopNumber];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Stop number not found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         [alert release];
     }
+    
+    
 }
 
 

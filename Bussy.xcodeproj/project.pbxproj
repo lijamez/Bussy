@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */ = {isa = PBXBuildFile; fileRef = A02B3E5C13BD83E7009FCCE3 /* Stop.m */; };
 		A02B3E6013BD93A7009FCCE3 /* Adapter.m in Sources */ = {isa = PBXBuildFile; fileRef = A02B3E5F13BD93A7009FCCE3 /* Adapter.m */; };
+		A0427C9713C58BD40098CE84 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B5948213C05692008A48CD /* Default@2x.png */; };
+		A0427C9813C58BDA0098CE84 /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550E13C04EA400100ACC /* 57.png */; };
+		A0427C9913C58BDE0098CE84 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
+		A0427C9E13C592140098CE84 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0427C9D13C592140098CE84 /* DSActivityView.m */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
 		A063462A13BC537300CB5168 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462913BC537300CB5168 /* Foundation.framework */; };
 		A063462C13BC537300CB5168 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462B13BC537300CB5168 /* CoreGraphics.framework */; };
@@ -42,9 +46,6 @@
 		A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07E596813C16CE5004EBC0D /* AddStopViewController.xib */; };
 		A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */; };
 		A080847113C56B7D00DEC160 /* StopRouteChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */; };
-		A094550C13C04E7A00100ACC /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
-		A094550F13C04EA400100ACC /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550E13C04EA400100ACC /* 57.png */; };
-		A0B5948313C05692008A48CD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B5948213C05692008A48CD /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,9 @@
 		A02B3E5C13BD83E7009FCCE3 /* Stop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stop.m; sourceTree = "<group>"; };
 		A02B3E5E13BD93A7009FCCE3 /* Adapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adapter.h; sourceTree = "<group>"; };
 		A02B3E5F13BD93A7009FCCE3 /* Adapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Adapter.m; sourceTree = "<group>"; };
+		A0427C9B13C592140098CE84 /* DSActivityView_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView_Prefix.pch; sourceTree = "<group>"; };
+		A0427C9C13C592140098CE84 /* DSActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
+		A0427C9D13C592140098CE84 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
 		A063462313BC537300CB5168 /* Bussy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bussy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A063462713BC537300CB5168 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A063462913BC537300CB5168 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -147,9 +151,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0427C9A13C592060098CE84 /* DSActivityView */ = {
+			isa = PBXGroup;
+			children = (
+				A0427C9B13C592140098CE84 /* DSActivityView_Prefix.pch */,
+				A0427C9C13C592140098CE84 /* DSActivityView.h */,
+				A0427C9D13C592140098CE84 /* DSActivityView.m */,
+			);
+			name = DSActivityView;
+			sourceTree = "<group>";
+		};
 		A063461813BC537300CB5168 = {
 			isa = PBXGroup;
 			children = (
+				A0427C9A13C592060098CE84 /* DSActivityView */,
 				A0B5948213C05692008A48CD /* Default@2x.png */,
 				A094550E13C04EA400100ACC /* 57.png */,
 				A094550B13C04E7A00100ACC /* 114.png */,
@@ -342,11 +357,11 @@
 				A063463213BC537300CB5168 /* InfoPlist.strings in Resources */,
 				A063463B13BC537300CB5168 /* MainWindow.xib in Resources */,
 				A063464113BC537300CB5168 /* RootViewController.xib in Resources */,
-				A094550C13C04E7A00100ACC /* 114.png in Resources */,
-				A094550F13C04EA400100ACC /* 57.png in Resources */,
-				A0B5948313C05692008A48CD /* Default@2x.png in Resources */,
 				A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */,
 				A080847113C56B7D00DEC160 /* StopRouteChooserViewController.xib in Resources */,
+				A0427C9713C58BD40098CE84 /* Default@2x.png in Resources */,
+				A0427C9813C58BDA0098CE84 /* 57.png in Resources */,
+				A0427C9913C58BDE0098CE84 /* 114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +418,7 @@
 				A02B3E6013BD93A7009FCCE3 /* Adapter.m in Sources */,
 				A07E596913C16CE5004EBC0D /* AddStopViewController.m in Sources */,
 				A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */,
+				A0427C9E13C592140098CE84 /* DSActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
