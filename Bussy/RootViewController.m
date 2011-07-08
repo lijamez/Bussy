@@ -15,6 +15,8 @@
 
 @synthesize addBarButton, watchedStopRoutes;
 
+CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
+
 - (NSString*) watchedStopRoutesSavePath
 {
     NSArray *saveDataPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -153,6 +155,13 @@
     return [watchedStopRoutes count];
 }
 
+- (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    return TABLE_VIEW_CELL_HEIGHT;
+}
+
+
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -163,11 +172,19 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
+    cell.autoresizesSubviews = YES;
+    
     StopRoute * stopRoute = [watchedStopRoutes objectAtIndex:indexPath.row];
-    cell.textLabel.text = [stopRoute generateTitle];
-    cell.detailTextLabel.text = [stopRoute generateTimesString];
+    cell.textLabel.text = [stopRoute routeName];
+    cell.detailTextLabel.numberOfLines = 2;
+    
+    NSString * stopNumberLine = [NSString stringWithFormat:@"Stop Number: %@", [[stopRoute stop] stopID]];
+    NSString * routeTimesLine = [stopRoute generateTimesString];
+    
+    NSString * details = [NSString stringWithFormat:@"%@\n%@", stopNumberLine, routeTimesLine];
+    cell.detailTextLabel.text = details;
 
-    // Configure the cell.
+    // Configure the cell. 
     return cell;
 }
 
