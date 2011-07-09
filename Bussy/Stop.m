@@ -59,6 +59,7 @@
     [stopID release];
     [stopName release];
     [routes release];
+    [adapter release];
     [super dealloc];
 }
 

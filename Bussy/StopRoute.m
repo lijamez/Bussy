@@ -55,4 +55,14 @@
     return timesString;
 }
 
+- (void) dealloc
+{
+    [stop release];
+    [direction release];
+    [routeID release];
+    [routeName release];
+    [times release];
+    [super dealloc];
+}
+
 @end

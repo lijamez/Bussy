@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "StopRoute.h"
 #import "StopRouteCollection.h"
+#import "WatchedStopRoutesCollection.h"
 
 @protocol ModalViewDelegate
 

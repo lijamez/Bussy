@@ -48,6 +48,7 @@
 		A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07E596813C16CE5004EBC0D /* AddStopViewController.xib */; };
 		A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */; };
 		A080847113C56B7D00DEC160 /* StopRouteChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */; };
+		A0BEB29813C8634300F5F29F /* WatchedStopRoutesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,8 @@
 		A094550B13C04E7A00100ACC /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		A094550E13C04EA400100ACC /* 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57.png; sourceTree = "<group>"; };
 		A0B5948213C05692008A48CD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A0BEB29613C8634300F5F29F /* WatchedStopRoutesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchedStopRoutesCollection.h; sourceTree = "<group>"; };
+		A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedStopRoutesCollection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +320,8 @@
 				A07BE4E613C7F841008CE68D /* TranslinkObject.h */,
 				A07BE4E913C806DA008CE68D /* StopRouteCollection.h */,
 				A07BE4EA13C806DA008CE68D /* StopRouteCollection.m */,
+				A0BEB29613C8634300F5F29F /* WatchedStopRoutesCollection.h */,
+				A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 				A0427C9E13C592140098CE84 /* DSActivityView.m in Sources */,
 				A07BE4EB13C806DA008CE68D /* StopRouteCollection.m in Sources */,
 				A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */,
+				A0BEB29813C8634300F5F29F /* WatchedStopRoutesCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

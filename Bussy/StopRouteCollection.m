@@ -68,4 +68,13 @@
     return [[NSArray alloc] initWithArray:array];
 }
 
+- (void) dealloc
+{
+    [array release];
+    [stop release];
+    [adapter release];
+    [super dealloc];
+    
+}
+
 @end
