@@ -77,12 +77,23 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.view];
     
     NSMutableArray * refreshedStopRoutes = [[NSMutableArray alloc] init];
-        
+    NSError * error = nil;
+    
     for(StopRoute * oldStopRoute in watchedStopRoutes)
     {
         Stop * stop = oldStopRoute.stop;
-        [stop refresh];
+        
+        
+        [stop refreshAndCatchError:&error];
             
+        if (error)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+            break;
+        }
+        
         for (StopRoute * newStopRoute in stop.routes.array)
         {
                 
@@ -96,10 +107,13 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
             
     }
     
-    [watchedStopRoutes release];
-    watchedStopRoutes = refreshedStopRoutes;
-    
-    [self.tableView reloadData];
+    if (!error)
+    {
+        [watchedStopRoutes release];
+        watchedStopRoutes = refreshedStopRoutes;
+        
+        [self.tableView reloadData];
+    }
     
     [DSBezelActivityView removeViewAnimated:YES];
 }
@@ -132,8 +146,25 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
             NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
             NSString * savedDirection = [stopRouteDictionary objectForKey:@"Direction"];
             
-            Stop * stop = [[Stop alloc] initWithAdapter: [[TranslinkAdapter alloc] init] stopId: savedStopID];
-            StopRouteCollection * stopRoutes = [[StopRouteCollection alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stop:stop];
+            NSError * httpGetStopError = nil;
+            
+            Stop * stop = [[Stop alloc] initWithAdapter: [[TranslinkAdapter alloc] init] stopId: savedStopID error:&httpGetStopError];
+            
+            if (httpGetStopError)
+            {
+                NSLog(@"%@: %@", @"Failed to GET stop", httpGetStopError );
+                continue;
+            }
+            
+            NSError * httpGetStopRoutesError = nil;
+            
+            StopRouteCollection * stopRoutes = [[StopRouteCollection alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stop:stop error:&httpGetStopRoutesError];
+            
+            if (httpGetStopRoutesError)
+            {
+                NSLog(@"%@: %@", @"Failed to GET stop routes", httpGetStopRoutesError );
+                continue;
+            }
             
             for (StopRoute * stopRoute in stopRoutes.array)
             {

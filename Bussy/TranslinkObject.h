@@ -35,6 +35,6 @@ typedef enum
 
 @protocol TranslinkObject
 
-- (void) refresh;
+- (void) refreshAndCatchError: (NSError**) error;
 
 @end

@@ -19,7 +19,7 @@
     TranslinkAdapter * adapter;
 }
 
--(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId;
+-(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId error: (NSError**) error;
 
 @property (readonly) NSString * stopID;
 @property (readonly) NSString * stopName;

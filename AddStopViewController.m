@@ -45,12 +45,21 @@ int const MAX_FIELD_CHARS = 5;
     
     [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.view];
     
-    Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:newStopNumber];
+    NSError * error = nil;
+    
+    Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:newStopNumber error:&error];
     
     [DSBezelActivityView removeViewAnimated:NO];
     
+    if (error)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
     
-    if ([newStopNumber isEqualToString:[stop stopID]])
+    if ([newStopNumber isEqualToString:stop.stopID] && [stop.routes.array count] > 0)
     {
         
         StopRouteCollection * stopRoutes = [stop routes];

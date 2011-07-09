@@ -13,7 +13,7 @@
 
 @synthesize stop;
 
-- (StopRouteCollection*) initWithAdapter: (TranslinkAdapter*) inputAdapter stop: (Stop*) inputStop
+- (StopRouteCollection*) initWithAdapter: (TranslinkAdapter*) inputAdapter stop: (Stop*) inputStop error: (NSError**) error
 {
     self = [super init];
     if (self) {
@@ -27,18 +27,18 @@
         adapter = inputAdapter;
         [adapter retain];
         
-        [self refresh];
+        [self refreshAndCatchError: error];
         
     }
     
     return self;
 }
 
-- (void) refresh
+- (void) refreshAndCatchError: (NSError**) error
 {
     [array removeAllObjects];
     
-    NSString * json = [adapter requestArrivalTimesAtStop:[stop stopID]];
+    NSString * json = [adapter requestArrivalTimesAtStop:[stop stopID] error: error];
     
     SBJsonParser * parser = [[SBJsonParser alloc] init];
     

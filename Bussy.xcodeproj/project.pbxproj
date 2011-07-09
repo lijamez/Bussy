@@ -12,6 +12,8 @@
 		A0427C9813C58BDA0098CE84 /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550E13C04EA400100ACC /* 57.png */; };
 		A0427C9913C58BDE0098CE84 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
 		A0427C9E13C592140098CE84 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0427C9D13C592140098CE84 /* DSActivityView.m */; };
+		A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */; };
+		A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
 		A063462A13BC537300CB5168 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462913BC537300CB5168 /* Foundation.framework */; };
 		A063462C13BC537300CB5168 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462B13BC537300CB5168 /* CoreGraphics.framework */; };
@@ -64,6 +66,9 @@
 		A0427C9B13C592140098CE84 /* DSActivityView_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView_Prefix.pch; sourceTree = "<group>"; };
 		A0427C9C13C592140098CE84 /* DSActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
 		A0427C9D13C592140098CE84 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
+		A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteDetailsViewController.h; sourceTree = "<group>"; };
+		A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteDetailsViewController.m; sourceTree = "<group>"; };
+		A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
 		A063462313BC537300CB5168 /* Bussy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bussy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A063462713BC537300CB5168 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A063462913BC537300CB5168 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -276,6 +281,7 @@
 		A07BE4E213C7F7A2008CE68D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */,
 				A063463913BC537300CB5168 /* MainWindow.xib */,
 				A07E596813C16CE5004EBC0D /* AddStopViewController.xib */,
 				A063463F13BC537300CB5168 /* RootViewController.xib */,
@@ -287,6 +293,8 @@
 		A07BE4E413C7F7CC008CE68D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */,
+				A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */,
 				A07E596613C16CE5004EBC0D /* AddStopViewController.h */,
 				A07E596713C16CE5004EBC0D /* AddStopViewController.m */,
 				A063463C13BC537300CB5168 /* RootViewController.h */,
@@ -388,6 +396,7 @@
 				A0427C9713C58BD40098CE84 /* Default@2x.png in Resources */,
 				A0427C9813C58BDA0098CE84 /* 57.png in Resources */,
 				A0427C9913C58BDE0098CE84 /* 114.png in Resources */,
+				A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +454,7 @@
 				A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */,
 				A0427C9E13C592140098CE84 /* DSActivityView.m in Sources */,
 				A07BE4EB13C806DA008CE68D /* StopRouteCollection.m in Sources */,
+				A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 @implementation Stop
 @synthesize stopID, stopName, routes;
 
--(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId
+-(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId error: (NSError**) error
 {
     self = [super init];
     if (self)
@@ -22,16 +22,16 @@
         stopID = inputId;
         [stopID retain];
         
-        [self refresh];
+        [self refreshAndCatchError: error];
 
     }
     
     return self;
 }
 
-- (void) refresh
+- (void) refreshAndCatchError: (NSError**) error
 {
-    NSString * json = [adapter requestStop:stopID];
+    NSString * json = [adapter requestStop:stopID error:error];
     
     SBJsonParser * parser = [[SBJsonParser alloc] init];
     
@@ -46,7 +46,7 @@
             stopName = [result objectAtIndex:1];
             [stopName retain];
             
-            routes = [[StopRouteCollection alloc] initWithAdapter: adapter stop: self];
+            routes = [[StopRouteCollection alloc] initWithAdapter: adapter stop: self error:error];
             
             break;
         }

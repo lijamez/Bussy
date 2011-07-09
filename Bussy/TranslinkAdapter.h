@@ -14,12 +14,12 @@
     
 }
 
--(NSString*) requestArrivalTimesAtStop: (NSString*) stopID;
--(NSString*) requestRouteSearch: (NSString*) searchString;
--(NSString*) requestRouteDirection: (NSString*) routeID;
--(NSString*) requestRouteStops: (NSString*) routeID direction: (NSString*) direction;
--(NSString*) requestStop: (NSString*) stopID;
--(NSString*) requestStopLocation: (NSString*) stopID;
--(NSString*) requestStopsByLat: (NSString*) latitude longitude: (NSString*) longitude;
+-(NSString*) requestArrivalTimesAtStop: (NSString*) stopID error: (NSError**) error;
+-(NSString*) requestRouteSearch: (NSString*) searchString error: (NSError**) error;
+-(NSString*) requestRouteDirection: (NSString*) routeID error: (NSError**) error;
+-(NSString*) requestRouteStops: (NSString*) routeID direction: (NSString*) direction error: (NSError**) error;
+-(NSString*) requestStop: (NSString*) stopID error: (NSError**) error;
+-(NSString*) requestStopLocation: (NSString*) stopID error: (NSError**) error;
+-(NSString*) requestStopsByLat: (NSString*) latitude longitude: (NSString*) longitude error: (NSError**) error;
 
 @end
