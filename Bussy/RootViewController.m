@@ -12,6 +12,7 @@
 #import "StopRouteCollection.h"
 #import "Stop.h"
 #import "DSActivityView.h"
+#import "StopRouteDetailsViewController.h"
 
 @implementation RootViewController
 
@@ -296,7 +297,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
-        
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     StopRoute * stopRoute = [watchedStopRoutes objectAtIndex:indexPath.row];
     cell.textLabel.text = [stopRoute routeName];
@@ -356,6 +357,12 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    StopRoute * selectedStopRoute = [watchedStopRoutes objectAtIndex:[indexPath row]];
+    
+    StopRouteDetailsViewController * detailsViewController = [[[StopRouteDetailsViewController alloc] init] autorelease];
+    detailsViewController.stopRoute = selectedStopRoute;
+    
+    [self.navigationController pushViewController:detailsViewController animated:YES];
     /*
     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
     // ...
