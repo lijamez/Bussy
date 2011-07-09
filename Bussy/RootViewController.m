@@ -67,14 +67,43 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     [self presentModalViewController:addStopRouteNavigationController animated:YES];
 }
 
-- (IBAction) refreshRoutes: (id) sender
+- (void) showActivityView
+{
+    UIBarButtonItem * leftNavButton = self.navigationController.navigationItem.leftBarButtonItem;
+    UIBarButtonItem * rightNavButton = self.navigationController.navigationItem.rightBarButtonItem;
+    
+    leftNavButton.enabled = NO;
+    rightNavButton.enabled = NO;
+    
+    [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.navigationController.navigationBar.superview];
+}
+
+- (void) changeActivityViewLabel: (NSString*) newLabel
+{
+    [DSBezelActivityView currentActivityView].activityLabel.text = newLabel;
+}
+
+- (void) removeActivityView
+{
+    
+    UIBarButtonItem * leftNavButton = self.navigationController.navigationItem.leftBarButtonItem;
+    UIBarButtonItem * rightNavButton = self.navigationController.navigationItem.rightBarButtonItem;
+    
+    leftNavButton.enabled = YES;
+    rightNavButton.enabled = YES;
+    
+    [DSBezelActivityView removeViewAnimated:YES];
+}
+
+- (void) refreshWatchedStopRoutes
 {
     if ([watchedStopRoutes count] <= 0)
     {
         return;
     }
-
-    [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.view];
+    
+    //[NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.navigationController.navigationBar.superview];
+    //[DSBezelActivityView newActivityViewForView:self.navigationController.navigationBar.superview withLabel:@"Refreshing..."];
     
     NSMutableArray * refreshedStopRoutes = [[NSMutableArray alloc] init];
     NSError * error = nil;
@@ -85,7 +114,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
         
         
         [stop refreshAndCatchError:&error];
-            
+        
         if (error)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -96,15 +125,14 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
         
         for (StopRoute * newStopRoute in stop.routes.array)
         {
-                
-            if ([newStopRoute.routeID isEqualToString:oldStopRoute.routeID] &&
-                [newStopRoute.direction isEqualToString:oldStopRoute.direction])
+            
+            if ([oldStopRoute isEqual:newStopRoute])
             {
                 [refreshedStopRoutes addObject:newStopRoute];
             }
-                
-        }
             
+        }
+        
     }
     
     if (!error)
@@ -115,32 +143,33 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
         [self.tableView reloadData];
     }
     
-    [DSBezelActivityView removeViewAnimated:YES];
+    //[DSBezelActivityView removeViewAnimated:YES];
 }
 
-- (void)viewDidLoad
+- (IBAction) refreshRoutes: (id) sender
 {
-    [super viewDidLoad];
+    [self showActivityView];
     
-    [self setRefreshBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutes:)]];
-    self.navigationController.navigationBar.topItem.leftBarButtonItem = refreshBarButton;
-    
-    [self setAddBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWatchedStopRoute:)]];
-    self.navigationController.navigationBar.topItem.rightBarButtonItem = addBarButton;
-    
-    self.title = @"Bussy";
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-    self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
-    
-    watchedStopRoutes = [[NSMutableArray alloc] init];
+    [self refreshWatchedStopRoutes];
+
+    [self removeActivityView];
+}
+
+- (void) loadDataFromSave
+{
+    [self showActivityView];
     
     NSString *pathToWatchedStopRoutesSaveFile = [self watchedStopRoutesSavePath];
     NSLog(@"Loading watched stops from %@...", pathToWatchedStopRoutesSaveFile);
+    
     if ([[NSFileManager defaultManager] fileExistsAtPath:pathToWatchedStopRoutesSaveFile])
     {
         NSArray * watchedStopRouteDictionaries = [[NSArray alloc] initWithContentsOfFile:pathToWatchedStopRoutesSaveFile];
+        int currentStopRoute = 1;
         for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
         {
+            NSString * activityString = [NSString stringWithFormat:@"Loading stop %d of %d", currentStopRoute, [watchedStopRouteDictionaries count]];
+            NSLog(@"%@", activityString);
             
             NSString * savedStopID = [stopRouteDictionary objectForKey:@"StopID"];
             NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
@@ -174,9 +203,9 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
                     [self didReceiveStopRoute:stopRoute];
                     break;
                 }
-                     
+                
             }
-            
+            currentStopRoute++;
         }
         NSLog(@"Loaded!");
     }
@@ -187,6 +216,28 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     }
     
     [self.tableView reloadData];
+
+    [self removeActivityView];
+
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self setRefreshBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutes:)]];
+    self.navigationController.navigationBar.topItem.leftBarButtonItem = refreshBarButton;
+    
+    [self setAddBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWatchedStopRoute:)]];
+    self.navigationController.navigationBar.topItem.rightBarButtonItem = addBarButton;
+    
+    self.title = @"Bussy";
+    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
+    
+    watchedStopRoutes = [[NSMutableArray alloc] init];
+
+    [NSThread detachNewThreadSelector:@selector(loadDataFromSave) toTarget:self withObject:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

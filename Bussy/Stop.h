@@ -25,5 +25,6 @@
 @property (readonly) NSString * stopName;
 @property (readonly) StopRouteCollection * routes;
 
+- (BOOL) isEqual:(id)object;
 
 @end

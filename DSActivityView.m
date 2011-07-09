@@ -3,7 +3,7 @@
 //  Dejal Open Source
 //
 //  Created by David Sinclair on 2009-07-26.
-//  Copyright 2009-2010 Dejal Systems, LLC. All rights reserved.
+//  Copyright 2009-2011 Dejal Systems, LLC. All rights reserved.
 //
 //  Redistribution and use in binary and source forms, with or without modification,
 //  are permitted for any project, commercial or otherwise, provided that the
@@ -518,6 +518,7 @@ static DSActivityView *dsActivityView = nil;
  Returns the activity label, creating it if necessary.
  
  Written by DJS 2009-07.
+ Changed by Suleman Sidat 2011-07 to support a multi-line label.
 */
 
 - (UILabel *)activityLabel;
@@ -530,6 +531,8 @@ static DSActivityView *dsActivityView = nil;
         _activityLabel.textAlignment = UITextAlignmentCenter;
         _activityLabel.textColor = [UIColor whiteColor];
         _activityLabel.backgroundColor = [UIColor clearColor];
+        _activityLabel.numberOfLines = 0;
+        _activityLabel.lineBreakMode = UILineBreakModeWordWrap; 
     }
     
     return _activityLabel;
@@ -541,6 +544,7 @@ static DSActivityView *dsActivityView = nil;
  Positions and sizes the various views that make up the activity view, including after rotation.
  
  Written by DJS 2009-07.
+ Changed by Suleman Sidat 2011-07 to support a multi-line label.
 */
 
 - (void)layoutSubviews;
@@ -551,7 +555,8 @@ static DSActivityView *dsActivityView = nil;
     
     self.frame = [self enclosingFrame];
     
-    CGSize textSize = [self.activityLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]]];
+    CGSize maxSize = CGSizeMake(260, 400);
+    CGSize textSize = [self.activityLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]] constrainedToSize:maxSize lineBreakMode:self.activityLabel.lineBreakMode];
     
     // Use the fixed width if one is specified:
     if (self.labelWidth > 10)

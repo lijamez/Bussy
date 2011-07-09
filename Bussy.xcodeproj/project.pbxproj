@@ -11,7 +11,6 @@
 		A0427C9713C58BD40098CE84 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B5948213C05692008A48CD /* Default@2x.png */; };
 		A0427C9813C58BDA0098CE84 /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550E13C04EA400100ACC /* 57.png */; };
 		A0427C9913C58BDE0098CE84 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
-		A0427C9E13C592140098CE84 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0427C9D13C592140098CE84 /* DSActivityView.m */; };
 		A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */; };
 		A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
@@ -49,6 +48,7 @@
 		A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */; };
 		A080847113C56B7D00DEC160 /* StopRouteChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */; };
 		A0BEB29813C8634300F5F29F /* WatchedStopRoutesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */; };
+		A0BEB2A913C898EF00F5F29F /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEB2A813C898EF00F5F29F /* DSActivityView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,9 +64,6 @@
 /* Begin PBXFileReference section */
 		A02B3E5B13BD83E7009FCCE3 /* Stop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stop.h; sourceTree = "<group>"; };
 		A02B3E5C13BD83E7009FCCE3 /* Stop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stop.m; sourceTree = "<group>"; };
-		A0427C9B13C592140098CE84 /* DSActivityView_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView_Prefix.pch; sourceTree = "<group>"; };
-		A0427C9C13C592140098CE84 /* DSActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
-		A0427C9D13C592140098CE84 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
 		A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteDetailsViewController.h; sourceTree = "<group>"; };
 		A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteDetailsViewController.m; sourceTree = "<group>"; };
 		A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
@@ -134,6 +131,8 @@
 		A0B5948213C05692008A48CD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		A0BEB29613C8634300F5F29F /* WatchedStopRoutesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchedStopRoutesCollection.h; sourceTree = "<group>"; };
 		A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedStopRoutesCollection.m; sourceTree = "<group>"; };
+		A0BEB2A713C898EF00F5F29F /* DSActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
+		A0BEB2A813C898EF00F5F29F /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,9 +162,8 @@
 		A0427C9A13C592060098CE84 /* DSActivityView */ = {
 			isa = PBXGroup;
 			children = (
-				A0427C9B13C592140098CE84 /* DSActivityView_Prefix.pch */,
-				A0427C9C13C592140098CE84 /* DSActivityView.h */,
-				A0427C9D13C592140098CE84 /* DSActivityView.m */,
+				A0BEB2A713C898EF00F5F29F /* DSActivityView.h */,
+				A0BEB2A813C898EF00F5F29F /* DSActivityView.m */,
 			);
 			name = DSActivityView;
 			sourceTree = "<group>";
@@ -173,6 +171,7 @@
 		A063461813BC537300CB5168 = {
 			isa = PBXGroup;
 			children = (
+				A07523F213BD7216000D9419 /* JSON */,
 				A0427C9A13C592060098CE84 /* DSActivityView */,
 				A0B5948213C05692008A48CD /* Default@2x.png */,
 				A094550E13C04EA400100ACC /* 57.png */,
@@ -209,7 +208,6 @@
 				A07BE4E513C7F7E9008CE68D /* Model */,
 				A07BE4E413C7F7CC008CE68D /* ViewControllers */,
 				A07BE4E213C7F7A2008CE68D /* Resources */,
-				A07523F213BD7216000D9419 /* JSON */,
 				A063463613BC537300CB5168 /* BussyAppDelegate.h */,
 				A063463713BC537300CB5168 /* BussyAppDelegate.m */,
 				A063462E13BC537300CB5168 /* Supporting Files */,
@@ -279,6 +277,7 @@
 				A075240D13BD722C000D9419 /* SBJsonWriter.m */,
 			);
 			name = JSON;
+			path = Bussy;
 			sourceTree = "<group>";
 		};
 		A07BE4E213C7F7A2008CE68D /* Resources */ = {
@@ -457,10 +456,10 @@
 				A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */,
 				A07E596913C16CE5004EBC0D /* AddStopViewController.m in Sources */,
 				A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */,
-				A0427C9E13C592140098CE84 /* DSActivityView.m in Sources */,
 				A07BE4EB13C806DA008CE68D /* StopRouteCollection.m in Sources */,
 				A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */,
 				A0BEB29813C8634300F5F29F /* WatchedStopRoutesCollection.m in Sources */,
+				A0BEB2A913C898EF00F5F29F /* DSActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

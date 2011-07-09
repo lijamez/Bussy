@@ -54,6 +54,31 @@
 
 }
 
+- (BOOL) isEqual:(id)object
+{
+    
+    if (object == self) //identity rule
+        return YES;
+    if (object == nil) //nil rule
+        return NO;
+    if (![object isKindOfClass:[self class]])
+        return NO;  //unrecognized class
+    
+    Stop * otherStop = (Stop*) object;
+    return [self hash] == [otherStop hash];
+    
+}
+
+- (NSUInteger) hash
+{
+    int prime = 31;
+    int result = 1;
+    
+    result = prime * result + [stopID hash];
+    
+    return result;
+}
+
 -(void) dealloc
 {
     [stopID release];
@@ -62,5 +87,7 @@
     [adapter release];
     [super dealloc];
 }
+
+
 
 @end

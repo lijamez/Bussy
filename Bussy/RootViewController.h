@@ -29,6 +29,7 @@
 @property (nonatomic, retain) NSMutableArray * watchedStopRoutes;
 
 - (IBAction)	addWatchedStopRoute:		(id) sender;
+- (void) loadDataFromSave;
 
 - (void) save;
 
