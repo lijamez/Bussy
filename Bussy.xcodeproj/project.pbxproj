@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */ = {isa = PBXBuildFile; fileRef = A02B3E5C13BD83E7009FCCE3 /* Stop.m */; };
-		A02B3E6013BD93A7009FCCE3 /* Adapter.m in Sources */ = {isa = PBXBuildFile; fileRef = A02B3E5F13BD93A7009FCCE3 /* Adapter.m */; };
 		A0427C9713C58BD40098CE84 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B5948213C05692008A48CD /* Default@2x.png */; };
 		A0427C9813C58BDA0098CE84 /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550E13C04EA400100ACC /* 57.png */; };
 		A0427C9913C58BDE0098CE84 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
@@ -28,7 +27,7 @@
 		A063465213BC537300CB5168 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A063465013BC537300CB5168 /* InfoPlist.strings */; };
 		A063465513BC537300CB5168 /* BussyTests.h in Resources */ = {isa = PBXBuildFile; fileRef = A063465413BC537300CB5168 /* BussyTests.h */; };
 		A063465713BC537300CB5168 /* BussyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A063465613BC537300CB5168 /* BussyTests.m */; };
-		A063466213BC5AFA00CB5168 /* Translink.m in Sources */ = {isa = PBXBuildFile; fileRef = A063466113BC5AFA00CB5168 /* Translink.m */; };
+		A063466213BC5AFA00CB5168 /* TranslinkAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = A063466113BC5AFA00CB5168 /* TranslinkAdapter.m */; };
 		A063466513BC5B8E00CB5168 /* StopRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = A063466413BC5B8E00CB5168 /* StopRoute.m */; };
 		A075240E13BD722C000D9419 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = A07523F613BD722C000D9419 /* NSObject+SBJson.m */; };
 		A075240F13BD722C000D9419 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A07523F913BD722C000D9419 /* SBJsonParser.m */; };
@@ -42,6 +41,7 @@
 		A075241713BD722C000D9419 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240913BD722C000D9419 /* SBJsonTokeniser.m */; };
 		A075241813BD722C000D9419 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240B13BD722C000D9419 /* SBJsonUTF8Stream.m */; };
 		A075241913BD722C000D9419 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A075240D13BD722C000D9419 /* SBJsonWriter.m */; };
+		A07BE4EB13C806DA008CE68D /* StopRouteCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A07BE4EA13C806DA008CE68D /* StopRouteCollection.m */; };
 		A07E596913C16CE5004EBC0D /* AddStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07E596713C16CE5004EBC0D /* AddStopViewController.m */; };
 		A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07E596813C16CE5004EBC0D /* AddStopViewController.xib */; };
 		A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */; };
@@ -61,8 +61,6 @@
 /* Begin PBXFileReference section */
 		A02B3E5B13BD83E7009FCCE3 /* Stop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stop.h; sourceTree = "<group>"; };
 		A02B3E5C13BD83E7009FCCE3 /* Stop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stop.m; sourceTree = "<group>"; };
-		A02B3E5E13BD93A7009FCCE3 /* Adapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adapter.h; sourceTree = "<group>"; };
-		A02B3E5F13BD93A7009FCCE3 /* Adapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Adapter.m; sourceTree = "<group>"; };
 		A0427C9B13C592140098CE84 /* DSActivityView_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView_Prefix.pch; sourceTree = "<group>"; };
 		A0427C9C13C592140098CE84 /* DSActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
 		A0427C9D13C592140098CE84 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
@@ -86,8 +84,8 @@
 		A063465313BC537300CB5168 /* BussyTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BussyTests-Prefix.pch"; sourceTree = "<group>"; };
 		A063465413BC537300CB5168 /* BussyTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BussyTests.h; sourceTree = "<group>"; };
 		A063465613BC537300CB5168 /* BussyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BussyTests.m; sourceTree = "<group>"; };
-		A063466013BC5AFA00CB5168 /* Translink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Translink.h; sourceTree = "<group>"; };
-		A063466113BC5AFA00CB5168 /* Translink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Translink.m; sourceTree = "<group>"; };
+		A063466013BC5AFA00CB5168 /* TranslinkAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslinkAdapter.h; sourceTree = "<group>"; };
+		A063466113BC5AFA00CB5168 /* TranslinkAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslinkAdapter.m; sourceTree = "<group>"; };
 		A063466313BC5B8E00CB5168 /* StopRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRoute.h; sourceTree = "<group>"; };
 		A063466413BC5B8E00CB5168 /* StopRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRoute.m; sourceTree = "<group>"; };
 		A07523F413BD722C000D9419 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSON.h; path = ../../../Downloads/SBJson_v3.0/Classes/JSON.h; sourceTree = "<group>"; };
@@ -116,6 +114,9 @@
 		A075240B13BD722C000D9419 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonUTF8Stream.m; path = ../../../Downloads/SBJson_v3.0/Classes/SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		A075240C13BD722C000D9419 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonWriter.h; path = ../../../Downloads/SBJson_v3.0/Classes/SBJsonWriter.h; sourceTree = "<group>"; };
 		A075240D13BD722C000D9419 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = ../../../Downloads/SBJson_v3.0/Classes/SBJsonWriter.m; sourceTree = "<group>"; };
+		A07BE4E613C7F841008CE68D /* TranslinkObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslinkObject.h; sourceTree = "<group>"; };
+		A07BE4E913C806DA008CE68D /* StopRouteCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteCollection.h; sourceTree = "<group>"; };
+		A07BE4EA13C806DA008CE68D /* StopRouteCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteCollection.m; sourceTree = "<group>"; };
 		A07E596613C16CE5004EBC0D /* AddStopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddStopViewController.h; path = ../AddStopViewController.h; sourceTree = "<group>"; };
 		A07E596713C16CE5004EBC0D /* AddStopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddStopViewController.m; path = ../AddStopViewController.m; sourceTree = "<group>"; };
 		A07E596813C16CE5004EBC0D /* AddStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddStopViewController.xib; path = ../AddStopViewController.xib; sourceTree = "<group>"; };
@@ -197,28 +198,13 @@
 		A063462D13BC537300CB5168 /* Bussy */ = {
 			isa = PBXGroup;
 			children = (
-				A07E596613C16CE5004EBC0D /* AddStopViewController.h */,
-				A07E596713C16CE5004EBC0D /* AddStopViewController.m */,
-				A07E596813C16CE5004EBC0D /* AddStopViewController.xib */,
+				A07BE4E513C7F7E9008CE68D /* Model */,
+				A07BE4E413C7F7CC008CE68D /* ViewControllers */,
+				A07BE4E213C7F7A2008CE68D /* Resources */,
 				A07523F213BD7216000D9419 /* JSON */,
 				A063463613BC537300CB5168 /* BussyAppDelegate.h */,
 				A063463713BC537300CB5168 /* BussyAppDelegate.m */,
-				A063463913BC537300CB5168 /* MainWindow.xib */,
-				A063463C13BC537300CB5168 /* RootViewController.h */,
-				A063463D13BC537300CB5168 /* RootViewController.m */,
-				A063463F13BC537300CB5168 /* RootViewController.xib */,
 				A063462E13BC537300CB5168 /* Supporting Files */,
-				A063466013BC5AFA00CB5168 /* Translink.h */,
-				A063466113BC5AFA00CB5168 /* Translink.m */,
-				A063466313BC5B8E00CB5168 /* StopRoute.h */,
-				A063466413BC5B8E00CB5168 /* StopRoute.m */,
-				A02B3E5B13BD83E7009FCCE3 /* Stop.h */,
-				A02B3E5C13BD83E7009FCCE3 /* Stop.m */,
-				A02B3E5E13BD93A7009FCCE3 /* Adapter.h */,
-				A02B3E5F13BD93A7009FCCE3 /* Adapter.m */,
-				A080846D13C56B7D00DEC160 /* StopRouteChooserViewController.h */,
-				A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */,
-				A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */,
 			);
 			path = Bussy;
 			sourceTree = "<group>";
@@ -285,6 +271,46 @@
 				A075240D13BD722C000D9419 /* SBJsonWriter.m */,
 			);
 			name = JSON;
+			sourceTree = "<group>";
+		};
+		A07BE4E213C7F7A2008CE68D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A063463913BC537300CB5168 /* MainWindow.xib */,
+				A07E596813C16CE5004EBC0D /* AddStopViewController.xib */,
+				A063463F13BC537300CB5168 /* RootViewController.xib */,
+				A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A07BE4E413C7F7CC008CE68D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A07E596613C16CE5004EBC0D /* AddStopViewController.h */,
+				A07E596713C16CE5004EBC0D /* AddStopViewController.m */,
+				A063463C13BC537300CB5168 /* RootViewController.h */,
+				A063463D13BC537300CB5168 /* RootViewController.m */,
+				A080846D13C56B7D00DEC160 /* StopRouteChooserViewController.h */,
+				A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A07BE4E513C7F7E9008CE68D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A063466013BC5AFA00CB5168 /* TranslinkAdapter.h */,
+				A063466113BC5AFA00CB5168 /* TranslinkAdapter.m */,
+				A063466313BC5B8E00CB5168 /* StopRoute.h */,
+				A063466413BC5B8E00CB5168 /* StopRoute.m */,
+				A02B3E5B13BD83E7009FCCE3 /* Stop.h */,
+				A02B3E5C13BD83E7009FCCE3 /* Stop.m */,
+				A07BE4E613C7F841008CE68D /* TranslinkObject.h */,
+				A07BE4E913C806DA008CE68D /* StopRouteCollection.h */,
+				A07BE4EA13C806DA008CE68D /* StopRouteCollection.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,7 +426,7 @@
 				A063463513BC537300CB5168 /* main.m in Sources */,
 				A063463813BC537300CB5168 /* BussyAppDelegate.m in Sources */,
 				A063463E13BC537300CB5168 /* RootViewController.m in Sources */,
-				A063466213BC5AFA00CB5168 /* Translink.m in Sources */,
+				A063466213BC5AFA00CB5168 /* TranslinkAdapter.m in Sources */,
 				A063466513BC5B8E00CB5168 /* StopRoute.m in Sources */,
 				A075240E13BD722C000D9419 /* NSObject+SBJson.m in Sources */,
 				A075240F13BD722C000D9419 /* SBJsonParser.m in Sources */,
@@ -415,10 +441,10 @@
 				A075241813BD722C000D9419 /* SBJsonUTF8Stream.m in Sources */,
 				A075241913BD722C000D9419 /* SBJsonWriter.m in Sources */,
 				A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */,
-				A02B3E6013BD93A7009FCCE3 /* Adapter.m in Sources */,
 				A07E596913C16CE5004EBC0D /* AddStopViewController.m in Sources */,
 				A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */,
 				A0427C9E13C592140098CE84 /* DSActivityView.m in Sources */,
+				A07BE4EB13C806DA008CE68D /* StopRouteCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

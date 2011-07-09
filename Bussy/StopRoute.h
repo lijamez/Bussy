@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Stop.h"
+#import "TranslinkObject.h"
+
+@class Stop;
 
 @interface StopRoute : NSObject {
     

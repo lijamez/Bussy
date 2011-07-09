@@ -7,37 +7,51 @@
 //
 
 #import "Stop.h"
-#import "StopRoute.h"
 
 @implementation Stop
 @synthesize stopID, stopName, routes;
 
--(Stop*) stopId: (NSString*) inputId name: (NSString*) inputName
+-(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId
 {
     self = [super init];
     if (self)
     {
+        adapter = inputAdapter;
+        [adapter retain];
+        
         stopID = inputId;
         [stopID retain];
         
-        stopName = inputName;
-        [stopName retain];
-        
-        routes = [[NSMutableArray alloc] init];
-        [routes retain];
+        [self refresh];
+
     }
     
     return self;
 }
 
--(void) addRoute: (StopRoute*) sr
+- (void) refresh
 {
-    [routes addObject:sr];
-}
+    NSString * json = [adapter requestStop:stopID];
+    
+    SBJsonParser * parser = [[SBJsonParser alloc] init];
+    
+    NSArray * entries = [parser objectWithString:json error:nil];
+    
+    for (NSArray * result in entries)
+    {
+        NSString * resultStopID = [[result objectAtIndex:0] stringValue];
+        if ([resultStopID isEqualToString:self.stopID])
+        {
+            
+            stopName = [result objectAtIndex:1];
+            [stopName retain];
+            
+            routes = [[StopRouteCollection alloc] initWithAdapter: adapter stop: self];
+            
+            break;
+        }
+    }
 
--(void) clearRoutes
-{
-    [routes removeAllObjects];
 }
 
 -(void) dealloc

@@ -11,16 +11,12 @@
 @protocol ModalViewDelegate;
 
 @interface AddStopViewController : UIViewController <UIAlertViewDelegate>{
-    UIBarButtonItem * doneButton;
-    UIBarButtonItem * cancelButton;
-    UITextField * textField;
+    UITextField * stopNumberTextField;
     
     id<ModalViewDelegate> delegate;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem * doneButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem * cancelButton;
-@property (nonatomic, retain) IBOutlet UITextField * textField;
+@property (nonatomic, retain) IBOutlet UITextField * stopNumberTextField;
 
 @property (nonatomic, assign) id<ModalViewDelegate> delegate;
 

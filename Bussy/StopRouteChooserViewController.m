@@ -9,10 +9,11 @@
 #import "StopRouteChooserViewController.h"
 #import "StopRoute.h"
 #import "RootViewController.h"
+#import "StopRouteCollection.h"
 
 @implementation StopRouteChooserViewController
 
-@synthesize tableView;
+@synthesize stopRouteTableView;
 @synthesize stopRoutes;
 @synthesize delegate;
 
@@ -68,7 +69,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [stopRoutes count];
+    return [stopRoutes.array count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -80,7 +81,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    StopRoute * stopRoute = [stopRoutes objectAtIndex:indexPath.row];
+    StopRoute * stopRoute = [stopRoutes.array objectAtIndex:indexPath.row];
     cell.textLabel.text = [stopRoute routeName];
     
     cell.detailTextLabel.text = [stopRoute generateTimesString];
@@ -91,7 +92,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.delegate didReceiveStopRoute:[stopRoutes objectAtIndex:[indexPath row]]];
+    [self.delegate didReceiveStopRoute:[stopRoutes.array objectAtIndex:[indexPath row]]];
     [self dismissModalViewControllerAnimated:YES];
     
 }

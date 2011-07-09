@@ -7,7 +7,7 @@
 //
 
 #import "StopRoute.h"
-
+#import "Stop.h"
 
 @implementation StopRoute
 @synthesize times, routeName, routeID, stop, direction;
@@ -40,7 +40,7 @@
 
 - (NSString*) generateTitle
 {
-    NSString * title = [NSString stringWithFormat:@"%@: %@", [stop stopID], routeName];
+    NSString * title = [NSString stringWithFormat:@"%@: %@", stop.stopID, routeName];
     return title;
 }
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "StopRoute.h"
+#import "StopRouteCollection.h"
 
 @protocol ModalViewDelegate
 
@@ -19,12 +20,14 @@
     
     NSMutableArray * watchedStopRoutes;
     UIBarButtonItem	* addBarButton;
+    UIBarButtonItem	* refreshBarButton;
 }
 
 @property (nonatomic, retain) UIBarButtonItem * addBarButton;
+@property (nonatomic, retain) UIBarButtonItem * refreshBarButton;
 @property (nonatomic, retain) NSMutableArray * watchedStopRoutes;
 
-- (IBAction)	addWatchedStop:		(id) sender;
+- (IBAction)	addWatchedStopRoute:		(id) sender;
 
 - (void) save;
 

@@ -8,14 +8,13 @@
 
 #import "AddStopViewController.h"
 #import "RootViewController.h"
-#import "Adapter.h"
 #import "Stop.h"
 #import "StopRouteChooserViewController.h"
 #import "DSActivityView.h"
 
 @implementation AddStopViewController
 
-@synthesize doneButton, cancelButton, textField;
+@synthesize stopNumberTextField;
 @synthesize delegate;
 
 int const MAX_FIELD_CHARS = 5;
@@ -33,7 +32,7 @@ int const MAX_FIELD_CHARS = 5;
 
 - (IBAction) notifyNext: (id) sender
 {
-    NSString * newStopNumber = [self.textField text];
+    NSString * newStopNumber = [self.stopNumberTextField text];
     
     if ([newStopNumber length] == 0)
     {
@@ -46,8 +45,7 @@ int const MAX_FIELD_CHARS = 5;
     
     [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.view];
     
-    Adapter * adapter = [[Adapter alloc] init];
-    Stop * stop = [adapter getStop:newStopNumber];
+    Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:newStopNumber];
     
     [DSBezelActivityView removeViewAnimated:NO];
     
@@ -55,7 +53,7 @@ int const MAX_FIELD_CHARS = 5;
     if ([newStopNumber isEqualToString:[stop stopID]])
     {
         
-        NSArray * stopRoutes = [adapter getStopRoutesForStop:stop];
+        StopRouteCollection * stopRoutes = [stop routes];
         StopRouteChooserViewController * stopRouteChooserView = [[[StopRouteChooserViewController alloc] init] autorelease];
         stopRouteChooserView.stopRoutes = stopRoutes;
         stopRouteChooserView.delegate = self.delegate;
@@ -86,9 +84,7 @@ int const MAX_FIELD_CHARS = 5;
 
 - (void)dealloc
 {
-    [doneButton release];
-    [cancelButton release];
-    [textField release];
+    [stopNumberTextField release];
     [super dealloc];
 }
 
@@ -105,7 +101,7 @@ int const MAX_FIELD_CHARS = 5;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [textField becomeFirstResponder];
+    [stopNumberTextField becomeFirstResponder];
     
     UIBarButtonItem * cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(notifyIsCancelled:)];
     self.navigationItem.leftBarButtonItem = cancelButton;

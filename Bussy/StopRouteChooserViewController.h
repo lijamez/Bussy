@@ -10,17 +10,19 @@
 
 @protocol ModalViewDelegate;
 
+@class StopRouteCollection;
+
 @interface StopRouteChooserViewController : UIViewController {
     
-    UITableView * tableView;
-    NSArray * stopRoutes;
+    UITableView * stopRouteTableView;
+    StopRouteCollection * stopRoutes;
     
     id<ModalViewDelegate> delegate;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView * tableView;
+@property (nonatomic, retain) IBOutlet UITableView * stopRouteTableView;
 
-@property (nonatomic, retain) NSArray * stopRoutes;
+@property (nonatomic, retain) StopRouteCollection * stopRoutes;
 
 @property (nonatomic, assign) id<ModalViewDelegate> delegate;
 

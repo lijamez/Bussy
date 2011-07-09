@@ -7,13 +7,15 @@
 //
 
 #import "RootViewController.h"
-#import "Adapter.h"
 #import "StopRoute.h"
 #import "AddStopViewController.h"
+#import "StopRouteCollection.h"
+#import "Stop.h"
+#import "DSActivityView.h"
 
 @implementation RootViewController
 
-@synthesize addBarButton, watchedStopRoutes;
+@synthesize addBarButton, refreshBarButton, watchedStopRoutes;
 
 CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
 
@@ -36,9 +38,9 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     {
         NSMutableDictionary * stopRouteDictionary = [[NSMutableDictionary alloc] init];
         
-        [stopRouteDictionary setObject:[stopRoute.stop stopID] forKey:@"StopID"];
-        [stopRouteDictionary setObject:[stopRoute routeID] forKey:@"RouteID"];
-        [stopRouteDictionary setObject:[stopRoute direction] forKey:@"Direction"];
+        [stopRouteDictionary setObject:stopRoute.stop.stopID forKey:@"StopID"];
+        [stopRouteDictionary setObject:stopRoute.routeID forKey:@"RouteID"];
+        [stopRouteDictionary setObject:stopRoute.direction forKey:@"Direction"];
         
         [watchedStopRouteDictionaries addObject:stopRouteDictionary];
     }
@@ -56,7 +58,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     }
 }
 
-- (IBAction) addWatchedStop: (id) sender
+- (IBAction) addWatchedStopRoute: (id) sender
 {
     AddStopViewController * addStopView = [[[AddStopViewController alloc] init] autorelease];
     addStopView.delegate = self;
@@ -65,11 +67,44 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     [self presentModalViewController:addStopRouteNavigationController animated:YES];
 }
 
+- (IBAction) refreshRoutes: (id) sender
+{
+    
+    [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.view];
+    
+    NSMutableArray * refreshedStopRoutes = [[NSMutableArray alloc] init];
+        
+    for(StopRoute * oldStopRoute in watchedStopRoutes)
+    {
+        Stop * stop = oldStopRoute.stop;
+        [stop refresh];
+            
+        for (StopRoute * newStopRoute in stop.routes.array)
+        {
+                
+            if ([newStopRoute.routeID isEqualToString:oldStopRoute.routeID] &&
+                [newStopRoute.direction isEqualToString:oldStopRoute.direction])
+            {
+                [refreshedStopRoutes addObject:newStopRoute];
+            }
+                
+        }
+            
+    }
+    
+    [self.tableView reloadData];
+    
+    [DSBezelActivityView removeViewAnimated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self setAddBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWatchedStop:)]];
+    [self setRefreshBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutes:)]];
+    self.navigationController.navigationBar.topItem.leftBarButtonItem = refreshBarButton;
+    
+    [self setAddBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWatchedStopRoute:)]];
     self.navigationController.navigationBar.topItem.rightBarButtonItem = addBarButton;
     
     self.title = @"Bussy";
@@ -83,7 +118,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     if ([[NSFileManager defaultManager] fileExistsAtPath:pathToWatchedStopRoutesSaveFile])
     {
         NSArray * watchedStopRouteDictionaries = [[NSArray alloc] initWithContentsOfFile:pathToWatchedStopRoutesSaveFile];
-        Adapter * adapter = [[[Adapter alloc] init] autorelease];
         for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
         {
             
@@ -91,10 +125,10 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
             NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
             NSString * savedDirection = [stopRouteDictionary objectForKey:@"Direction"];
             
-            Stop * stop = [adapter getStop:savedStopID];
-            NSArray * stopRoutes = [adapter getStopRoutesForStop:stop];
+            Stop * stop = [[Stop alloc] initWithAdapter: [[TranslinkAdapter alloc] init] stopId: savedStopID];
+            StopRouteCollection * stopRoutes = [[StopRouteCollection alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stop:stop];
             
-            for (StopRoute * stopRoute in stopRoutes)
+            for (StopRoute * stopRoute in stopRoutes.array)
             {
                 if ([[stopRoute routeID] isEqualToString:savedRouteID] &&
                     [[stopRoute direction] isEqualToString:savedDirection])
@@ -113,7 +147,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
         watchedStopRoutes = [[NSMutableArray alloc] init];
         NSLog(@"Save file not found.");
     }
-
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -150,6 +185,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     return 1;
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [watchedStopRoutes count];
@@ -171,9 +207,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-    cell.autoresizesSubviews = YES;
-    
+        
     StopRoute * stopRoute = [watchedStopRoutes objectAtIndex:indexPath.row];
     cell.textLabel.text = [stopRoute routeName];
     cell.detailTextLabel.numberOfLines = 2;
