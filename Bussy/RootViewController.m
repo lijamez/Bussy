@@ -69,7 +69,11 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
 
 - (IBAction) refreshRoutes: (id) sender
 {
-    
+    if ([watchedStopRoutes count] <= 0)
+    {
+        return;
+    }
+
     [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.view];
     
     NSMutableArray * refreshedStopRoutes = [[NSMutableArray alloc] init];
@@ -91,6 +95,9 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
         }
             
     }
+    
+    [watchedStopRoutes release];
+    watchedStopRoutes = refreshedStopRoutes;
     
     [self.tableView reloadData];
     
@@ -208,6 +215,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
         
+
     StopRoute * stopRoute = [watchedStopRoutes objectAtIndex:indexPath.row];
     cell.textLabel.text = [stopRoute routeName];
     cell.detailTextLabel.numberOfLines = 2;

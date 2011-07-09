@@ -71,6 +71,7 @@
      See also applicationDidEnterBackground:.
      */
     NSLog(@"applicationWillTerminate Called");
+    [rootViewController save];
     
 }
 
