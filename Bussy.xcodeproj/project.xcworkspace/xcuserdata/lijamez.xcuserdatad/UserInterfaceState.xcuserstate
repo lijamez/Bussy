@@ -730,10 +730,10 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>334220307.09153903</real>
+		<real>334220360.66131902</real>
 		<string>{327, 1190}</string>
 		<false/>
-		<string>{812, 0}</string>
+		<string>{809, 0}</string>
 		<dict>
 			<key>$classes</key>
 			<array>
@@ -743,7 +743,7 @@
 			<key>$classname</key>
 			<string>NSDictionary</string>
 		</dict>
-		<string>@implementation StopRouteDetailsViewController</string>
+		<string>-didReceiveMemoryWarning</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
 			<key>$class</key>
@@ -7034,9 +7034,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>334220307.08862603</real>
+		<real>334220360.658638</real>
 		<string>{327, 1190}</string>
-		<string>{812, 0}</string>
+		<string>{809, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11638,11 +11638,11 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>75</integer>
+					<integer>74</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>74</integer>
+					<integer>75</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -11661,8 +11661,8 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{0, 774}</string>
-		<real>334220307.08871901</real>
+		<real>334220360.65875101</real>
+		<string>{14257, 929}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
