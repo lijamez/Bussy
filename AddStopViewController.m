@@ -44,7 +44,7 @@ int const MAX_FIELD_CHARS = 5;
     NSError * error = nil;
     
     Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:newStopNumber error:&error];
-    
+
     if (error)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

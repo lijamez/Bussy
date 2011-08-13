@@ -74,7 +74,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     
     leftNavButton.enabled = NO;
     rightNavButton.enabled = NO;
-
 }
 
 - (void) removeActivityView
@@ -85,7 +84,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     
     leftNavButton.enabled = YES;
     rightNavButton.enabled = YES;
-    
 }
 
 - (void) refreshWatchedStopRoutes
@@ -132,7 +130,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
         
         [self.tableView reloadData];
     }
-    
 }
 
 - (IBAction) refreshRoutes: (id) sender

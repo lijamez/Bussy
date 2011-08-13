@@ -13,7 +13,6 @@
 		A0427C9913C58BDE0098CE84 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
 		A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */; };
 		A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */; };
-		A05D3F2F13F70BD000D89508 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = A05D3F2E13F70BD000D89508 /* Background.png */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
 		A063462A13BC537300CB5168 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462913BC537300CB5168 /* Foundation.framework */; };
 		A063462C13BC537300CB5168 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462B13BC537300CB5168 /* CoreGraphics.framework */; };
@@ -66,7 +65,6 @@
 		A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteDetailsViewController.h; sourceTree = "<group>"; };
 		A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteDetailsViewController.m; sourceTree = "<group>"; };
 		A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
-		A05D3F2E13F70BD000D89508 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		A063462313BC537300CB5168 /* Bussy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bussy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A063462713BC537300CB5168 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A063462913BC537300CB5168 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -154,26 +152,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A05D3F2B13F70BA700D89508 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A05D3F2D13F70BBF00D89508 /* Images */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		A05D3F2D13F70BBF00D89508 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				A05D3F2E13F70BD000D89508 /* Background.png */,
-			);
-			name = Images;
-			sourceTree = "<group>";
-		};
 		A063461813BC537300CB5168 = {
 			isa = PBXGroup;
 			children = (
-				A05D3F2B13F70BA700D89508 /* Resources */,
 				A07523F213BD7216000D9419 /* JSON */,
 				A0B5948213C05692008A48CD /* Default@2x.png */,
 				A094550E13C04EA400100ACC /* 57.png */,
@@ -403,7 +384,6 @@
 				A0427C9813C58BDA0098CE84 /* 57.png in Resources */,
 				A0427C9913C58BDE0098CE84 /* 114.png in Resources */,
 				A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */,
-				A05D3F2F13F70BD000D89508 /* Background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
