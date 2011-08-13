@@ -15,6 +15,7 @@
 @interface StopRouteChooserViewController : UIViewController {
     
     UITableView * stopRouteTableView;
+    
     StopRouteCollection * stopRoutes;
     
     id<ModalViewDelegate> delegate;

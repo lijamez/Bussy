@@ -22,10 +22,12 @@
     NSMutableArray * watchedStopRoutes;
     UIBarButtonItem	* addBarButton;
     UIBarButtonItem	* refreshBarButton;
+    UIImageView * imageView;
 }
 
 @property (nonatomic, retain) UIBarButtonItem * addBarButton;
 @property (nonatomic, retain) UIBarButtonItem * refreshBarButton;
+@property (nonatomic, retain) IBOutlet UIImageView * imageView;
 @property (nonatomic, retain) NSMutableArray * watchedStopRoutes;
 
 - (IBAction)	addWatchedStopRoute:		(id) sender;

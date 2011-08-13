@@ -13,6 +13,7 @@
 		A0427C9913C58BDE0098CE84 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A094550B13C04E7A00100ACC /* 114.png */; };
 		A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */; };
 		A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */; };
+		A05D3F2F13F70BD000D89508 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = A05D3F2E13F70BD000D89508 /* Background.png */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
 		A063462A13BC537300CB5168 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462913BC537300CB5168 /* Foundation.framework */; };
 		A063462C13BC537300CB5168 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462B13BC537300CB5168 /* CoreGraphics.framework */; };
@@ -33,7 +34,6 @@
 		A07BE4EB13C806DA008CE68D /* StopRouteCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A07BE4EA13C806DA008CE68D /* StopRouteCollection.m */; };
 		A07E596913C16CE5004EBC0D /* AddStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07E596713C16CE5004EBC0D /* AddStopViewController.m */; };
 		A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07E596813C16CE5004EBC0D /* AddStopViewController.xib */; };
-		A07FE7F813EBCFCE00567B09 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07FE7F713EBCFCE00567B09 /* DSActivityView.m */; };
 		A07FE81013EBCFFB00567B09 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = A07FE7FA13EBCFFB00567B09 /* NSObject+SBJson.m */; };
 		A07FE81113EBCFFB00567B09 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A07FE7FD13EBCFFB00567B09 /* SBJsonParser.m */; };
 		A07FE81213EBCFFB00567B09 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A07FE7FF13EBCFFB00567B09 /* SBJsonStreamParser.m */; };
@@ -66,6 +66,7 @@
 		A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteDetailsViewController.h; sourceTree = "<group>"; };
 		A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteDetailsViewController.m; sourceTree = "<group>"; };
 		A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
+		A05D3F2E13F70BD000D89508 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		A063462313BC537300CB5168 /* Bussy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bussy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A063462713BC537300CB5168 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A063462913BC537300CB5168 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,8 +97,6 @@
 		A07E596613C16CE5004EBC0D /* AddStopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddStopViewController.h; path = ../AddStopViewController.h; sourceTree = "<group>"; };
 		A07E596713C16CE5004EBC0D /* AddStopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddStopViewController.m; path = ../AddStopViewController.m; sourceTree = "<group>"; };
 		A07E596813C16CE5004EBC0D /* AddStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddStopViewController.xib; path = ../AddStopViewController.xib; sourceTree = "<group>"; };
-		A07FE7F613EBCFCE00567B09 /* DSActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSActivityView.h; sourceTree = "<group>"; };
-		A07FE7F713EBCFCE00567B09 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSActivityView.m; sourceTree = "<group>"; };
 		A07FE7F913EBCFFB00567B09 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		A07FE7FA13EBCFFB00567B09 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		A07FE7FB13EBCFFB00567B09 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -155,20 +154,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A0427C9A13C592060098CE84 /* DSActivityView */ = {
+		A05D3F2B13F70BA700D89508 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A07FE7F613EBCFCE00567B09 /* DSActivityView.h */,
-				A07FE7F713EBCFCE00567B09 /* DSActivityView.m */,
+				A05D3F2D13F70BBF00D89508 /* Images */,
 			);
-			name = DSActivityView;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A05D3F2D13F70BBF00D89508 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				A05D3F2E13F70BD000D89508 /* Background.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		A063461813BC537300CB5168 = {
 			isa = PBXGroup;
 			children = (
+				A05D3F2B13F70BA700D89508 /* Resources */,
 				A07523F213BD7216000D9419 /* JSON */,
-				A0427C9A13C592060098CE84 /* DSActivityView */,
 				A0B5948213C05692008A48CD /* Default@2x.png */,
 				A094550E13C04EA400100ACC /* 57.png */,
 				A094550B13C04E7A00100ACC /* 114.png */,
@@ -362,6 +368,9 @@
 /* Begin PBXProject section */
 		A063461A13BC537300CB5168 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = A063461D13BC537300CB5168 /* Build configuration list for PBXProject "Bussy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -394,6 +403,7 @@
 				A0427C9813C58BDA0098CE84 /* 57.png in Resources */,
 				A0427C9913C58BDE0098CE84 /* 114.png in Resources */,
 				A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */,
+				A05D3F2F13F70BD000D89508 /* Background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +450,6 @@
 				A07BE4EB13C806DA008CE68D /* StopRouteCollection.m in Sources */,
 				A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */,
 				A0BEB29813C8634300F5F29F /* WatchedStopRoutesCollection.m in Sources */,
-				A07FE7F813EBCFCE00567B09 /* DSActivityView.m in Sources */,
 				A07FE81013EBCFFB00567B09 /* NSObject+SBJson.m in Sources */,
 				A07FE81113EBCFFB00567B09 /* SBJsonParser.m in Sources */,
 				A07FE81213EBCFFB00567B09 /* SBJsonStreamParser.m in Sources */,

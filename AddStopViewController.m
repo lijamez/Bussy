@@ -10,7 +10,6 @@
 #import "RootViewController.h"
 #import "Stop.h"
 #import "StopRouteChooserViewController.h"
-#import "DSActivityView.h"
 
 @implementation AddStopViewController
 
@@ -42,14 +41,9 @@ int const MAX_FIELD_CHARS = 5;
         return;
     }
     
-    
-    [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.view];
-    
     NSError * error = nil;
     
     Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:newStopNumber error:&error];
-    
-    [DSBezelActivityView removeViewAnimated:NO];
     
     if (error)
     {

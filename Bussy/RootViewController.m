@@ -11,7 +11,6 @@
 #import "AddStopViewController.h"
 #import "StopRouteCollection.h"
 #import "Stop.h"
-#import "DSActivityView.h"
 #import "StopRouteDetailsViewController.h"
 
 @implementation RootViewController
@@ -75,13 +74,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     
     leftNavButton.enabled = NO;
     rightNavButton.enabled = NO;
-    
-    [NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.navigationController.navigationBar.superview];
-}
 
-- (void) changeActivityViewLabel: (NSString*) newLabel
-{
-    [DSBezelActivityView currentActivityView].activityLabel.text = newLabel;
 }
 
 - (void) removeActivityView
@@ -93,7 +86,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     leftNavButton.enabled = YES;
     rightNavButton.enabled = YES;
     
-    [DSBezelActivityView removeViewAnimated:YES];
 }
 
 - (void) refreshWatchedStopRoutes
@@ -102,9 +94,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     {
         return;
     }
-    
-    //[NSThread detachNewThreadSelector:@selector(newActivityViewForView:) toTarget:[DSBezelActivityView class] withObject:self.navigationController.navigationBar.superview];
-    //[DSBezelActivityView newActivityViewForView:self.navigationController.navigationBar.superview withLabel:@"Refreshing..."];
     
     NSMutableArray * refreshedStopRoutes = [[NSMutableArray alloc] init];
     NSError * error = nil;
@@ -144,7 +133,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
         [self.tableView reloadData];
     }
     
-    //[DSBezelActivityView removeViewAnimated:YES];
 }
 
 - (IBAction) refreshRoutes: (id) sender
