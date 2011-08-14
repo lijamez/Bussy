@@ -17,15 +17,20 @@
 
 @end
 
-@interface RootViewController : UITableViewController<ModalViewDelegate> {
+@interface RootViewController : UIViewController<ModalViewDelegate> {
     
     NSMutableArray * watchedStopRoutes;
     UIBarButtonItem	* addBarButton;
     UIBarButtonItem	* refreshBarButton;
+    UIImageView * imageView;
+    UITableView * tableView;
 }
 
 @property (nonatomic, retain) UIBarButtonItem * addBarButton;
 @property (nonatomic, retain) UIBarButtonItem * refreshBarButton;
+@property (nonatomic, retain) IBOutlet UIImageView * imageView;
+@property (nonatomic, retain) IBOutlet UITableView * tableView;
+
 @property (nonatomic, retain) NSMutableArray * watchedStopRoutes;
 
 - (IBAction)	addWatchedStopRoute:		(id) sender;

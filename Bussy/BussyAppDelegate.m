@@ -15,7 +15,7 @@
 @synthesize window=_window;
 
 @synthesize navigationController=_navigationController;
-
+@synthesize imageView=_imageView;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -44,7 +44,7 @@
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     NSLog(@"applicationDidEnterBackground Called");
-    [rootViewController save];
+    [rootViewControllerz save];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -71,7 +71,7 @@
      See also applicationDidEnterBackground:.
      */
     NSLog(@"applicationWillTerminate Called");
-    [rootViewController save];
+    [rootViewControllerz save];
     
 }
 

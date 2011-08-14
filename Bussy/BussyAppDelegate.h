@@ -11,12 +11,14 @@
 
 @interface BussyAppDelegate : NSObject <UIApplicationDelegate> {
 
-    IBOutlet RootViewController *rootViewController;
+    IBOutlet RootViewController *rootViewControllerz;
     
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+
+@property (nonatomic, retain) IBOutlet UIImageView * imageView;
 
 @end

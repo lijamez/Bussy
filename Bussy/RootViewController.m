@@ -12,12 +12,13 @@
 #import "StopRouteCollection.h"
 #import "Stop.h"
 #import "StopRouteDetailsViewController.h"
+#import "TranslinkColors.h"
 
 @implementation RootViewController
 
-@synthesize addBarButton, refreshBarButton, watchedStopRoutes;
+@synthesize addBarButton, refreshBarButton, watchedStopRoutes, imageView, tableView;
 
-CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
+CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
 - (NSString*) watchedStopRoutesSavePath
 {
@@ -63,7 +64,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     AddStopViewController * addStopView = [[[AddStopViewController alloc] init] autorelease];
     addStopView.delegate = self;
     UINavigationController * addStopRouteNavigationController = [[UINavigationController alloc] initWithRootViewController:addStopView];
-    addStopRouteNavigationController.navigationBar.tintColor = [UIColor blueColor];
+    addStopRouteNavigationController.navigationBar.tintColor = [TranslinkColors GetTranslinkBlue];
     [self presentModalViewController:addStopRouteNavigationController animated:YES];
 }
 
@@ -210,7 +211,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+        
     [self setRefreshBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutes:)]];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = refreshBarButton;
     
@@ -218,7 +219,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     self.navigationController.navigationBar.topItem.rightBarButtonItem = addBarButton;
     
     self.title = @"Bussy";
-    self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    self.navigationController.navigationBar.tintColor = [TranslinkColors GetTranslinkBlue];
     self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
     watchedStopRoutes = [[NSMutableArray alloc] init];
@@ -276,15 +277,90 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    const NSInteger TOP_LABEL_TAG = 1001;
+    const NSInteger MIDDLE_LABEL_TAG = 1002;
+	const NSInteger BOTTOM_LABEL_TAG = 1003;
+    
+    UILabel *topLabel;
+    UILabel *middleLabel;
+	UILabel *bottomLabel;
+    
+    
+    
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero] autorelease];
+    
+        //Indicator
+        UIImage * indicatorImage = [UIImage imageNamed:@"indicator.png"];
+        cell.accessoryView = [[[UIImageView alloc]
+                               initWithImage:indicatorImage]
+                              autorelease];
+        
+        const CGFloat LABEL_HEIGHT = 20;
+        
+        //Top Label
+        topLabel =
+        [[[UILabel alloc]
+          initWithFrame:
+          CGRectMake(
+                     2.0 * cell.indentationWidth,
+                     0.5 * (tableView.rowHeight - 2 * LABEL_HEIGHT),
+                     tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
+                     LABEL_HEIGHT)]
+         autorelease];
+        [cell.contentView addSubview:topLabel];
+        
+        topLabel.tag = TOP_LABEL_TAG;
+        topLabel.backgroundColor = [UIColor clearColor];
+        topLabel.textColor = [UIColor whiteColor];
+        topLabel.highlightedTextColor = [UIColor blackColor];
+        topLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize]];
+        
+        
+        //Bottom Label
+        bottomLabel =
+        [[[UILabel alloc]
+          initWithFrame:
+          CGRectMake(
+                     2.0 * cell.indentationWidth,
+                     0.5 * (tableView.rowHeight - 2 * LABEL_HEIGHT) + LABEL_HEIGHT,
+                     tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
+                     LABEL_HEIGHT)]
+         autorelease];
+        [cell.contentView addSubview:bottomLabel];
+        
+        // Bottom Label
+        bottomLabel.tag = BOTTOM_LABEL_TAG;
+        bottomLabel.backgroundColor = [UIColor clearColor];
+        bottomLabel.textColor = [UIColor whiteColor];
+        bottomLabel.highlightedTextColor = [UIColor blackColor];
+        bottomLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 2];
+        
+        
+        //
+		// Create a background image view.
+		//
+		cell.backgroundView =
+        [[[UIImageView alloc] init] autorelease];
+		cell.selectedBackgroundView =
+        [[[UIImageView alloc] init] autorelease];
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+    else
+    {
+        topLabel = (UILabel *)[cell viewWithTag:TOP_LABEL_TAG];
+		bottomLabel = (UILabel *)[cell viewWithTag:BOTTOM_LABEL_TAG];
+    }
+    
     StopRoute * stopRoute = [watchedStopRoutes objectAtIndex:indexPath.row];
+    
+    topLabel.text = [stopRoute routeName];
+    bottomLabel.text = [stopRoute generateTimesString];
+    
+    /*
     cell.textLabel.text = [stopRoute routeName];
     cell.detailTextLabel.numberOfLines = 2;
     
@@ -293,7 +369,38 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 64;
     
     NSString * details = [NSString stringWithFormat:@"%@\n%@", stopNumberLine, routeTimesLine];
     cell.detailTextLabel.text = details;
-
+*/
+    
+    
+    //Set the background
+	UIImage *rowBackground;
+	UIImage *selectionBackground;
+	NSInteger sectionRows = [tableView numberOfRowsInSection:[indexPath section]];
+	NSInteger row = [indexPath row];
+	if (row == 0 && row == sectionRows - 1)
+	{
+		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
+		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
+	}
+	else if (row == 0)
+	{
+		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
+		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
+	}
+	else if (row == sectionRows - 1)
+	{
+		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
+		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
+	}
+	else
+	{
+		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
+		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
+	}
+    
+	((UIImageView *)cell.backgroundView).image = rowBackground;
+	((UIImageView *)cell.selectedBackgroundView).image = selectionBackground; 
+    
     // Configure the cell. 
     return cell;
 }
