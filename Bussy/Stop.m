@@ -9,7 +9,7 @@
 #import "Stop.h"
 
 @implementation Stop
-@synthesize stopID, stopName, routes;
+@synthesize stopID, stopName, routes, lastRefreshedDate;
 
 -(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId error: (NSError**) error
 {
@@ -48,6 +48,10 @@
             
             routes = [[StopRouteCollection alloc] initWithAdapter: adapter stop: self error:error];
             
+            [lastRefreshedDate release];
+            lastRefreshedDate = [NSDate date];
+            [lastRefreshedDate retain];
+            
             break;
         }
     }
@@ -85,6 +89,7 @@
     [stopName release];
     [routes release];
     [adapter release];
+    [lastRefreshedDate release];
     [super dealloc];
 }
 

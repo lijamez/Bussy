@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A026ACE513F798570068E8F5 /* topAndBottomRowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = A026ACE413F798570068E8F5 /* topAndBottomRowSelected.png */; };
+		A026ACE913F799DC0068E8F5 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = A026ACE813F799DC0068E8F5 /* Background.png */; };
 		A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */ = {isa = PBXBuildFile; fileRef = A02B3E5C13BD83E7009FCCE3 /* Stop.m */; };
 		A039764A13F73FB500CF9693 /* Bussy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A039764913F73FB500CF9693 /* Bussy@2x.png */; };
 		A039764C13F73FCE00CF9693 /* Bussy.png in Resources */ = {isa = PBXBuildFile; fileRef = A039764B13F73FCE00CF9693 /* Bussy.png */; };
@@ -15,6 +17,8 @@
 		A039765413F7426B00CF9693 /* Bussy Splash Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A039765313F7426A00CF9693 /* Bussy Splash Retina.png */; };
 		A039765613F742BB00CF9693 /* Bussy Icon Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A039765513F742BB00CF9693 /* Bussy Icon Retina.png */; };
 		A039765813F7435300CF9693 /* Bussy Icon Non-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A039765713F7435300CF9693 /* Bussy Icon Non-Retina.png */; };
+		A04032E913F77F5B005CA758 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A04032E713F77F5B005CA758 /* ProgressViewController.m */; };
+		A04032EA13F77F5B005CA758 /* ProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04032E813F77F5B005CA758 /* ProgressViewController.xib */; };
 		A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */; };
 		A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
@@ -50,10 +54,8 @@
 		A07FE81A13EBCFFB00567B09 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A07FE80F13EBCFFB00567B09 /* SBJsonWriter.m */; };
 		A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */; };
 		A080847113C56B7D00DEC160 /* StopRouteChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */; };
-		A0B2353C13F750FA00018A59 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B2353B13F750FA00018A59 /* Background.png */; };
 		A0B2353F13F751E400018A59 /* TranslinkColors.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B2353E13F751E400018A59 /* TranslinkColors.m */; };
 		A0B2354313F7620500018A59 /* topAndBottomRow.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B2354013F7620500018A59 /* topAndBottomRow.png */; };
-		A0B2354413F7620500018A59 /* topAndBottomRowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B2354113F7620500018A59 /* topAndBottomRowSelected.png */; };
 		A0B2354713F7643600018A59 /* indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B2354613F7643600018A59 /* indicator.png */; };
 		A0BEB29813C8634300F5F29F /* WatchedStopRoutesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */; };
 /* End PBXBuildFile section */
@@ -69,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A026ACE413F798570068E8F5 /* topAndBottomRowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRowSelected.png; sourceTree = "<group>"; };
+		A026ACE813F799DC0068E8F5 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		A02B3E5B13BD83E7009FCCE3 /* Stop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stop.h; sourceTree = "<group>"; };
 		A02B3E5C13BD83E7009FCCE3 /* Stop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stop.m; sourceTree = "<group>"; };
 		A039764913F73FB500CF9693 /* Bussy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bussy@2x.png"; sourceTree = "<group>"; };
@@ -78,6 +82,9 @@
 		A039765313F7426A00CF9693 /* Bussy Splash Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bussy Splash Retina.png"; sourceTree = "<group>"; };
 		A039765513F742BB00CF9693 /* Bussy Icon Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bussy Icon Retina.png"; sourceTree = "<group>"; };
 		A039765713F7435300CF9693 /* Bussy Icon Non-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bussy Icon Non-Retina.png"; sourceTree = "<group>"; };
+		A04032E613F77F5B005CA758 /* ProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressViewController.h; sourceTree = "<group>"; };
+		A04032E713F77F5B005CA758 /* ProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressViewController.m; sourceTree = "<group>"; };
+		A04032E813F77F5B005CA758 /* ProgressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressViewController.xib; sourceTree = "<group>"; };
 		A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteDetailsViewController.h; sourceTree = "<group>"; };
 		A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteDetailsViewController.m; sourceTree = "<group>"; };
 		A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
@@ -137,11 +144,9 @@
 		A080846D13C56B7D00DEC160 /* StopRouteChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteChooserViewController.h; sourceTree = "<group>"; };
 		A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteChooserViewController.m; sourceTree = "<group>"; };
 		A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteChooserViewController.xib; sourceTree = "<group>"; };
-		A0B2353B13F750FA00018A59 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		A0B2353D13F751E400018A59 /* TranslinkColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslinkColors.h; sourceTree = "<group>"; };
 		A0B2353E13F751E400018A59 /* TranslinkColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslinkColors.m; sourceTree = "<group>"; };
 		A0B2354013F7620500018A59 /* topAndBottomRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRow.png; sourceTree = "<group>"; };
-		A0B2354113F7620500018A59 /* topAndBottomRowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRowSelected.png; sourceTree = "<group>"; };
 		A0B2354613F7643600018A59 /* indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indicator.png; sourceTree = "<group>"; };
 		A0BEB29613C8634300F5F29F /* WatchedStopRoutesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchedStopRoutesCollection.h; sourceTree = "<group>"; };
 		A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchedStopRoutesCollection.m; sourceTree = "<group>"; };
@@ -309,6 +314,9 @@
 				A063463D13BC537300CB5168 /* RootViewController.m */,
 				A080846D13C56B7D00DEC160 /* StopRouteChooserViewController.h */,
 				A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */,
+				A04032E613F77F5B005CA758 /* ProgressViewController.h */,
+				A04032E713F77F5B005CA758 /* ProgressViewController.m */,
+				A04032E813F77F5B005CA758 /* ProgressViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -334,10 +342,10 @@
 		A0B3621413F71A940032F8B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A026ACE813F799DC0068E8F5 /* Background.png */,
+				A026ACE413F798570068E8F5 /* topAndBottomRowSelected.png */,
 				A0B2354613F7643600018A59 /* indicator.png */,
 				A0B2354013F7620500018A59 /* topAndBottomRow.png */,
-				A0B2354113F7620500018A59 /* topAndBottomRowSelected.png */,
-				A0B2353B13F750FA00018A59 /* Background.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -425,10 +433,11 @@
 				A039765413F7426B00CF9693 /* Bussy Splash Retina.png in Resources */,
 				A039765613F742BB00CF9693 /* Bussy Icon Retina.png in Resources */,
 				A039765813F7435300CF9693 /* Bussy Icon Non-Retina.png in Resources */,
-				A0B2353C13F750FA00018A59 /* Background.png in Resources */,
 				A0B2354313F7620500018A59 /* topAndBottomRow.png in Resources */,
-				A0B2354413F7620500018A59 /* topAndBottomRowSelected.png in Resources */,
 				A0B2354713F7643600018A59 /* indicator.png in Resources */,
+				A04032EA13F77F5B005CA758 /* ProgressViewController.xib in Resources */,
+				A026ACE513F798570068E8F5 /* topAndBottomRowSelected.png in Resources */,
+				A026ACE913F799DC0068E8F5 /* Background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +496,7 @@
 				A07FE81913EBCFFB00567B09 /* SBJsonUTF8Stream.m in Sources */,
 				A07FE81A13EBCFFB00567B09 /* SBJsonWriter.m in Sources */,
 				A0B2353F13F751E400018A59 /* TranslinkColors.m in Sources */,
+				A04032E913F77F5B005CA758 /* ProgressViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

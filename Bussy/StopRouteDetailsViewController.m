@@ -11,7 +11,7 @@
 
 @implementation StopRouteDetailsViewController
 
-@synthesize stopRouteNameLabel, stopNumberLabel, timesTableView;
+@synthesize stopRouteNameLabel, stopNumberLabel, timesTableView, lastRefreshedLabel, exportBarButton;
 @synthesize stopRoute;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,7 +32,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (IBAction)openInMaps:(id)sender
+- (void)openInMaps
 {
     NSString * translinkUrlString = [NSString stringWithFormat:@"http://m.translink.ca/api/kml/stop/%@/", stopRoute.stop.stopID];
     NSString * mapsAppUrlString = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", translinkUrlString];
@@ -67,6 +67,26 @@
     
 }
 
+- (void) showActionSheet
+{
+    
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select an action" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Show in Maps", nil];
+    
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    [actionSheet showInView:self.view];
+    [actionSheet release];
+    
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 0) {
+        [self openInMaps];
+    }
+    
+}
+
+
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,8 +98,9 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    cell.textLabel.text = [stopRoute.times objectAtIndex:[indexPath row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.text = [stopRoute.times objectAtIndex:[indexPath row]];
+    
     // Configure the cell. 
     return cell;
 }
@@ -91,8 +112,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setExportBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet)]];
+    self.navigationItem.rightBarButtonItem = exportBarButton;
+    
+    
     stopRouteNameLabel.text = stopRoute.routeName;
     stopNumberLabel.text = [NSString stringWithFormat:@"Stop Number: %@", stopRoute.stop.stopID];
+    
+    NSString * lastRefreshedString = @"Never";
+    if (stopRoute.stop.lastRefreshedDate != nil)
+    {
+        NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        
+        lastRefreshedString = [dateFormatter stringFromDate:stopRoute.stop.lastRefreshedDate];
+    }
+    
+    lastRefreshedLabel.text = [NSString stringWithFormat:@"Last Refreshed: %@", lastRefreshedString];
     
 }
 

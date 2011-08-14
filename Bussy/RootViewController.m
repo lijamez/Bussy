@@ -13,6 +13,7 @@
 #import "Stop.h"
 #import "StopRouteDetailsViewController.h"
 #import "TranslinkColors.h"
+#import "ProgressViewController.h"
 
 @implementation RootViewController
 
@@ -68,23 +69,38 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     [self presentModalViewController:addStopRouteNavigationController animated:YES];
 }
 
-- (void) showActivityView
+- (ProgressViewController*) showActivityView
 {
     UIBarButtonItem * leftNavButton = self.navigationController.navigationItem.leftBarButtonItem;
     UIBarButtonItem * rightNavButton = self.navigationController.navigationItem.rightBarButtonItem;
     
     leftNavButton.enabled = NO;
     rightNavButton.enabled = NO;
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    ProgressViewController * progressViewController = [[ProgressViewController alloc] autorelease];
+    
+    [self.view addSubview:progressViewController.view];
+     
+    return progressViewController;
+
 }
 
-- (void) removeActivityView
+- (void) removeActivityView: (ProgressViewController*) progressViewController
 {
+    if (progressViewController != nil)
+    {
+        UIBarButtonItem * leftNavButton = self.navigationController.navigationItem.leftBarButtonItem;
+        UIBarButtonItem * rightNavButton = self.navigationController.navigationItem.rightBarButtonItem;
     
-    UIBarButtonItem * leftNavButton = self.navigationController.navigationItem.leftBarButtonItem;
-    UIBarButtonItem * rightNavButton = self.navigationController.navigationItem.rightBarButtonItem;
-    
-    leftNavButton.enabled = YES;
-    rightNavButton.enabled = YES;
+        leftNavButton.enabled = YES;
+        rightNavButton.enabled = YES;
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+        [progressViewController.view removeFromSuperview];
+    }
 }
 
 - (void) refreshWatchedStopRoutes
@@ -135,16 +151,16 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
 - (IBAction) refreshRoutes: (id) sender
 {
-    [self showActivityView];
+    ProgressViewController * progressViewController = [self showActivityView];
     
     [self refreshWatchedStopRoutes];
-
-    [self removeActivityView];
+    
+    [self removeActivityView: progressViewController];
 }
 
 - (void) loadDataFromSave
 {
-    [self showActivityView];
+    ProgressViewController * progressViewController = [self showActivityView];
     
     NSString *pathToWatchedStopRoutesSaveFile = [self watchedStopRoutesSavePath];
     NSLog(@"Loading watched stops from %@...", pathToWatchedStopRoutesSaveFile);
@@ -204,7 +220,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     
     [self.tableView reloadData];
 
-    [self removeActivityView];
+    [self removeActivityView: progressViewController];
 
 }
 
@@ -285,9 +301,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     UILabel *middleLabel;
 	UILabel *bottomLabel;
     
-    
-    
-    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -300,7 +313,10 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
                                initWithImage:indicatorImage]
                               autorelease];
         
-        const CGFloat LABEL_HEIGHT = 20;
+        const CGFloat TOP_LABEL_HEIGHT = 20;
+        const CGFloat MIDDLE_LABEL_HEIGHT = 20;
+        const CGFloat BOTTOM_LABEL_HEIGHT = 15;
+
         
         //Top Label
         topLabel =
@@ -308,9 +324,9 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
           initWithFrame:
           CGRectMake(
                      2.0 * cell.indentationWidth,
-                     0.5 * (tableView.rowHeight - 2 * LABEL_HEIGHT),
+                     0.5 * (tableView.rowHeight - TOP_LABEL_HEIGHT - MIDDLE_LABEL_HEIGHT - BOTTOM_LABEL_HEIGHT),
                      tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
-                     LABEL_HEIGHT)]
+                     TOP_LABEL_HEIGHT)]
          autorelease];
         [cell.contentView addSubview:topLabel];
         
@@ -318,8 +334,25 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
         topLabel.backgroundColor = [UIColor clearColor];
         topLabel.textColor = [UIColor whiteColor];
         topLabel.highlightedTextColor = [UIColor blackColor];
-        topLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize]];
+        topLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize] - 2];
         
+        //Middle Label
+        middleLabel =
+        [[[UILabel alloc]
+          initWithFrame:
+          CGRectMake(
+                     2.0 * cell.indentationWidth,
+                     0.5 * (tableView.rowHeight - TOP_LABEL_HEIGHT - MIDDLE_LABEL_HEIGHT - BOTTOM_LABEL_HEIGHT) + TOP_LABEL_HEIGHT,
+                     tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
+                     MIDDLE_LABEL_HEIGHT)]
+         autorelease];
+        [cell.contentView addSubview:middleLabel];
+        
+        middleLabel.tag = TOP_LABEL_TAG;
+        middleLabel.backgroundColor = [UIColor clearColor];
+        middleLabel.textColor = [UIColor whiteColor];
+        middleLabel.highlightedTextColor = [UIColor blackColor];
+        middleLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 2];
         
         //Bottom Label
         bottomLabel =
@@ -327,18 +360,18 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
           initWithFrame:
           CGRectMake(
                      2.0 * cell.indentationWidth,
-                     0.5 * (tableView.rowHeight - 2 * LABEL_HEIGHT) + LABEL_HEIGHT,
+                     0.5 * (tableView.rowHeight - TOP_LABEL_HEIGHT - MIDDLE_LABEL_HEIGHT - BOTTOM_LABEL_HEIGHT) + TOP_LABEL_HEIGHT + MIDDLE_LABEL_HEIGHT,
                      tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
-                     LABEL_HEIGHT)]
+                     BOTTOM_LABEL_HEIGHT)]
          autorelease];
         [cell.contentView addSubview:bottomLabel];
         
         // Bottom Label
         bottomLabel.tag = BOTTOM_LABEL_TAG;
         bottomLabel.backgroundColor = [UIColor clearColor];
-        bottomLabel.textColor = [UIColor whiteColor];
-        bottomLabel.highlightedTextColor = [UIColor blackColor];
-        bottomLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 2];
+        bottomLabel.textColor = [UIColor grayColor];
+        bottomLabel.highlightedTextColor = [UIColor grayColor];
+        bottomLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 5];
         
         
         //
@@ -358,7 +391,23 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     StopRoute * stopRoute = [watchedStopRoutes objectAtIndex:indexPath.row];
     
     topLabel.text = [stopRoute routeName];
-    bottomLabel.text = [stopRoute generateTimesString];
+    
+    NSString * timesString = [stopRoute generateTimesString];
+    if (timesString == (id)[NSNull null] || timesString.length == 0 )
+    {
+        timesString = @"No service in the near future. Oh noes!";
+    }
+    middleLabel.text = timesString;
+    
+    NSString * lastRefreshedDateString = @"Never!";
+    if (stopRoute.stop.lastRefreshedDate != nil)
+    {
+        NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        lastRefreshedDateString = [NSString stringWithFormat:@"Last refreshed: %@", [dateFormatter stringFromDate: stopRoute.stop.lastRefreshedDate]];
+    }
+    bottomLabel.text = lastRefreshedDateString;
     
     /*
     cell.textLabel.text = [stopRoute routeName];

@@ -13,13 +13,17 @@
 {
     UILabel * stopRouteNameLabel;
     UILabel * stopNumberLabel;
+    UILabel * lastRefreshedLabel;
     UITableView * timesTableView;
+    UIBarButtonItem * exportBarButton;
     
     StopRoute * stopRoute;
 }
 
+@property (nonatomic, retain) UIBarButtonItem * exportBarButton;
 @property (nonatomic, retain) IBOutlet UILabel * stopRouteNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel * stopNumberLabel;
+@property (nonatomic, retain) IBOutlet UILabel * lastRefreshedLabel;
 @property (nonatomic, retain) IBOutlet UITableView * timesTableView;
 
 @property (nonatomic, retain) StopRoute * stopRoute;
