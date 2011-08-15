@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutViewController : UIViewController
+@interface AboutViewController : UIViewController {
+    
+    UILabel * appNameLabel;
+    UILabel * versionLabel;
+}
+
+@property (nonatomic, retain) IBOutlet UILabel * appNameLabel;
+@property (nonatomic, retain) IBOutlet UILabel * versionLabel;
 
 @end
