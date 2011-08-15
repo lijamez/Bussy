@@ -11,7 +11,7 @@
 #import "StopRouteCollection.h"
 #import "WatchedStopRoutesCollection.h"
 #import "MBProgressHUD.h"
-#import "FancyViewController.h"
+#import "AbstractFancyViewController.h"
 
 @protocol ModalViewDelegate
 
@@ -19,19 +19,19 @@
 
 @end
 
-@interface RootViewController : FancyViewController<ModalViewDelegate> {
+@interface MyRoutesViewController : AbstractFancyViewController<ModalViewDelegate> {
     
     NSMutableArray * watchedStopRoutes;
     UIBarButtonItem	* addBarButton;
     UIBarButtonItem	* refreshBarButton;
     UIImageView * imageView;
-    UITableView * tableView;
+    UITableView * stopRoutesTableView;
 }
 
 @property (nonatomic, retain) UIBarButtonItem * addBarButton;
 @property (nonatomic, retain) UIBarButtonItem * refreshBarButton;
 @property (nonatomic, retain) IBOutlet UIImageView * imageView;
-@property (nonatomic, retain) IBOutlet UITableView * tableView;
+@property (nonatomic, retain) IBOutlet UITableView * stopRoutesTableView;
 
 @property (nonatomic, retain) NSMutableArray * watchedStopRoutes;
 

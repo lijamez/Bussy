@@ -6,9 +6,9 @@
 //  Copyright (c) 2011 University of British Columbia. All rights reserved.
 //
 
-#import "FancyViewController.h"
+#import "AbstractFancyViewController.h"
 
-@implementation FancyViewController
+@implementation AbstractFancyViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,10 +47,16 @@
     HUD.labelText = text;
 }
 
-- (void) updateHUDWithMode: (MBProgressHUDMode) mode text: (NSString*) text
+- (void) updateHUDWithDetailsText:(NSString *)text
+{
+    HUD.detailsLabelText = text;
+}
+
+- (void) updateHUDWithMode: (MBProgressHUDMode) mode text: (NSString*) text detailsText: (NSString*) detailsText
 {
     HUD.mode = mode;
     HUD.labelText = text;
+    HUD.detailsLabelText = detailsText;
 }
 
 

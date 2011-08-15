@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface FancyViewController : UIViewController<MBProgressHUDDelegate> {
+@interface AbstractFancyViewController : UIViewController<MBProgressHUDDelegate> {
     
     MBProgressHUD * HUD;
 
@@ -19,7 +19,6 @@
 - (void) showHUDWithSelector: (SEL)method mode:(MBProgressHUDMode) mode text: (NSString*) text DimBackground: (BOOL) dimBackground animated: (BOOL)animated onTarget:(id)target withObject:(id)object;
 
 - (void) updateHUDWithText: (NSString*) text;
-
-- (void) updateHUDWithMode: (MBProgressHUDMode) mode text: (NSString*) text;
-
+- (void) updateHUDWithDetailsText:(NSString *)text;
+- (void) updateHUDWithMode: (MBProgressHUDMode) mode text: (NSString*) text detailsText: (NSString*) detailsText;
 @end

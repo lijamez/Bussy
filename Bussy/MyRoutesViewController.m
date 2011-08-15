@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "RootViewController.h"
+#import "MyRoutesViewController.h"
 #import "StopRoute.h"
 #import "AddStopViewController.h"
 #import "StopRouteCollection.h"
@@ -15,9 +15,9 @@
 #import "TranslinkColors.h"
 #import "ProgressViewController.h"
 
-@implementation RootViewController
+@implementation MyRoutesViewController
 
-@synthesize addBarButton, refreshBarButton, watchedStopRoutes, imageView, tableView;
+@synthesize addBarButton, refreshBarButton, watchedStopRoutes, imageView, stopRoutesTableView;
 
 CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
@@ -62,7 +62,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     if (![watchedStopRoutes containsObject:newStopRoute])
     {
         [watchedStopRoutes addObject:newStopRoute];
-        [self.tableView reloadData];
+        [self.stopRoutesTableView reloadData];
     }
 }
 
@@ -89,7 +89,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     
     for(StopRoute * oldStopRoute in watchedStopRoutes)
     {
-        [self updateHUDWithText:[NSString stringWithFormat:@"Loading stop %d of %d...", currentStopCount, watchedStopRoutes.count]];
+        [self updateHUDWithDetailsText:[NSString stringWithFormat:@"%d of %d", currentStopCount, watchedStopRoutes.count]];
         
         Stop * stop = oldStopRoute.stop;
         
@@ -122,13 +122,13 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
         [watchedStopRoutes release];
         watchedStopRoutes = refreshedStopRoutes;
         
-        [self.tableView reloadData];
+        [self.stopRoutesTableView reloadData];
     }
 }
 
 - (void) refreshRoutes: (id) sender
 {    
-    [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:nil DimBackground:NO animated:YES onTarget:self withObject:nil];
+    [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:@"Refreshing Routes" DimBackground:NO animated:YES onTarget:self withObject:nil];
 }
 
 - (void) loadDataFromSave
@@ -142,9 +142,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
         int currentStopRoute = 1;
         for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
         {
-            NSString * activityString = [NSString stringWithFormat:@"Loading route %d of %d", currentStopRoute, [watchedStopRouteDictionaries count]];
-            [self updateHUDWithText:activityString];    
-            NSLog(@"%@", activityString);
+            [self updateHUDWithDetailsText:[NSString stringWithFormat:@"%d of %d", currentStopRoute, [watchedStopRouteDictionaries count]]];
             
             NSString * savedStopID = [stopRouteDictionary objectForKey:@"StopID"];
             NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
@@ -190,7 +188,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
         NSLog(@"Save file not found.");
     }
     
-    [self.tableView reloadData];
+    [self.stopRoutesTableView reloadData];
 
 }
 
@@ -204,13 +202,13 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     [self setAddBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWatchedStopRoute:)]];
     self.navigationController.navigationBar.topItem.rightBarButtonItem = addBarButton;
     
-    self.title = @"Bussy";
+    self.title = @"My Routes";
     self.navigationController.navigationBar.tintColor = [TranslinkColors GetTranslinkBlue];
     self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
     watchedStopRoutes = [[NSMutableArray alloc] init];
     
-    [self showHUDWithSelector:@selector(loadDataFromSave) mode:MBProgressHUDModeIndeterminate text:nil DimBackground:YES animated:YES onTarget:self withObject:nil];
+    [self showHUDWithSelector:@selector(loadDataFromSave) mode:MBProgressHUDModeIndeterminate text:@"Loading routes" DimBackground:YES animated:YES onTarget:self withObject:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -218,11 +216,11 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     [super viewWillAppear:animated];
     
     //Deselects the last selected cell when coming back from another view
-    NSIndexPath*	selection = [self.tableView indexPathForSelectedRow];
+    NSIndexPath*	selection = [self.stopRoutesTableView indexPathForSelectedRow];
 	if (selection)
-		[self.tableView deselectRowAtIndexPath:selection animated:YES];
+		[self.stopRoutesTableView deselectRowAtIndexPath:selection animated:YES];
     
-	[self.tableView reloadData];
+	[self.stopRoutesTableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -325,7 +323,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
          autorelease];
         [cell.contentView addSubview:middleLabel];
         
-        middleLabel.tag = TOP_LABEL_TAG;
+        middleLabel.tag = MIDDLE_LABEL_TAG;
         middleLabel.backgroundColor = [UIColor clearColor];
         middleLabel.textColor = [UIColor whiteColor];
         middleLabel.highlightedTextColor = [UIColor blackColor];
