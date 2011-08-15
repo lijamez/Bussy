@@ -11,7 +11,7 @@
 
 @interface BussyAppDelegate : NSObject <UIApplicationDelegate> {
 
-    IBOutlet RootViewController *rootViewControllerz;
+    IBOutlet RootViewController *rootViewController;
     
 }
 

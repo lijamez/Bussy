@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.h
+//  AboutViewController.h
 //  Bussy
 //
 //  Created by James Li on 11-08-14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UIViewController
+@interface AboutViewController : UIViewController
 
 @end

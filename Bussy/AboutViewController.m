@@ -1,14 +1,14 @@
 //
-//  SettingsViewController.m
+//  AboutViewController.m
 //  Bussy
 //
 //  Created by James Li on 11-08-14.
 //  Copyright (c) 2011 University of British Columbia. All rights reserved.
 //
 
-#import "SettingsViewController.h"
+#import "AboutViewController.h"
 
-@implementation SettingsViewController
+@implementation AboutViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

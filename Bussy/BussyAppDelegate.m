@@ -44,7 +44,7 @@
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     NSLog(@"applicationDidEnterBackground Called");
-    [rootViewControllerz save];
+    [rootViewController save];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -71,7 +71,7 @@
      See also applicationDidEnterBackground:.
      */
     NSLog(@"applicationWillTerminate Called");
-    [rootViewControllerz save];
+    [rootViewController save];
     
 }
 

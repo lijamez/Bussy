@@ -60,6 +60,8 @@
 		A0BEB29813C8634300F5F29F /* WatchedStopRoutesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */; };
 		A0D89D2013F89A2F0094FA13 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D89D1F13F89A2F0094FA13 /* MBProgressHUD.m */; };
 		A0D89D2313F8ACF60094FA13 /* FancyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D89D2213F8ACF60094FA13 /* FancyViewController.m */; };
+		A0D89D2713F8BDB50094FA13 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D89D2513F8BDB50094FA13 /* AboutViewController.m */; };
+		A0D89D2813F8BDB50094FA13 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0D89D2613F8BDB50094FA13 /* AboutViewController.xib */; };
 		A0F3057613F86162004F431A /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F3053613F86162004F431A /* alarm.png */; };
 		A0F3057713F86162004F431A /* arrowdown.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F3053713F86162004F431A /* arrowdown.png */; };
 		A0F3057813F86162004F431A /* arrowleft.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F3053813F86162004F431A /* arrowleft.png */; };
@@ -124,8 +126,6 @@
 		A0F305B313F86162004F431A /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F3057313F86162004F431A /* trash.png */; };
 		A0F305B413F86162004F431A /* trend.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F3057413F86162004F431A /* trend.png */; };
 		A0F305B513F86162004F431A /* world.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F3057513F86162004F431A /* world.png */; };
-		A0F305B913F86285004F431A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F305B713F86285004F431A /* SettingsViewController.m */; };
-		A0F305BA13F86285004F431A /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0F305B813F86285004F431A /* SettingsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +222,9 @@
 		A0D89D1F13F89A2F0094FA13 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A0D89D2113F8ACF60094FA13 /* FancyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyViewController.h; sourceTree = "<group>"; };
 		A0D89D2213F8ACF60094FA13 /* FancyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyViewController.m; sourceTree = "<group>"; };
+		A0D89D2413F8BDB50094FA13 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		A0D89D2513F8BDB50094FA13 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		A0D89D2613F8BDB50094FA13 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		A0F3053613F86162004F431A /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alarm.png; sourceTree = "<group>"; };
 		A0F3053713F86162004F431A /* arrowdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowdown.png; sourceTree = "<group>"; };
 		A0F3053813F86162004F431A /* arrowleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowleft.png; sourceTree = "<group>"; };
@@ -286,9 +289,6 @@
 		A0F3057313F86162004F431A /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		A0F3057413F86162004F431A /* trend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trend.png; sourceTree = "<group>"; };
 		A0F3057513F86162004F431A /* world.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = world.png; sourceTree = "<group>"; };
-		A0F305B613F86284004F431A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		A0F305B713F86285004F431A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		A0F305B813F86285004F431A /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,8 +435,8 @@
 			children = (
 				A0B3621413F71A940032F8B4 /* Images */,
 				A04032E813F77F5B005CA758 /* ProgressViewController.xib */,
-				A0F305B813F86285004F431A /* SettingsViewController.xib */,
 				A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */,
+				A0D89D2613F8BDB50094FA13 /* AboutViewController.xib */,
 				A063463913BC537300CB5168 /* MainWindow.xib */,
 				A07E596813C16CE5004EBC0D /* AddStopViewController.xib */,
 				A063463F13BC537300CB5168 /* RootViewController.xib */,
@@ -458,10 +458,10 @@
 				A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */,
 				A04032E613F77F5B005CA758 /* ProgressViewController.h */,
 				A04032E713F77F5B005CA758 /* ProgressViewController.m */,
-				A0F305B613F86284004F431A /* SettingsViewController.h */,
-				A0F305B713F86285004F431A /* SettingsViewController.m */,
 				A0D89D2113F8ACF60094FA13 /* FancyViewController.h */,
 				A0D89D2213F8ACF60094FA13 /* FancyViewController.m */,
+				A0D89D2413F8BDB50094FA13 /* AboutViewController.h */,
+				A0D89D2513F8BDB50094FA13 /* AboutViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -728,7 +728,7 @@
 				A0F305B313F86162004F431A /* trash.png in Resources */,
 				A0F305B413F86162004F431A /* trend.png in Resources */,
 				A0F305B513F86162004F431A /* world.png in Resources */,
-				A0F305BA13F86285004F431A /* SettingsViewController.xib in Resources */,
+				A0D89D2813F8BDB50094FA13 /* AboutViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,9 +788,9 @@
 				A07FE81A13EBCFFB00567B09 /* SBJsonWriter.m in Sources */,
 				A0B2353F13F751E400018A59 /* TranslinkColors.m in Sources */,
 				A04032E913F77F5B005CA758 /* ProgressViewController.m in Sources */,
-				A0F305B913F86285004F431A /* SettingsViewController.m in Sources */,
 				A0D89D2013F89A2F0094FA13 /* MBProgressHUD.m in Sources */,
 				A0D89D2313F8ACF60094FA13 /* FancyViewController.m in Sources */,
+				A0D89D2713F8BDB50094FA13 /* AboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
