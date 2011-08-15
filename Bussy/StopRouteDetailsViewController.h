@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "StopRoute.h"
 
-@interface StopRouteDetailsViewController : UIViewController
+@interface StopRouteDetailsViewController : UIViewController<UIActionSheetDelegate>
 {
     UILabel * stopRouteNameLabel;
     UILabel * stopNumberLabel;

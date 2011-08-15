@@ -7,14 +7,14 @@
 //
 
 #import "BussyAppDelegate.h"
-#import "RootViewController.h"
+#import "MyRoutesViewController.h"
 
 @implementation BussyAppDelegate
 
 
 @synthesize window=_window;
 
-@synthesize navigationController=_navigationController;
+@synthesize tabBarController=_tabBarController;
 @synthesize imageView=_imageView;
 
 
@@ -22,7 +22,7 @@
 {
     // Override point for customization after application launch.
     // Add the navigation controller's view to the window and display.
-    self.window.rootViewController = self.navigationController;
+    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
     return YES;		
@@ -78,7 +78,7 @@
 - (void)dealloc
 {
     [_window release];
-    [_navigationController release];
+    [_tabBarController release];
     [super dealloc];
 }
 

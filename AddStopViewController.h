@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FancyViewController.h"
+#import "AbstractFancyViewController.h"
 #import "Stop.h"
 
 @protocol ModalViewDelegate;
 
-@interface AddStopViewController : FancyViewController <UIAlertViewDelegate>{
+@interface AddStopViewController : AbstractFancyViewController <UIAlertViewDelegate>{
     UITextField * stopNumberTextField;
     
     id<ModalViewDelegate> delegate;
