@@ -29,6 +29,58 @@ int const MAX_FIELD_CHARS = 5;
     return self;
 }
 
+//Override
+- (UIView*) HUDParentView
+{
+    return self.navigationController.view;
+}
+
+
+- (void) hudWasHidden
+{
+    if (foundStopRoutes != nil)
+    {
+        StopRouteChooserViewController * stopRouteChooserView = [[[StopRouteChooserViewController alloc] init] autorelease];
+        stopRouteChooserView.stopRoutes = foundStopRoutes;
+        stopRouteChooserView.delegate = self.delegate;
+        
+        [self.navigationController pushViewController:stopRouteChooserView animated:YES];
+        
+        foundStopRoutes = nil;
+    }
+}
+
+- (void) processStopNumber: (NSString*) stopNumber
+{
+    
+    NSError * error = nil;
+    
+    Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:stopNumber error:&error];
+    
+    if (error)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+    
+    if ([stopNumber isEqualToString:stop.stopID] && [stop.routes.array count] > 0)
+    {
+        
+        foundStopRoutes = [stop routes];
+
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Stop number not found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+
+    
+}
+
 - (IBAction) notifyNext: (id) sender
 {
     NSString * newStopNumber = [self.stopNumberTextField text];
@@ -40,37 +92,10 @@ int const MAX_FIELD_CHARS = 5;
         [alert release];
         return;
     }
+        
+    [self showHUDWithSelector:@selector(processStopNumber:) mode:MBProgressHUDModeIndeterminate text:nil DimBackground:NO animated:YES onTarget:self withObject:newStopNumber];
     
-    NSError * error = nil;
-    
-    Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:newStopNumber error:&error];
 
-    if (error)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-        return;
-    }
-    
-    if ([newStopNumber isEqualToString:stop.stopID] && [stop.routes.array count] > 0)
-    {
-        
-        StopRouteCollection * stopRoutes = [stop routes];
-        StopRouteChooserViewController * stopRouteChooserView = [[[StopRouteChooserViewController alloc] init] autorelease];
-        stopRouteChooserView.stopRoutes = stopRoutes;
-        stopRouteChooserView.delegate = self.delegate;
-        
-        [self.navigationController pushViewController:stopRouteChooserView animated:YES];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Stop number not found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
-    
-    
 }
 
 

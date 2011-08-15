@@ -10,6 +10,8 @@
 #import "StopRoute.h"
 #import "StopRouteCollection.h"
 #import "WatchedStopRoutesCollection.h"
+#import "MBProgressHUD.h"
+#import "FancyViewController.h"
 
 @protocol ModalViewDelegate
 
@@ -17,7 +19,7 @@
 
 @end
 
-@interface RootViewController : UIViewController<ModalViewDelegate> {
+@interface RootViewController : FancyViewController<ModalViewDelegate> {
     
     NSMutableArray * watchedStopRoutes;
     UIBarButtonItem	* addBarButton;

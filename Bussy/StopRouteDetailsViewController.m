@@ -129,7 +129,7 @@
         lastRefreshedString = [dateFormatter stringFromDate:stopRoute.stop.lastRefreshedDate];
     }
     
-    lastRefreshedLabel.text = [NSString stringWithFormat:@"Last Refreshed: %@", lastRefreshedString];
+    lastRefreshedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", lastRefreshedString];
     
 }
 

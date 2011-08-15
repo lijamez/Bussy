@@ -21,6 +21,12 @@
 
 CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
+//Override
+- (UIView*) HUDParentView
+{
+    return self.navigationController.view;
+}
+
 - (NSString*) watchedStopRoutesSavePath
 {
     NSArray *saveDataPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -69,42 +75,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     [self presentModalViewController:addStopRouteNavigationController animated:YES];
 }
 
-- (ProgressViewController*) showActivityView
-{
-    UIBarButtonItem * leftNavButton = self.navigationController.navigationItem.leftBarButtonItem;
-    UIBarButtonItem * rightNavButton = self.navigationController.navigationItem.rightBarButtonItem;
-    
-    leftNavButton.enabled = NO;
-    rightNavButton.enabled = NO;
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    ProgressViewController * progressViewController = [[ProgressViewController alloc] autorelease];
-    
-    [self.view addSubview:progressViewController.view];
-     
-    return progressViewController;
-
-}
-
-- (void) removeActivityView: (ProgressViewController*) progressViewController
-{
-    if (progressViewController != nil)
-    {
-        UIBarButtonItem * leftNavButton = self.navigationController.navigationItem.leftBarButtonItem;
-        UIBarButtonItem * rightNavButton = self.navigationController.navigationItem.rightBarButtonItem;
-    
-        leftNavButton.enabled = YES;
-        rightNavButton.enabled = YES;
-        
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        
-        [progressViewController.view removeFromSuperview];
-    }
-}
-
 - (void) refreshWatchedStopRoutes
-{
+{    
     if ([watchedStopRoutes count] <= 0)
     {
         return;
@@ -113,10 +85,13 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     NSMutableArray * refreshedStopRoutes = [[NSMutableArray alloc] init];
     NSError * error = nil;
     
+    int currentStopCount = 1;
+    
     for(StopRoute * oldStopRoute in watchedStopRoutes)
     {
-        Stop * stop = oldStopRoute.stop;
+        [self updateHUDWithText:[NSString stringWithFormat:@"Loading stop %d of %d...", currentStopCount, watchedStopRoutes.count]];
         
+        Stop * stop = oldStopRoute.stop;
         
         [stop refreshAndCatchError:&error];
         
@@ -138,8 +113,10 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
             
         }
         
+        currentStopCount++;
     }
     
+        
     if (!error)
     {
         [watchedStopRoutes release];
@@ -149,19 +126,13 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     }
 }
 
-- (IBAction) refreshRoutes: (id) sender
-{
-    ProgressViewController * progressViewController = [self showActivityView];
-    
-    [self refreshWatchedStopRoutes];
-    
-    [self removeActivityView: progressViewController];
+- (void) refreshRoutes: (id) sender
+{    
+    [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:nil DimBackground:NO animated:YES onTarget:self withObject:nil];
 }
 
 - (void) loadDataFromSave
-{
-    ProgressViewController * progressViewController = [self showActivityView];
-    
+{    
     NSString *pathToWatchedStopRoutesSaveFile = [self watchedStopRoutesSavePath];
     NSLog(@"Loading watched stops from %@...", pathToWatchedStopRoutesSaveFile);
     
@@ -171,7 +142,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
         int currentStopRoute = 1;
         for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
         {
-            NSString * activityString = [NSString stringWithFormat:@"Loading stop %d of %d", currentStopRoute, [watchedStopRouteDictionaries count]];
+            NSString * activityString = [NSString stringWithFormat:@"Loading route %d of %d", currentStopRoute, [watchedStopRouteDictionaries count]];
+            [self updateHUDWithText:activityString];    
             NSLog(@"%@", activityString);
             
             NSString * savedStopID = [stopRouteDictionary objectForKey:@"StopID"];
@@ -220,8 +192,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     
     [self.tableView reloadData];
 
-    [self removeActivityView: progressViewController];
-
 }
 
 - (void)viewDidLoad
@@ -239,13 +209,20 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
     watchedStopRoutes = [[NSMutableArray alloc] init];
-
-    [NSThread detachNewThreadSelector:@selector(loadDataFromSave) toTarget:self withObject:nil];
+    
+    [self showHUDWithSelector:@selector(loadDataFromSave) mode:MBProgressHUDModeIndeterminate text:nil DimBackground:YES animated:YES onTarget:self withObject:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    //Deselects the last selected cell when coming back from another view
+    NSIndexPath*	selection = [self.tableView indexPathForSelectedRow];
+	if (selection)
+		[self.tableView deselectRowAtIndexPath:selection animated:YES];
+    
+	[self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -395,7 +372,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     NSString * timesString = [stopRoute generateTimesString];
     if (timesString == (id)[NSNull null] || timesString.length == 0 )
     {
-        timesString = @"No service in the near future. Oh noes!";
+        timesString = @"No service. Oh noes!";
     }
     middleLabel.text = timesString;
     
@@ -405,7 +382,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
         NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-        lastRefreshedDateString = [NSString stringWithFormat:@"Last refreshed: %@", [dateFormatter stringFromDate: stopRoute.stop.lastRefreshedDate]];
+        lastRefreshedDateString = [NSString stringWithFormat:@"Last updated: %@", [dateFormatter stringFromDate: stopRoute.stop.lastRefreshedDate]];
     }
     bottomLabel.text = lastRefreshedDateString;
     
