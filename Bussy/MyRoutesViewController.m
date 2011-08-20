@@ -13,11 +13,10 @@
 #import "Stop.h"
 #import "StopRouteDetailsViewController.h"
 #import "TranslinkColors.h"
-#import "ProgressViewController.h"
 
 @implementation MyRoutesViewController
 
-@synthesize addBarButton, refreshBarButton, watchedStopRoutes, imageView, stopRoutesTableView;
+@synthesize addBarButton, refreshBarButton, watchedStopRoutes, imageView, stopRoutesTableView, noRoutesLabel;
 
 CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
@@ -255,6 +254,15 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if ([watchedStopRoutes count] <= 0)
+    {
+        noRoutesLabel.hidden = NO;
+    }
+    else
+    {
+        noRoutesLabel.hidden = YES;
+    }
+    
     return [watchedStopRoutes count];
 }
 

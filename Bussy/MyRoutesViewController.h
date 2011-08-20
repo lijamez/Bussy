@@ -26,12 +26,14 @@
     UIBarButtonItem	* refreshBarButton;
     UIImageView * imageView;
     UITableView * stopRoutesTableView;
+    UILabel * noRoutesLabel;
 }
 
 @property (nonatomic, retain) UIBarButtonItem * addBarButton;
 @property (nonatomic, retain) UIBarButtonItem * refreshBarButton;
 @property (nonatomic, retain) IBOutlet UIImageView * imageView;
 @property (nonatomic, retain) IBOutlet UITableView * stopRoutesTableView;
+@property (nonatomic, retain) IBOutlet UILabel * noRoutesLabel;
 
 @property (nonatomic, retain) NSMutableArray * watchedStopRoutes;
 

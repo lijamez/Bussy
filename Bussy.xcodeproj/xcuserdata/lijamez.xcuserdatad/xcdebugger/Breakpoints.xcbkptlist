@@ -357,11 +357,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteDetailsViewController.m"
-         timestampString = "335001631.41054"
+         timestampString = "335568776.816309"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "123"
-         endingLineNumber = "123"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -371,11 +371,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteDetailsViewController.m"
-         timestampString = "335001631.41054"
+         timestampString = "335568776.816309"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "115"
-         endingLineNumber = "115"
+         startingLineNumber = "119"
+         endingLineNumber = "119"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>

@@ -12,10 +12,8 @@
 	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>Bussy Icon Retina.png</string>
-		<string>Bussy Icon Non-Retina.png</string>
-		<string>Bussy.png</string>
-		<string>Bussy@2x.png</string>
+		<string>Bussy-Icon-Retina.png</string>
+		<string>Bussy-Icon.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -23,13 +21,11 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>Bussy Icon Retina.png</string>
-				<string>Bussy Icon Non-Retina.png</string>
-				<string>Bussy.png</string>
-				<string>Bussy@2x.png</string>
+				<string>Bussy-Icon-Retina.png</string>
+				<string>Bussy-Icon.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>UINewsstandIcon</key>
 		<dict>

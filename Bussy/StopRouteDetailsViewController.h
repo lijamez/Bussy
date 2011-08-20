@@ -16,6 +16,7 @@
     UILabel * lastRefreshedLabel;
     UITableView * timesTableView;
     UIBarButtonItem * exportBarButton;
+    UILabel * noServiceLabel;
     
     StopRoute * stopRoute;
 }
@@ -25,6 +26,7 @@
 @property (nonatomic, retain) IBOutlet UILabel * stopNumberLabel;
 @property (nonatomic, retain) IBOutlet UILabel * lastRefreshedLabel;
 @property (nonatomic, retain) IBOutlet UITableView * timesTableView;
+@property (nonatomic, retain) IBOutlet UILabel * noServiceLabel;
 
 @property (nonatomic, retain) StopRoute * stopRoute;
 

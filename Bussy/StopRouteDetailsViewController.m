@@ -11,7 +11,7 @@
 
 @implementation StopRouteDetailsViewController
 
-@synthesize stopRouteNameLabel, stopNumberLabel, timesTableView, lastRefreshedLabel, exportBarButton;
+@synthesize stopRouteNameLabel, stopNumberLabel, timesTableView, lastRefreshedLabel, exportBarButton, noServiceLabel;
 @synthesize stopRoute;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,12 +43,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0)
+    if ([stopRoute.times count] <= 0)
     {
-        return [stopRoute.times count];
+        noServiceLabel.hidden = NO;
     }
-    
-    return 0;
+    else
+    {
+        noServiceLabel.hidden = YES;
+    }
+        
+    return [stopRoute.times count];
 }
 
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -7,19 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A00773D21400581D00EC71A6 /* Bussy-Icon-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A00773D11400581D00EC71A6 /* Bussy-Icon-Retina.png */; };
+		A00773D41400582800EC71A6 /* Bussy-Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A00773D31400582800EC71A6 /* Bussy-Icon.png */; };
 		A00E7D1B13F8D720005CFAEC /* world@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00E7D1A13F8D720005CFAEC /* world@2x.png */; };
 		A00E7D1D13F8D731005CFAEC /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00E7D1C13F8D731005CFAEC /* star@2x.png */; };
 		A00E7D1F13F8D742005CFAEC /* preferences@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00E7D1E13F8D742005CFAEC /* preferences@2x.png */; };
 		A00E7D2113F8D7C6005CFAEC /* indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00E7D2013F8D7C6005CFAEC /* indicator@2x.png */; };
-		A00E7D2313F8D84B005CFAEC /* Bussy Icon Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A00E7D2213F8D84B005CFAEC /* Bussy Icon Retina.png */; };
-		A00E7D2513F8D84E005CFAEC /* Bussy Icon Non-Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = A00E7D2413F8D84E005CFAEC /* Bussy Icon Non-Retina.png */; };
 		A026ACE513F798570068E8F5 /* topAndBottomRowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = A026ACE413F798570068E8F5 /* topAndBottomRowSelected.png */; };
 		A026ACE913F799DC0068E8F5 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = A026ACE813F799DC0068E8F5 /* Background.png */; };
 		A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */ = {isa = PBXBuildFile; fileRef = A02B3E5C13BD83E7009FCCE3 /* Stop.m */; };
 		A039765013F7413500CF9693 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A039764F13F7413500CF9693 /* Default@2x.png */; };
 		A039765213F7416400CF9693 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A039765113F7416400CF9693 /* Default.png */; };
-		A04032E913F77F5B005CA758 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A04032E713F77F5B005CA758 /* ProgressViewController.m */; };
-		A04032EA13F77F5B005CA758 /* ProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04032E813F77F5B005CA758 /* ProgressViewController.xib */; };
 		A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */; };
 		A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
@@ -79,21 +77,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A00773D11400581D00EC71A6 /* Bussy-Icon-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bussy-Icon-Retina.png"; sourceTree = "<group>"; };
+		A00773D31400582800EC71A6 /* Bussy-Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bussy-Icon.png"; sourceTree = "<group>"; };
 		A00E7D1A13F8D720005CFAEC /* world@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world@2x.png"; sourceTree = "<group>"; };
 		A00E7D1C13F8D731005CFAEC /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		A00E7D1E13F8D742005CFAEC /* preferences@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preferences@2x.png"; sourceTree = "<group>"; };
 		A00E7D2013F8D7C6005CFAEC /* indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "indicator@2x.png"; sourceTree = "<group>"; };
-		A00E7D2213F8D84B005CFAEC /* Bussy Icon Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bussy Icon Retina.png"; sourceTree = "<group>"; };
-		A00E7D2413F8D84E005CFAEC /* Bussy Icon Non-Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bussy Icon Non-Retina.png"; sourceTree = "<group>"; };
 		A026ACE413F798570068E8F5 /* topAndBottomRowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRowSelected.png; sourceTree = "<group>"; };
 		A026ACE813F799DC0068E8F5 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		A02B3E5B13BD83E7009FCCE3 /* Stop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stop.h; sourceTree = "<group>"; };
 		A02B3E5C13BD83E7009FCCE3 /* Stop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stop.m; sourceTree = "<group>"; };
 		A039764F13F7413500CF9693 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		A039765113F7416400CF9693 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		A04032E613F77F5B005CA758 /* ProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressViewController.h; sourceTree = "<group>"; };
-		A04032E713F77F5B005CA758 /* ProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressViewController.m; sourceTree = "<group>"; };
-		A04032E813F77F5B005CA758 /* ProgressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressViewController.xib; sourceTree = "<group>"; };
 		A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteDetailsViewController.h; sourceTree = "<group>"; };
 		A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteDetailsViewController.m; sourceTree = "<group>"; };
 		A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
@@ -198,8 +193,8 @@
 		A063461813BC537300CB5168 = {
 			isa = PBXGroup;
 			children = (
-				A00E7D2413F8D84E005CFAEC /* Bussy Icon Non-Retina.png */,
-				A00E7D2213F8D84B005CFAEC /* Bussy Icon Retina.png */,
+				A00773D31400582800EC71A6 /* Bussy-Icon.png */,
+				A00773D11400581D00EC71A6 /* Bussy-Icon-Retina.png */,
 				A0D89D1C13F89A1B0094FA13 /* MBProgressHUD */,
 				A039765113F7416400CF9693 /* Default.png */,
 				A039764F13F7413500CF9693 /* Default@2x.png */,
@@ -311,7 +306,6 @@
 			isa = PBXGroup;
 			children = (
 				A0B3621413F71A940032F8B4 /* Images */,
-				A04032E813F77F5B005CA758 /* ProgressViewController.xib */,
 				A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */,
 				A0D89D2613F8BDB50094FA13 /* AboutViewController.xib */,
 				A063463913BC537300CB5168 /* MainWindow.xib */,
@@ -333,8 +327,6 @@
 				A063463D13BC537300CB5168 /* MyRoutesViewController.m */,
 				A080846D13C56B7D00DEC160 /* StopRouteChooserViewController.h */,
 				A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */,
-				A04032E613F77F5B005CA758 /* ProgressViewController.h */,
-				A04032E713F77F5B005CA758 /* ProgressViewController.m */,
 				A0D89D2113F8ACF60094FA13 /* AbstractFancyViewController.h */,
 				A0D89D2213F8ACF60094FA13 /* AbstractFancyViewController.m */,
 				A0D89D2413F8BDB50094FA13 /* AboutViewController.h */,
@@ -476,7 +468,6 @@
 				A039765213F7416400CF9693 /* Default.png in Resources */,
 				A0B2354313F7620500018A59 /* topAndBottomRow.png in Resources */,
 				A0B2354713F7643600018A59 /* indicator.png in Resources */,
-				A04032EA13F77F5B005CA758 /* ProgressViewController.xib in Resources */,
 				A026ACE513F798570068E8F5 /* topAndBottomRowSelected.png in Resources */,
 				A026ACE913F799DC0068E8F5 /* Background.png in Resources */,
 				A0F305A513F86162004F431A /* preferences.png in Resources */,
@@ -487,8 +478,8 @@
 				A00E7D1D13F8D731005CFAEC /* star@2x.png in Resources */,
 				A00E7D1F13F8D742005CFAEC /* preferences@2x.png in Resources */,
 				A00E7D2113F8D7C6005CFAEC /* indicator@2x.png in Resources */,
-				A00E7D2313F8D84B005CFAEC /* Bussy Icon Retina.png in Resources */,
-				A00E7D2513F8D84E005CFAEC /* Bussy Icon Non-Retina.png in Resources */,
+				A00773D21400581D00EC71A6 /* Bussy-Icon-Retina.png in Resources */,
+				A00773D41400582800EC71A6 /* Bussy-Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,7 +538,6 @@
 				A07FE81913EBCFFB00567B09 /* SBJsonUTF8Stream.m in Sources */,
 				A07FE81A13EBCFFB00567B09 /* SBJsonWriter.m in Sources */,
 				A0B2353F13F751E400018A59 /* TranslinkColors.m in Sources */,
-				A04032E913F77F5B005CA758 /* ProgressViewController.m in Sources */,
 				A0D89D2013F89A2F0094FA13 /* MBProgressHUD.m in Sources */,
 				A0D89D2313F8ACF60094FA13 /* AbstractFancyViewController.m in Sources */,
 				A0D89D2713F8BDB50094FA13 /* AboutViewController.m in Sources */,
@@ -620,7 +610,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -634,7 +624,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};
@@ -649,7 +639,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bussy/Bussy-Prefix.pch";
 				INFOPLIST_FILE = "Bussy/Bussy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = Bussy;
 				WRAPPER_EXTENSION = app;
 			};
@@ -663,7 +653,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bussy/Bussy-Prefix.pch";
 				INFOPLIST_FILE = "Bussy/Bussy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = Bussy;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
