@@ -73,7 +73,7 @@
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select an action" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Show in Maps", nil];
     
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    [actionSheet showInView:self.view];
+    [actionSheet showInView:self.parentViewController.tabBarController.view];
     [actionSheet release];
     
 }
