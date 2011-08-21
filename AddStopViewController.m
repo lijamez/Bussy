@@ -55,7 +55,8 @@ int const MAX_FIELD_CHARS = 5;
     
     NSError * error = nil;
     
-    Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:stopNumber error:&error];
+    Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:stopNumber];
+    [stop refreshAndCatchError:&error];
     
     if (error)
     {

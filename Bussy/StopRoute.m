@@ -10,9 +10,9 @@
 #import "Stop.h"
 
 @implementation StopRoute
-@synthesize times, routeName, routeID, stop, direction;
+@synthesize times, routeName, routeID, stop, direction, lastRefreshedDate;
 
--(StopRoute*) stop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes
+-(StopRoute*) initWithStop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes lastRefreshedDate: (NSDate*) inputLastRefreshedDate
 {
     self = [super init];
     if (self)
@@ -32,20 +32,22 @@
         times = inputTimes;
         [times retain];
         
+        lastRefreshedDate = inputLastRefreshedDate;
+        [lastRefreshedDate retain];
+        
     }
     
     return self;
     
 }
 
-- (NSString*) generateTitle
-{
-    NSString * title = [NSString stringWithFormat:@"%@: %@", stop.stopID, routeName];
-    return title;
-}
-
 - (NSString*) generateTimesString
 {
+    if ([times count] <= 0)
+    {
+        return nil;
+    }
+    
     NSMutableString * timesString = [NSMutableString string];
     for (int i = 0 ; i < [times count] ; i++)
     {
@@ -89,6 +91,7 @@
     [routeID release];
     [routeName release];
     [times release];
+    [lastRefreshedDate release];
     [super dealloc];
 }
 

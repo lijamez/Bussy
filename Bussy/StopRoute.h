@@ -7,30 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TranslinkObject.h"
 
 @class Stop;
 
-@interface StopRoute : NSObject {
-    
+@interface StopRoute : NSObject 
+{
     Stop * stop;
     NSString * direction;
     NSString * routeID;
     NSString * routeName;
     NSArray * times;
+    NSDate * lastRefreshedDate;
 }
 
--(StopRoute*) stop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes;
+-(StopRoute*) initWithStop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes lastRefreshedDate: (NSDate*) inputLastRefreshedDate;
 
 @property (readonly) NSString * routeName;
 @property (readonly) NSArray * times;
 @property (readonly) NSString * routeID;
 @property (readonly) NSString * direction;
 @property (readonly) Stop * stop;
+@property (readonly) NSDate * lastRefreshedDate;
 
 - (NSString*) generateTimesString;
-- (NSString*) generateTitle;
-
 
 
 @end

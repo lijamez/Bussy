@@ -17,15 +17,15 @@ typedef enum
 
 
 
-@interface TranslinkObject : NSObject
+@interface AbstractTranslinkObject : NSObject
 {
     TranslinkAdapter * adapter;
     Status status;
     
 }
 
-- (TranslinkObject*) initWithAdapter: (TranslinkAdapter*) adapter;
-- (void) refresh;
+- (AbstractTranslinkObject*) initWithAdapter: (TranslinkAdapter*) adapter;
+- (void) refreshAndCatchError: (NSError**) error;
 
 @property (readonly) TranslinkAdapter * adapter;
 @property (readonly) Status status;
@@ -33,8 +33,3 @@ typedef enum
 @end
 
 
-@protocol TranslinkObject
-
-- (void) refreshAndCatchError: (NSError**) error;
-
-@end

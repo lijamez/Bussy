@@ -124,13 +124,13 @@
     stopNumberLabel.text = [NSString stringWithFormat:@"Stop Number: %@", stopRoute.stop.stopID];
     
     NSString * lastRefreshedString = @"Never";
-    if (stopRoute.stop.lastRefreshedDate != nil)
+    if (stopRoute.lastRefreshedDate != nil)
     {
         NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
         [dateFormatter setDateStyle:NSDateFormatterLongStyle];
         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
         
-        lastRefreshedString = [dateFormatter stringFromDate:stopRoute.stop.lastRefreshedDate];
+        lastRefreshedString = [dateFormatter stringFromDate:stopRoute.lastRefreshedDate];
     }
     
     lastRefreshedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", lastRefreshedString];

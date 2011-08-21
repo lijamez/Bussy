@@ -7,11 +7,12 @@
 //
 
 #import "Stop.h"
+#import "AbstractTranslinkObject.h"
 
 @implementation Stop
-@synthesize stopID, stopName, routes, lastRefreshedDate;
+@synthesize stopID, stopName, routes;
 
--(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId error: (NSError**) error
+-(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId
 {
     self = [super init];
     if (self)
@@ -22,8 +23,9 @@
         stopID = inputId;
         [stopID retain];
         
-        [self refreshAndCatchError: error];
-
+        //[self refreshAndCatchError: error];
+         
+        status = NOT_LOADED;
     }
     
     return self;
@@ -31,6 +33,8 @@
 
 - (void) refreshAndCatchError: (NSError**) error
 {
+    status = REFRESHING;
+    
     NSString * json = [adapter requestStop:stopID error:error];
     
     SBJsonParser * parser = [[SBJsonParser alloc] init];
@@ -46,15 +50,15 @@
             stopName = [result objectAtIndex:1];
             [stopName retain];
             
-            routes = [[StopRouteCollection alloc] initWithAdapter: adapter stop: self error:error];
+            routes = [[StopRouteCollection alloc] initWithAdapter: adapter stop: self];
             
-            [lastRefreshedDate release];
-            lastRefreshedDate = [NSDate date];
-            [lastRefreshedDate retain];
+            [routes refreshAndCatchError:error];
             
             break;
         }
     }
+    
+    status = VALID;
 
 }
 
@@ -89,7 +93,6 @@
     [stopName release];
     [routes release];
     [adapter release];
-    [lastRefreshedDate release];
     [super dealloc];
 }
 

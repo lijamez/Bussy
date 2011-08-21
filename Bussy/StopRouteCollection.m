@@ -13,7 +13,7 @@
 
 @synthesize stop;
 
-- (StopRouteCollection*) initWithAdapter: (TranslinkAdapter*) inputAdapter stop: (Stop*) inputStop error: (NSError**) error
+- (StopRouteCollection*) initWithAdapter: (TranslinkAdapter*) inputAdapter stop: (Stop*) inputStop
 {
     self = [super init];
     if (self) {
@@ -27,7 +27,8 @@
         adapter = inputAdapter;
         [adapter retain];
         
-        [self refreshAndCatchError: error];
+        //[self refreshAndCatchError: error];
+        status = NOT_LOADED;
         
     }
     
@@ -36,6 +37,8 @@
 
 - (void) refreshAndCatchError: (NSError**) error
 {
+    status = REFRESHING;
+    
     [array removeAllObjects];
     
     NSString * json = [adapter requestArrivalTimesAtStop:[stop stopID] error: error];
@@ -55,12 +58,16 @@
             NSString * entryRouteName = [entry objectForKey:@"routeName"];
             NSArray * entryTimes = [entry objectForKey:@"times"];
             
-            StopRoute * stopRoute = [[StopRoute alloc] stop:stop direction:entryDirection routeID:entryRouteID routeName:entryRouteName times:entryTimes];
+            StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:entryDirection routeID:entryRouteID routeName:entryRouteName times:entryTimes lastRefreshedDate:[NSDate date]];
             
             [array addObject:stopRoute];
             
+            break;
+            
         }
     }
+    
+    status = VALID;
 }
 
 - (NSArray*) array

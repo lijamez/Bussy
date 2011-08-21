@@ -7,26 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TranslinkObject.h"
+#import "AbstractTranslinkObject.h"
 #import "TranslinkAdapter.h"
 #import "StopRouteCollection.h"
 
-@interface Stop : NSObject<TranslinkObject> {
+@interface Stop : AbstractTranslinkObject {
     @private
     NSString * stopID;
     NSString * stopName;
     StopRouteCollection * routes;
-    TranslinkAdapter * adapter;
-    NSDate * lastRefreshedDate;
 }
 
--(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId error: (NSError**) error;
+-(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId;
 
 @property (readonly) NSString * stopID;
 @property (readonly) NSString * stopName;
 @property (readonly) StopRouteCollection * routes;
-@property (readonly) NSDate * lastRefreshedDate;
-
 
 - (BOOL) isEqual:(id)object;
 

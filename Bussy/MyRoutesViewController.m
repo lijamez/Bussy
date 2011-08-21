@@ -53,6 +53,9 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
             [stopRouteDictionary setObject:stopRoute.stop.stopID forKey:@"StopID"];
             [stopRouteDictionary setObject:stopRoute.routeID forKey:@"RouteID"];
             [stopRouteDictionary setObject:stopRoute.direction forKey:@"Direction"];
+            [stopRouteDictionary setObject:stopRoute.routeName forKey:@"RouteName"];
+            [stopRouteDictionary setObject:stopRoute.times forKey:@"Times"];
+            [stopRouteDictionary setObject:stopRoute.lastRefreshedDate forKey:@"LastRefreshedDate"];
             
             [watchedStopRouteDictionaries addObject:stopRouteDictionary];
         }
@@ -154,37 +157,18 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
             NSString * savedStopID = [stopRouteDictionary objectForKey:@"StopID"];
             NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
             NSString * savedDirection = [stopRouteDictionary objectForKey:@"Direction"];
+            NSString * savedRouteName = [stopRouteDictionary objectForKey:@"RouteName"];
+            NSArray * savedRouteTimes = [stopRouteDictionary objectForKey:@"Times"];
+            NSDate * savedLastRefreshedDate = [stopRouteDictionary objectForKey:@"LastRefreshedDate"];
             
-            NSError * httpGetStopError = nil;
+            Stop * stop = [[Stop alloc] initWithAdapter: [[TranslinkAdapter alloc] init] stopId: savedStopID];
             
-            Stop * stop = [[Stop alloc] initWithAdapter: [[TranslinkAdapter alloc] init] stopId: savedStopID error:&httpGetStopError];
+            //StopRouteCollection * stopRoutes = [[StopRouteCollection alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stop:stop];
             
-            if (httpGetStopError)
-            {
-                NSLog(@"%@: %@", @"Failed to GET stop", httpGetStopError );
-                continue;
-            }
+            StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:savedDirection routeID:savedRouteID routeName:savedRouteName times:savedRouteTimes lastRefreshedDate:savedLastRefreshedDate];
             
-            NSError * httpGetStopRoutesError = nil;
+            [self didReceiveStopRoute:stopRoute];
             
-            StopRouteCollection * stopRoutes = [[StopRouteCollection alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stop:stop error:&httpGetStopRoutesError];
-            
-            if (httpGetStopRoutesError)
-            {
-                NSLog(@"%@: %@", @"Failed to GET stop routes", httpGetStopRoutesError );
-                continue;
-            }
-            
-            for (StopRoute * stopRoute in stopRoutes.array)
-            {
-                if ([[stopRoute routeID] isEqualToString:savedRouteID] &&
-                    [[stopRoute direction] isEqualToString:savedDirection])
-                {
-                    [self didReceiveStopRoute:stopRoute];
-                    break;
-                }
-                
-            }
             currentStopRoute++;
         }
         NSLog(@"Loaded!");
@@ -408,14 +392,14 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     middleLabel.text = timesString;
     
     NSString * lastRefreshedDateString = @"Never!";
-    if (stopRoute.stop.lastRefreshedDate != nil)
+    if (stopRoute.lastRefreshedDate != nil)
     {
         NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-        lastRefreshedDateString = [NSString stringWithFormat:@"Last updated: %@", [dateFormatter stringFromDate: stopRoute.stop.lastRefreshedDate]];
+        lastRefreshedDateString = [dateFormatter stringFromDate: stopRoute.lastRefreshedDate];
     }
-    bottomLabel.text = lastRefreshedDateString;
+    bottomLabel.text = [NSString stringWithFormat:@"Last updated: %@", lastRefreshedDateString];
     
     /*
     cell.textLabel.text = [stopRoute routeName];
