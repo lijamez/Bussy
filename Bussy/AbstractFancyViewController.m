@@ -7,6 +7,8 @@
 //
 
 #import "AbstractFancyViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
+
 
 @implementation AbstractFancyViewController
 
@@ -77,13 +79,16 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    CFURLRef soundFileURLRefClick  = CFBundleCopyResourceURL (CFBundleGetMainBundle (), CFSTR ("click"), CFSTR ("wav"), NULL);
+    AudioServicesCreateSystemSoundID (soundFileURLRefClick, &clickSoundEffect);
 }
-*/
+
 
 - (void)viewDidUnload
 {
@@ -96,6 +101,14 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void) dealloc
+{
+    [HUD release];
+    AudioServicesDisposeSystemSoundID(clickSoundEffect);
+    
+    [super dealloc];
 }
 
 @end

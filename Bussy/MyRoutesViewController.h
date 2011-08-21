@@ -21,7 +21,7 @@
 
 @interface MyRoutesViewController : AbstractFancyViewController<ModalViewDelegate> {
     
-    NSMutableArray * watchedStopRoutes;
+    WatchedStopRoutesCollection * watchedStopRoutes;
     UIBarButtonItem	* addBarButton;
     UIBarButtonItem	* refreshBarButton;
     UIImageView * imageView;
@@ -35,7 +35,7 @@
 @property (nonatomic, retain) IBOutlet UITableView * stopRoutesTableView;
 @property (nonatomic, retain) IBOutlet UILabel * noRoutesLabel;
 
-@property (nonatomic, retain) NSMutableArray * watchedStopRoutes;
+@property (nonatomic, retain) WatchedStopRoutesCollection * watchedStopRoutes;
 
 - (IBAction)	addWatchedStopRoute:		(id) sender;
 - (void) loadDataFromSave;

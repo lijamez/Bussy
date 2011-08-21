@@ -209,7 +209,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<object class="IBUILabel" id="1063361429">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{119, 182}, {83, 21}}</string>
+						<string key="NSFrame">{{20, 164}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -219,7 +219,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">No Service</string>
+						<string key="IBUIText">No Service At This Time :(</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">10</int>
 							<object class="NSImage" key="NSImage">

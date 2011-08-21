@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "MBProgressHUD.h"
 
 
 @interface AbstractFancyViewController : UIViewController<MBProgressHUDDelegate> {
     
     MBProgressHUD * HUD;
+    SystemSoundID clickSoundEffect;
 
 }
 

@@ -7,21 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "StopRoute.h"
 
 @interface WatchedStopRoutesCollection : NSObject
 {
-    NSMutableArray * items;
-    
+    NSMutableDictionary * routesByStopNumber;
 }
 
-@property (readonly, retain) NSMutableArray * items;
-
+- (NSUInteger) countOfStops;
+- (NSUInteger) countOfRoutesAtStopNumber: (NSString*) stopNumber;
+- (NSUInteger) countOfRoutesAtStopIndex: (NSUInteger) stopIndex;
 - (NSUInteger) countOfItems;
-- (id) objectInItemsAtIndex:(NSUInteger)index;
-- (void) insertObject:(id)object inItemsAtIndex:(NSUInteger)index;
-- (void) removeObjectFromItemsAtIndex:(NSUInteger)index;
-- (void) replaceObjectInItemsAtIndex:(NSUInteger)index withObject:(id)object;
+- (NSArray*) stopNumbers;
+- (StopRoute*) stopRouteAtIndex: (NSUInteger) routeIndex withStopNumber: (NSString*) stopNumber;
+- (NSArray*) stopRoutesWithStopNumber: (NSString*) stopNumber;
+- (id) stopRouteAtIndex: (NSUInteger) routeIndex withStopIndex: (NSUInteger) stopIndex;
+- (void) insertStopRoute:(StopRoute*)stopRoute;
+- (void) removeStopRouteAtIndex: (NSUInteger) routeIndex withStopNumber: (NSString*) stopNumber;
+- (void) removeStopRouteAtIndex: (NSUInteger) routeIndex withStopIndex: (NSUInteger) stopIndex;
+- (NSArray*) stopRoutesWithStopIndex: (NSUInteger) stopIndex;
+-(BOOL) containsStopRoute:(StopRoute*)stopRoute;
 
-- (void) addObject: (id) object;
-- (BOOL) containsObject: (id) object;
 @end
