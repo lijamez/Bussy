@@ -54,11 +54,11 @@
     {
         if (stopNumber != nil)
         {
-            StopRoute * stopRoute = [routesByStopNumber objectForKey:stopNumber];
+            NSArray * stopRoutes = [routesByStopNumber objectForKey:stopNumber];
             
-            if (stopRoute != nil)
+            if (stopRoutes != nil)
             {
-                count++;
+                count += stopRoutes.count;
             }
         }
     }
