@@ -11,6 +11,8 @@
 @interface TranslinkColors : NSObject
 
 + (UIColor*) GetTranslinkBlue;
++ (UIColor*) GetTranslinkDarkBlue;
+
 + (UIColor*) GetTranslinkYellow;
 
 @end

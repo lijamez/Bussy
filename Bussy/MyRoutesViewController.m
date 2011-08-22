@@ -141,6 +141,28 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:@"Refreshing Routes" DimBackground:NO animated:YES onTarget:self withObject:nil];
 }
 
+- (void) refreshRoutesWhenNecessary
+{    
+    NSTimeInterval greatestTimeInterval = 0;
+    
+    for (NSString * stopNumber in [watchedStopRoutes stopNumbers])
+    {
+        for (StopRoute * stopRoute in [watchedStopRoutes stopRoutesWithStopNumber: stopNumber])
+        {
+            NSTimeInterval interval = -[stopRoute.lastRefreshedDate timeIntervalSinceNow];
+            
+            if (interval > greatestTimeInterval)
+                greatestTimeInterval = interval;
+            
+            if (greatestTimeInterval >= minAgeToRefresh)
+            {
+                [self refreshRoutes:nil];
+                return;
+            }
+        }
+    }
+}
+
 - (void) loadDataFromSave
 {    
     NSString *pathToWatchedStopRoutesSaveFile = [self watchedStopRoutesSavePath];
@@ -152,8 +174,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
         int currentStopRoute = 1;
         for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
         {
-            [self updateHUDWithDetailsText:[NSString stringWithFormat:@"%d of %d", currentStopRoute, [watchedStopRouteDictionaries count]]];
-            
             NSString * savedStopID = [stopRouteDictionary objectForKey:@"StopID"];
             NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
             NSString * savedDirection = [stopRouteDictionary objectForKey:@"Direction"];
@@ -162,8 +182,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
             NSDate * savedLastRefreshedDate = [stopRouteDictionary objectForKey:@"LastRefreshedDate"];
             
             Stop * stop = [[Stop alloc] initWithAdapter: [[TranslinkAdapter alloc] init] stopId: savedStopID];
-            
-            //StopRouteCollection * stopRoutes = [[StopRouteCollection alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stop:stop];
             
             StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:savedDirection routeID:savedRouteID routeName:savedRouteName times:savedRouteTimes lastRefreshedDate:savedLastRefreshedDate];
             
@@ -180,6 +198,10 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     }
     
     [self.stopRoutesTableView reloadData];
+    
+    //Load Settings 
+    //TODO Dynamically set these values when a settings view is implemented
+    minAgeToRefresh = 300;
 
 }
 
@@ -198,8 +220,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
     watchedStopRoutes = [[WatchedStopRoutesCollection alloc] init];
-    
-    [self showHUDWithSelector:@selector(loadDataFromSave) mode:MBProgressHUDModeIndeterminate text:@"Loading routes" DimBackground:YES animated:YES onTarget:self withObject:nil];
+
+    [self loadDataFromSave];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -210,6 +232,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     NSIndexPath*	selection = [self.stopRoutesTableView indexPathForSelectedRow];
 	if (selection)
 		[self.stopRoutesTableView deselectRowAtIndexPath:selection animated:YES];
+    
+    [self refreshRoutesWhenNecessary];
     
 	[self.stopRoutesTableView reloadData];
 }

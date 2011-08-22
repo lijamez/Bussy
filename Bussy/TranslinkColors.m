@@ -15,6 +15,11 @@
     return [UIColor colorWithRed:19.0/255.0 green:97.0/255.0 blue:165.0/255.0 alpha:1.0];
 }
 
++ (UIColor*) GetTranslinkDarkBlue
+{
+    return [UIColor colorWithRed:12.0/255.0 green:70.0/255.0 blue:120.0/255.0 alpha:1.0];
+}
+
 + (UIColor*) GetTranslinkYellow
 {
     return [UIColor colorWithRed:255.0/255.0 green:213.0/255.0 blue:32.0/255.0 alpha:1.0];

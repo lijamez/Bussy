@@ -27,6 +27,8 @@
     UIImageView * imageView;
     UITableView * stopRoutesTableView;
     UILabel * noRoutesLabel;
+    
+    NSTimeInterval minAgeToRefresh;
 }
 
 @property (nonatomic, retain) UIBarButtonItem * addBarButton;
