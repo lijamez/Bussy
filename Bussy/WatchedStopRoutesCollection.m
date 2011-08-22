@@ -210,7 +210,7 @@
     {
         for (StopRoute * route in array)
         {
-            if (stopRoute == route)
+            if ([stopRoute isEqual: route])
                 return YES;
         }
     }

@@ -72,6 +72,12 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
         [watchedStopRoutes insertStopRoute:newStopRoute];
         [self.stopRoutesTableView reloadData];
     }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Hey!" message:@"This route has already been added." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 - (IBAction) addWatchedStopRoute: (id) sender
@@ -201,7 +207,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     
     //Load Settings 
     //TODO Dynamically set these values when a settings view is implemented
-    minAgeToRefresh = 300;
+    minAgeToRefresh = 1200;
 
 }
 
