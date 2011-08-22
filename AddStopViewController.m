@@ -48,11 +48,16 @@ int const MAX_FIELD_CHARS = 5;
         
         foundStopRoutes = nil;
     }
+    else
+    {
+        [stopNumberTextField becomeFirstResponder];
+    }
 }
 
 - (void) processStopNumber: (NSString*) stopNumber
 {
-    
+    [stopNumberTextField resignFirstResponder];
+
     NSError * error = nil;
     
     Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:stopNumber];
@@ -78,8 +83,6 @@ int const MAX_FIELD_CHARS = 5;
         [alert show];
         [alert release];
     }
-
-    
 }
 
 - (IBAction) notifyNext: (id) sender
@@ -93,10 +96,11 @@ int const MAX_FIELD_CHARS = 5;
         [alert release];
         return;
     }
-        
-    [self showHUDWithSelector:@selector(processStopNumber:) mode:MBProgressHUDModeIndeterminate text:nil DimBackground:NO animated:YES onTarget:self withObject:newStopNumber];
     
+    [stopNumberTextField resignFirstResponder];
 
+    [self showHUDWithSelector:@selector(processStopNumber:) mode:MBProgressHUDModeIndeterminate text:@"Fetching Routes..." DimBackground:YES animated:YES onTarget:self withObject:newStopNumber];
+    
 }
 
 
@@ -130,7 +134,6 @@ int const MAX_FIELD_CHARS = 5;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [stopNumberTextField becomeFirstResponder];
     
     UIBarButtonItem * cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(notifyIsCancelled:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -138,6 +141,11 @@ int const MAX_FIELD_CHARS = 5;
     UIBarButtonItem * nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(notifyNext:)];
     self.navigationItem.rightBarButtonItem = nextButton;
     
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [stopNumberTextField becomeFirstResponder];
 }
 
 - (void)viewDidUnload
