@@ -239,6 +239,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
 - (UIView *)tableView: (UITableView *)tableView viewForHeaderInSection: (NSInteger) section
 {
+    if (section >= [[watchedStopRoutes stopNumbers] count]) return nil;
+    
     BussyTableHeaderView * headerView = [[BussyTableHeaderView alloc] init];
     headerView.headerLabel.text =  [NSString stringWithFormat:@"Stop# %@", [[watchedStopRoutes stopNumbers] objectAtIndex:section]];
     
@@ -247,6 +249,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section >= [[watchedStopRoutes stopNumbers] count]) return 0;
+    
     return 19;
 }
 
@@ -463,7 +467,21 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     {
         // Delete the row from the data source.
         [watchedStopRoutes removeStopRouteAtIndex:indexPath.row withStopIndex:indexPath.section];
+        
+        [tableView beginUpdates];
+        
+        //Remove the row only
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        if ([watchedStopRoutes countOfRoutesAtStopIndex:indexPath.section] <= 0)
+        {
+            //Remove the entire section
+            [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            //[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        
+        [tableView endUpdates];
+        
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)
     {

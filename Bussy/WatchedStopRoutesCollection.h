@@ -9,9 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "StopRoute.h"
 
+typedef enum
+{
+    ASCENDING,
+    DESCENDING
+} SortMethod;
+
 @interface WatchedStopRoutesCollection : NSObject
 {
     NSMutableDictionary * routesByStopNumber;
+    SortMethod stopsSortMethod;
+    SortMethod stopRoutesSortMethod;
 }
 
 - (NSUInteger) countOfStops;
@@ -27,5 +35,9 @@
 - (void) removeStopRouteAtIndex: (NSUInteger) routeIndex withStopIndex: (NSUInteger) stopIndex;
 - (NSArray*) stopRoutesWithStopIndex: (NSUInteger) stopIndex;
 -(BOOL) containsStopRoute:(StopRoute*)stopRoute;
+
+@property (readwrite) SortMethod stopsSortMethod;
+@property (readwrite) SortMethod stopRoutesSortMethod;
+
 
 @end

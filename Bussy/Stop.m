@@ -62,6 +62,27 @@
 
 }
 
+- (NSComparisonResult) compareStopNumberAscending: (Stop*) otherStop
+{
+    return [self.stopID compare: otherStop.stopID];
+}
+
+- (NSComparisonResult) compareStopNumberDescending: (Stop*) otherStop
+{
+    NSComparisonResult result = [self.stopID compare: otherStop.stopID];
+    
+    if (result == NSOrderedAscending)
+    {
+        return NSOrderedDescending;
+    }
+    else if (result == NSOrderedDescending)
+    {
+        return NSOrderedAscending;
+    }
+    
+    return NSOrderedSame;
+}
+
 - (BOOL) isEqual:(id)object
 {
     

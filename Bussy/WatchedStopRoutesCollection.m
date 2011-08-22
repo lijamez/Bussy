@@ -12,15 +12,58 @@
 
 @implementation WatchedStopRoutesCollection
 
+@synthesize stopsSortMethod, stopRoutesSortMethod;
+
 - (id)init
 {
     self = [super init];
     if (self) {
         routesByStopNumber = [[NSMutableDictionary alloc] init];
         [routesByStopNumber retain];
+        
+        stopsSortMethod = ASCENDING; //TODO Adjustable in the future once a settings view is implemented
+        stopRoutesSortMethod = ASCENDING; //TODO Adjustable in the future once a settings view is implemented
     }
 
     return self;
+}
+
+- (NSArray*) sortedKeys
+{
+    
+    if (stopsSortMethod == ASCENDING)
+    {
+        NSSortDescriptor * descriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:YES selector:@selector(localizedCompare:)];
+        return [[routesByStopNumber allKeys] sortedArrayUsingDescriptors: [NSArray arrayWithObject: descriptor]];
+    }
+    else if (stopsSortMethod == DESCENDING)
+    {
+        NSSortDescriptor * descriptor = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO selector:@selector(localizedCompare:)];
+        return [[routesByStopNumber allKeys] sortedArrayUsingDescriptors: [NSArray arrayWithObject: descriptor]];
+    }
+    
+    return [routesByStopNumber allKeys];
+}
+
+- (NSArray*) sortedStopRoutesWithStopNumber: (NSString*) stopNumber
+{
+    NSArray * stopRoutes = [routesByStopNumber objectForKey:stopNumber];
+    
+    if (stopRoutes == nil) return nil;
+    
+    if (stopRoutesSortMethod == ASCENDING)
+    {
+        NSSortDescriptor * descriptor = [NSSortDescriptor sortDescriptorWithKey:@"routeID" ascending:YES selector:@selector(localizedCompare:)];
+        return [stopRoutes sortedArrayUsingDescriptors: [NSArray arrayWithObject: descriptor]];
+
+    }
+    else if (stopRoutesSortMethod == DESCENDING)
+    {
+        NSSortDescriptor * descriptor = [NSSortDescriptor sortDescriptorWithKey:@"routeID" ascending:NO selector:@selector(localizedCompare:)];
+        return [stopRoutes sortedArrayUsingDescriptors: [NSArray arrayWithObject: descriptor]];
+    }
+    
+    return stopRoutes;
 }
 
 - (NSUInteger) countOfStops
@@ -39,9 +82,9 @@
 
 - (NSUInteger) countOfRoutesAtStopIndex: (NSUInteger) stopIndex
 {    
-    if (stopIndex >= [[routesByStopNumber allKeys] count]) return 0;
+    if (stopIndex >= [[self sortedKeys] count]) return 0;
     
-    NSString * stopNumber = [[routesByStopNumber allKeys] objectAtIndex: stopIndex];
+    NSString * stopNumber = [[self sortedKeys] objectAtIndex: stopIndex];
     
     return [self countOfRoutesAtStopNumber:stopNumber];
 }
@@ -50,7 +93,7 @@
 {
     NSUInteger count = 0;
     
-    for (NSString * stopNumber in [routesByStopNumber allKeys])
+    for (NSString * stopNumber in [self sortedKeys])
     {
         if (stopNumber != nil)
         {
@@ -68,14 +111,14 @@
 
 - (NSArray*) stopNumbers
 {
-    return [routesByStopNumber allKeys];
+    return [self sortedKeys];
 }
 
 - (StopRoute*) stopRouteAtIndex: (NSUInteger) routeIndex withStopNumber: (NSString*) stopNumber
 {
-    if (![[routesByStopNumber allKeys] containsObject:stopNumber]) return nil;
+    if (![[self sortedKeys] containsObject:stopNumber]) return nil;
     
-    NSMutableArray * stopRoutesArray = [routesByStopNumber objectForKey: stopNumber];
+    NSArray * stopRoutesArray = [self sortedStopRoutesWithStopNumber:stopNumber];
     
     if (routeIndex >= [stopRoutesArray count]) return nil;
     
@@ -84,9 +127,9 @@
 
 - (StopRoute*) stopRouteAtIndex: (NSUInteger) routeIndex withStopIndex: (NSUInteger) stopIndex
 {
-    if (stopIndex >= [[routesByStopNumber allKeys] count]) return nil;
+    if (stopIndex >= [[self sortedKeys] count]) return nil;
 
-    NSString * stopNumber = [[routesByStopNumber allKeys] objectAtIndex: stopIndex];
+    NSString * stopNumber = [[self sortedKeys] objectAtIndex: stopIndex];
 
     return [self stopRouteAtIndex:routeIndex withStopNumber:stopNumber];
 }
@@ -94,16 +137,16 @@
 - (NSArray*) stopRoutesWithStopNumber: (NSString*) stopNumber
 {
     if (stopNumber == nil) return nil;
-    if (![[routesByStopNumber allKeys] containsObject:stopNumber]) return nil;
+    if (![[self sortedKeys] containsObject:stopNumber]) return nil;
     
-    return [[NSArray alloc] initWithArray:[routesByStopNumber objectForKey:stopNumber]];
+    return [[NSArray alloc] initWithArray:[self sortedStopRoutesWithStopNumber:stopNumber]];
 }
 
 - (NSArray*) stopRoutesWithStopIndex: (NSUInteger) stopIndex
 {
-    if (stopIndex >= [[routesByStopNumber allKeys] count]) return nil;
+    if (stopIndex >= [[self sortedKeys] count]) return nil;
     
-    NSString * stopNumber = [[routesByStopNumber allKeys] objectAtIndex: stopIndex];
+    NSString * stopNumber = [[self sortedKeys] objectAtIndex: stopIndex];
     
     return [self stopRoutesWithStopNumber:stopNumber];
 }
@@ -114,7 +157,7 @@
     
     NSMutableArray * stopRouteArray = nil;
         
-    if ([[routesByStopNumber allKeys] containsObject:stopRoute.stop.stopID])
+    if ([[self sortedKeys] containsObject:stopRoute.stop.stopID])
     {
         stopRouteArray = [routesByStopNumber objectForKey:stopRoute.stop.stopID];
         
@@ -135,20 +178,27 @@
 
 - (void) removeStopRouteAtIndex: (NSUInteger) routeIndex withStopNumber: (NSString*) stopNumber
 {
-    if (![[routesByStopNumber allKeys] containsObject:stopNumber]) return;
+    if (![[self sortedKeys] containsObject:stopNumber]) return;
     
     NSMutableArray * stopRouteArray = [routesByStopNumber objectForKey:stopNumber];
     
     if (routeIndex >= [stopRouteArray count]) return;
     
-    [stopRouteArray removeObjectAtIndex:routeIndex];
+    id objectToRemove = [[self sortedStopRoutesWithStopNumber:stopNumber] objectAtIndex:routeIndex];
+    
+    [stopRouteArray removeObject:objectToRemove];
+    
+    if ([stopRouteArray count] <= 0)
+    {
+        [routesByStopNumber removeObjectForKey:stopNumber];
+    }
 }
 
 - (void) removeStopRouteAtIndex: (NSUInteger) routeIndex withStopIndex: (NSUInteger) stopIndex
 {
     if (stopIndex >= [routesByStopNumber count]) return;
     
-    NSString * stopNumber = [[routesByStopNumber allKeys] objectAtIndex: stopIndex];
+    NSString * stopNumber = [[self sortedKeys] objectAtIndex: stopIndex];
     
     [self removeStopRouteAtIndex:routeIndex withStopNumber:stopNumber];
 
@@ -161,11 +211,11 @@
         for (StopRoute * route in array)
         {
             if (stopRoute == route)
-                return true;
+                return YES;
         }
     }
 
-    return false;
+    return NO;
 }
 
 - (void) dealloc

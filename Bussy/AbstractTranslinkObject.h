@@ -12,7 +12,10 @@
 
 typedef enum
 {
-    VALID, INVALID, REFRESHING, NOT_LOADED
+    VALID, 
+    INVALID, 
+    REFRESHING, 
+    NOT_LOADED
 } Status;
 
 
