@@ -61,9 +61,6 @@
             StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:entryDirection routeID:entryRouteID routeName:entryRouteName times:entryTimes lastRefreshedDate:[NSDate date]];
             
             [array addObject:stopRoute];
-            
-            break;
-            
         }
     }
     

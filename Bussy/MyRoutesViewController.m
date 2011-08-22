@@ -257,13 +257,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [watchedStopRoutes countOfStops];
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if ([watchedStopRoutes countOfItems] <= 0)
+    if ([watchedStopRoutes countOfStops] <= 0)
     {
         noRoutesLabel.hidden = NO;
     }
@@ -272,6 +266,12 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
         noRoutesLabel.hidden = YES;
     }
     
+    return [watchedStopRoutes countOfStops];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     NSArray * stopRoutes = [watchedStopRoutes stopRoutesWithStopIndex:section];
     
     if (stopRoutes == nil) return 0;
@@ -466,19 +466,22 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         // Delete the row from the data source.
-        [watchedStopRoutes removeStopRouteAtIndex:indexPath.row withStopIndex:indexPath.section];
+        NSString * stopNumberOfRemovedItem = [[watchedStopRoutes stopNumbers] objectAtIndex:indexPath.section];
+        [stopNumberOfRemovedItem retain];
+        [watchedStopRoutes removeStopRouteAtIndex:indexPath.row withStopNumber:stopNumberOfRemovedItem];
         
         [tableView beginUpdates];
         
         //Remove the row only
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        if ([watchedStopRoutes countOfRoutesAtStopIndex:indexPath.section] <= 0)
+        if (![[watchedStopRoutes stopNumbers] containsObject:stopNumberOfRemovedItem])
         {
             //Remove the entire section
             [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
             //[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
         }
+        [stopNumberOfRemovedItem release];
         
         [tableView endUpdates];
         

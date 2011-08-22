@@ -204,7 +204,7 @@
 
 }
 
--(BOOL) containsStopRoute:(StopRoute*)stopRoute
+- (BOOL) containsStopRoute:(StopRoute*)stopRoute
 {
     for (NSMutableArray * array in [routesByStopNumber allValues])
     {
