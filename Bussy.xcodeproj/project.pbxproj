@@ -66,6 +66,7 @@
 		A0D89D2313F8ACF60094FA13 /* AbstractFancyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D89D2213F8ACF60094FA13 /* AbstractFancyViewController.m */; };
 		A0D89D2713F8BDB50094FA13 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D89D2513F8BDB50094FA13 /* AboutViewController.m */; };
 		A0D89D2813F8BDB50094FA13 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0D89D2613F8BDB50094FA13 /* AboutViewController.xib */; };
+		A0DFBD1C140372F0004AB22B /* BussyConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DFBD1B140372F0004AB22B /* BussyConstants.m */; };
 		A0E61DFF1401616000D8AAB1 /* AbstractTranslinkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A0E61DFE1401616000D8AAB1 /* AbstractTranslinkObject.m */; };
 		A0F305A513F86162004F431A /* preferences.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F3056513F86162004F431A /* preferences.png */; };
 		A0F305B213F86162004F431A /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F3057213F86162004F431A /* star.png */; };
@@ -172,6 +173,8 @@
 		A0D89D2413F8BDB50094FA13 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		A0D89D2513F8BDB50094FA13 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		A0D89D2613F8BDB50094FA13 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		A0DFBD1A140372F0004AB22B /* BussyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BussyConstants.h; sourceTree = "<group>"; };
+		A0DFBD1B140372F0004AB22B /* BussyConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BussyConstants.m; sourceTree = "<group>"; };
 		A0E61DFD1401616000D8AAB1 /* AbstractTranslinkObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractTranslinkObject.h; sourceTree = "<group>"; };
 		A0E61DFE1401616000D8AAB1 /* AbstractTranslinkObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractTranslinkObject.m; sourceTree = "<group>"; };
 		A0F3056513F86162004F431A /* preferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preferences.png; sourceTree = "<group>"; };
@@ -376,6 +379,8 @@
 				A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */,
 				A0E61DFD1401616000D8AAB1 /* AbstractTranslinkObject.h */,
 				A0E61DFE1401616000D8AAB1 /* AbstractTranslinkObject.m */,
+				A0DFBD1A140372F0004AB22B /* BussyConstants.h */,
+				A0DFBD1B140372F0004AB22B /* BussyConstants.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -583,6 +588,7 @@
 				A0D89D2713F8BDB50094FA13 /* AboutViewController.m in Sources */,
 				A009DFFD14007D19006E1976 /* BussyTableHeaderView.m in Sources */,
 				A0E61DFF1401616000D8AAB1 /* AbstractTranslinkObject.m in Sources */,
+				A0DFBD1C140372F0004AB22B /* BussyConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,6 +41,7 @@
 
 - (IBAction)	addWatchedStopRoute:		(id) sender;
 - (void) loadDataFromSave;
+- (void) refreshRoutesWhenNecessary;
 
 - (void) save;
 

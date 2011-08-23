@@ -14,6 +14,7 @@
 #import "StopRouteDetailsViewController.h"
 #import "TranslinkColors.h"
 #import "BussyTableHeaderView.h"
+#import "BussyConstants.h"
 
 @implementation MyRoutesViewController
 
@@ -167,6 +168,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
             }
         }
     }
+    
+    [self.stopRoutesTableView reloadData];
 }
 
 - (void) loadDataFromSave
@@ -207,13 +210,15 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     
     //Load Settings 
     //TODO Dynamically set these values when a settings view is implemented
-    minAgeToRefresh = 1200;
+    minAgeToRefresh = DEFAULT_MIN_AGE_FOR_AUTO_REFRESH_IN_SECS;
 
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshRoutesWhenNecessary) name:UIApplicationDidBecomeActiveNotification object:nil];
         
     [self setRefreshBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutes:)]];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = refreshBarButton;
@@ -238,10 +243,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     NSIndexPath*	selection = [self.stopRoutesTableView indexPathForSelectedRow];
 	if (selection)
 		[self.stopRoutesTableView deselectRowAtIndexPath:selection animated:YES];
-    
-    [self refreshRoutesWhenNecessary];
-    
-	[self.stopRoutesTableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -578,6 +579,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
 - (void) dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [super dealloc];
 }
 
