@@ -16,13 +16,21 @@
     NSString * stopID;
     NSString * stopName;
     StopRouteCollection * routes;
+    NSDate * lastRefreshedDate;
+    BOOL exists;
 }
 
--(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId;
+-(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId lastRefreshedDate: (NSDate*) inputLastRefreshedDate exists: (BOOL) inputExists;
 
 @property (readonly) NSString * stopID;
 @property (readonly) NSString * stopName;
 @property (readonly) StopRouteCollection * routes;
+@property (readonly) NSDate * lastRefreshedDate;
+@property (readwrite) BOOL exists;
+
+- (NSComparisonResult) compareStopNumberAscending: (Stop*) otherStop;
+- (NSComparisonResult) compareStopNumberDescending: (Stop*) otherStop;
+
 
 - (BOOL) isEqual:(id)object;
 

@@ -8,6 +8,7 @@
 
 #import "BussyAppDelegate.h"
 #import "MyRoutesViewController.h"
+#import "TranslinkStopManager.h"
 
 @implementation BussyAppDelegate
 
@@ -21,7 +22,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    // Add the navigation controller's view to the window and display.
+    
+    [TranslinkStopManager setAdapter:[[TranslinkAdapter alloc] init]];
+    
+    // Add the navigation controller's view to the window and display
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     

@@ -10,9 +10,9 @@
 #import "AbstractTranslinkObject.h"
 
 @implementation Stop
-@synthesize stopID, stopName, routes;
+@synthesize stopID, stopName, routes, lastRefreshedDate, exists;
 
--(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId
+-(Stop*) initWithAdapter: (TranslinkAdapter*) inputAdapter stopId: (NSString*) inputId lastRefreshedDate: (NSDate*) inputLastRefreshedDate exists: (BOOL) inputExists
 {
     self = [super init];
     if (self)
@@ -23,8 +23,14 @@
         stopID = inputId;
         [stopID retain];
         
-        //[self refreshAndCatchError: error];
-         
+        routes = [[StopRouteCollection alloc] initWithAdapter:inputAdapter stop:self];
+        [routes retain];
+        
+        lastRefreshedDate = inputLastRefreshedDate;
+        [lastRefreshedDate retain];
+        
+        exists = inputExists;
+                 
         status = NOT_LOADED;
     }
     
@@ -41,6 +47,8 @@
     
     NSArray * entries = [parser objectWithString:json error:nil];
     
+    BOOL stopFound = NO;
+    
     for (NSArray * result in entries)
     {
         NSString * resultStopID = [[result objectAtIndex:0] stringValue];
@@ -50,14 +58,24 @@
             stopName = [result objectAtIndex:1];
             [stopName retain];
             
-            routes = [[StopRouteCollection alloc] initWithAdapter: adapter stop: self];
+            if (routes == nil)
+            {
+                routes = [[StopRouteCollection alloc] initWithAdapter: adapter stop: self];
+            }
             
             [routes refreshAndCatchError:error];
             
+            stopFound = YES;
             break;
         }
     }
     
+    exists = stopFound;
+    
+    [lastRefreshedDate release];
+    lastRefreshedDate = [NSDate date];
+    [lastRefreshedDate retain];
+
     status = VALID;
 
 }
@@ -108,12 +126,20 @@
     return result;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    [self retain];
+    return self;
+}
+
 -(void) dealloc
 {
     [stopID release];
     [stopName release];
     [routes release];
     [adapter release];
+    [lastRefreshedDate release];
+    
     [super dealloc];
 }
 

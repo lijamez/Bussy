@@ -15,6 +15,7 @@
 #import "TranslinkColors.h"
 #import "BussyTableHeaderView.h"
 #import "BussyConstants.h"
+#import "TranslinkStopManager.h"
 
 @implementation MyRoutesViewController
 
@@ -41,28 +42,40 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     NSLog(@"Saving to %@...", watchedStopRoutesSavePath);
     
     //Construct serializable array
-    NSMutableArray * watchedStopRouteDictionaries = [[[NSMutableArray alloc] init] autorelease]; 
+    NSMutableArray * watchedStopDictionaries = [[[NSMutableArray alloc] init] autorelease];
     
     for (int stopIndex = 0; stopIndex < [watchedStopRoutes countOfStops]; stopIndex++)
     {
-        for (int routeIndex = 0; routeIndex < [watchedStopRoutes countOfRoutesAtStopIndex:stopIndex]; routeIndex++)
+        NSString * stopNumber = [[watchedStopRoutes stopNumbers] objectAtIndex:stopIndex];
+        Stop * stop = [TranslinkStopManager getStopWithNumber:stopNumber];
+        NSMutableDictionary * stopDictionary = [[NSMutableDictionary alloc] init];
+
+        [stopDictionary setObject:stop.stopID forKey:@"StopID"];
+        [stopDictionary setObject:stop.lastRefreshedDate forKey:@"LastRefreshedDate"];
+        [stopDictionary setObject:[NSNumber numberWithBool:stop.exists] forKey:@"StopExists"];
+        
+        NSMutableArray * watchedStopRouteDictionaries = [[[NSMutableArray alloc] init] autorelease]; 
+        
+        for (StopRoute * stopRoute in [watchedStopRoutes stopRoutesWithStopNumber:stopNumber])
         {
-            StopRoute * stopRoute = [watchedStopRoutes stopRouteAtIndex:routeIndex withStopIndex:stopIndex];
             
             NSMutableDictionary * stopRouteDictionary = [[NSMutableDictionary alloc] init];
             
-            [stopRouteDictionary setObject:stopRoute.stop.stopID forKey:@"StopID"];
             [stopRouteDictionary setObject:stopRoute.routeID forKey:@"RouteID"];
             [stopRouteDictionary setObject:stopRoute.direction forKey:@"Direction"];
             [stopRouteDictionary setObject:stopRoute.routeName forKey:@"RouteName"];
             [stopRouteDictionary setObject:stopRoute.times forKey:@"Times"];
-            [stopRouteDictionary setObject:stopRoute.lastRefreshedDate forKey:@"LastRefreshedDate"];
+            [stopRouteDictionary setObject:[NSNumber numberWithBool:stopRoute.exists] forKey:@"RouteExists"];
             
             [watchedStopRouteDictionaries addObject:stopRouteDictionary];
         }
+        
+        [stopDictionary setObject:watchedStopRouteDictionaries forKey:@"StopRoutes"];
+        
+        [watchedStopDictionaries addObject:stopDictionary];
     }
     
-    [watchedStopRouteDictionaries writeToFile:watchedStopRoutesSavePath atomically:YES];
+    [watchedStopDictionaries writeToFile:watchedStopRoutesSavePath atomically:YES];
     NSLog(@"Saved!");
 }
 
@@ -92,55 +105,24 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
 - (void) refreshWatchedStopRoutes
 {    
-    if ([watchedStopRoutes countOfItems] <= 0)
+    if ([watchedStopRoutes countOfAllWatchedStopRoutes] <= 0)
     {
         return;
     }
     
-    WatchedStopRoutesCollection * refreshedStopRoutes = [[WatchedStopRoutesCollection alloc] init];
     NSError * error = nil;
     
-    int currentStopCount = 1;
+    [watchedStopRoutes refreshAndCatchError:&error];
     
-    for (NSString * stopNumber in [watchedStopRoutes stopNumbers])
+    if (error)
     {
-        for (StopRoute * oldStopRoute in [watchedStopRoutes stopRoutesWithStopNumber:stopNumber])
-        {
-            [self updateHUDWithDetailsText:[NSString stringWithFormat:@"%d of %d", currentStopCount, watchedStopRoutes.countOfItems]];
-            
-            Stop * stop = oldStopRoute.stop;
-            
-            [stop refreshAndCatchError:&error];
-            
-            if (error)
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-                [alert release];
-                break;
-            }
-            
-            for (StopRoute * newStopRoute in stop.routes.array)
-            {
-                
-                if ([oldStopRoute isEqual:newStopRoute])
-                {
-                    [refreshedStopRoutes insertStopRoute:newStopRoute];
-                }
-                
-            }
-            
-            currentStopCount++;
-        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
     }
-        
-    if (!error)
-    {
-        [watchedStopRoutes release];
-        watchedStopRoutes = refreshedStopRoutes;
-        
-        [self.stopRoutesTableView reloadData];
-    }
+    
+    [self.stopRoutesTableView reloadData];
+
 }
 
 - (void) refreshRoutes: (id) sender
@@ -152,24 +134,34 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 {    
     NSTimeInterval greatestTimeInterval = 0;
     
+    NSMutableArray * outOfDateStopNumbers = [[NSMutableArray alloc] init];
+    
     for (NSString * stopNumber in [watchedStopRoutes stopNumbers])
     {
-        for (StopRoute * stopRoute in [watchedStopRoutes stopRoutesWithStopNumber: stopNumber])
+        Stop * stop = [TranslinkStopManager getStopWithNumber:stopNumber];
+        
+        NSTimeInterval interval = -[stop.lastRefreshedDate timeIntervalSinceNow];
+        
+        if (interval > greatestTimeInterval)
+            greatestTimeInterval = interval;
+        
+        if (greatestTimeInterval >= minAgeToRefresh)
         {
-            NSTimeInterval interval = -[stopRoute.lastRefreshedDate timeIntervalSinceNow];
-            
-            if (interval > greatestTimeInterval)
-                greatestTimeInterval = interval;
-            
-            if (greatestTimeInterval >= minAgeToRefresh)
-            {
-                [self refreshRoutes:nil];
-                return;
-            }
+            [outOfDateStopNumbers addObject:stopNumber];
         }
     }
     
+    NSError * error = nil;
+
+    [watchedStopRoutes refreshStopsWithNumbers:outOfDateStopNumbers andCatchError:&error];
+    
     [self.stopRoutesTableView reloadData];
+}
+
+- (void) refreshRoutesWhenNecessaryAsync
+{
+    [[NSThread alloc] initWithTarget:self selector:@selector(refreshRoutesWhenNecessary) object:nil];
+    
 }
 
 - (void) loadDataFromSave
@@ -179,25 +171,35 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:pathToWatchedStopRoutesSaveFile])
     {
-        NSArray * watchedStopRouteDictionaries = [[NSArray alloc] initWithContentsOfFile:pathToWatchedStopRoutesSaveFile];
-        int currentStopRoute = 1;
-        for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
+        NSArray * watchedStopDictionaries = [[NSArray alloc] initWithContentsOfFile:pathToWatchedStopRoutesSaveFile];
+
+        for ( NSDictionary * stopDictionary in watchedStopDictionaries)
         {
-            NSString * savedStopID = [stopRouteDictionary objectForKey:@"StopID"];
-            NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
-            NSString * savedDirection = [stopRouteDictionary objectForKey:@"Direction"];
-            NSString * savedRouteName = [stopRouteDictionary objectForKey:@"RouteName"];
-            NSArray * savedRouteTimes = [stopRouteDictionary objectForKey:@"Times"];
-            NSDate * savedLastRefreshedDate = [stopRouteDictionary objectForKey:@"LastRefreshedDate"];
             
-            Stop * stop = [[Stop alloc] initWithAdapter: [[TranslinkAdapter alloc] init] stopId: savedStopID];
+            NSString * savedStopID = [stopDictionary objectForKey:@"StopID"];
+            NSDate * savedLastRefreshedDate = [stopDictionary objectForKey:@"LastRefreshedDate"];
+            BOOL savedStopExists = [[stopDictionary objectForKey:@"StopExists"] boolValue];
+            NSArray * watchedStopRouteDictionaries = [stopDictionary objectForKey:@"StopRoutes"];
             
-            StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:savedDirection routeID:savedRouteID routeName:savedRouteName times:savedRouteTimes lastRefreshedDate:savedLastRefreshedDate];
+            Stop * stop = [TranslinkStopManager getStopWithNumber:savedStopID lastRefreshDate:savedLastRefreshedDate exists:savedStopExists];
             
-            [self didReceiveStopRoute:stopRoute];
+            for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
+            {
+                NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
+                NSString * savedDirection = [stopRouteDictionary objectForKey:@"Direction"];
+                NSString * savedRouteName = [stopRouteDictionary objectForKey:@"RouteName"];
+                NSArray * savedRouteTimes = [stopRouteDictionary objectForKey:@"Times"];
+                BOOL savedExists = [[stopRouteDictionary objectForKey:@"RouteExists"] boolValue];
+                
+                StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:savedDirection routeID:savedRouteID routeName:savedRouteName times:savedRouteTimes exists:savedExists];
+                
+                [stop.routes addStopRoute:stopRoute];
+                
+                [self didReceiveStopRoute:stopRoute];
+            }
             
-            currentStopRoute++;
         }
+        
         NSLog(@"Loaded!");
     }
     else
@@ -218,7 +220,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshRoutesWhenNecessary) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshRoutesWhenNecessaryAsync) name:UIApplicationDidBecomeActiveNotification object:nil];
         
     [self setRefreshBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutes:)]];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = refreshBarButton;
@@ -324,9 +326,9 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     const NSInteger MIDDLE_LABEL_TAG = 1002;
 	const NSInteger BOTTOM_LABEL_TAG = 1003;
     
-    UILabel *topLabel;
-    UILabel *middleLabel;
-	UILabel *bottomLabel;
+    UILabel *routeNumberLabel;
+    UILabel *routeTimesLabel;
+	UILabel *routeNameLabel;
     
     static NSString *CellIdentifier = @"Cell";
     
@@ -346,7 +348,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 
         
         //Top Label
-        topLabel =
+        routeNumberLabel =
         [[[UILabel alloc]
           initWithFrame:
           CGRectMake(
@@ -355,16 +357,16 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
                      tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
                      TOP_LABEL_HEIGHT)]
          autorelease];
-        [cell.contentView addSubview:topLabel];
+        [cell.contentView addSubview:routeNumberLabel];
         
-        topLabel.tag = TOP_LABEL_TAG;
-        topLabel.backgroundColor = [UIColor clearColor];
-        topLabel.textColor = [UIColor whiteColor];
+        routeNumberLabel.tag = TOP_LABEL_TAG;
+        routeNumberLabel.backgroundColor = [UIColor clearColor];
+        routeNumberLabel.textColor = [UIColor whiteColor];
         //topLabel.highlightedTextColor = [UIColor blackColor];
-        topLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize] - 2];
+        routeNumberLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize] - 2];
         
         //Middle Label
-        middleLabel =
+        routeTimesLabel =
         [[[UILabel alloc]
           initWithFrame:
           CGRectMake(
@@ -373,16 +375,16 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
                      tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
                      MIDDLE_LABEL_HEIGHT)]
          autorelease];
-        [cell.contentView addSubview:middleLabel];
+        [cell.contentView addSubview:routeTimesLabel];
         
-        middleLabel.tag = MIDDLE_LABEL_TAG;
-        middleLabel.backgroundColor = [UIColor clearColor];
-        middleLabel.textColor = [UIColor whiteColor];
+        routeTimesLabel.tag = MIDDLE_LABEL_TAG;
+        routeTimesLabel.backgroundColor = [UIColor clearColor];
+        routeTimesLabel.textColor = [UIColor whiteColor];
         //middleLabel.highlightedTextColor = [UIColor blackColor];
-        middleLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 2];
+        routeTimesLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 2];
         
         //Bottom Label
-        bottomLabel =
+        routeNameLabel =
         [[[UILabel alloc]
           initWithFrame:
           CGRectMake(
@@ -391,14 +393,14 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
                      tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
                      BOTTOM_LABEL_HEIGHT)]
          autorelease];
-        [cell.contentView addSubview:bottomLabel];
+        [cell.contentView addSubview:routeNameLabel];
         
         // Bottom Label
-        bottomLabel.tag = BOTTOM_LABEL_TAG;
-        bottomLabel.backgroundColor = [UIColor clearColor];
-        bottomLabel.textColor = [UIColor lightGrayColor];
+        routeNameLabel.tag = BOTTOM_LABEL_TAG;
+        routeNameLabel.backgroundColor = [UIColor clearColor];
+        routeNameLabel.textColor = [UIColor colorWithRed:3.0/255.0 green:20.0/255.0 blue:40.0/255.0 alpha:1.0];
         //bottomLabel.highlightedTextColor = [UIColor grayColor];
-        bottomLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 5];
+        routeNameLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 5];
         
         
         //
@@ -411,30 +413,31 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     }
     else
     {
-        topLabel = (UILabel *)[cell viewWithTag:TOP_LABEL_TAG];
-		bottomLabel = (UILabel *)[cell viewWithTag:BOTTOM_LABEL_TAG];
+        routeNumberLabel = (UILabel *)[cell viewWithTag:TOP_LABEL_TAG];
+		routeNameLabel = (UILabel *)[cell viewWithTag:BOTTOM_LABEL_TAG];
     }
     
     StopRoute * stopRoute = [watchedStopRoutes stopRouteAtIndex:indexPath.row withStopIndex:indexPath.section];
     
-    topLabel.text = [stopRoute routeName];
+    routeNumberLabel.text = [stopRoute routeName];
     
     NSString * timesString = [stopRoute generateTimesString];
     if (timesString == (id)[NSNull null] || timesString.length == 0 )
     {
         timesString = @"No service at this time";
     }
-    middleLabel.text = timesString;
+    routeTimesLabel.text = timesString;
     
     NSString * lastRefreshedDateString = @"Never!";
-    if (stopRoute.lastRefreshedDate != nil)
+    if (stopRoute.stop.lastRefreshedDate != nil)
     {
-        NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] retain];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-        lastRefreshedDateString = [dateFormatter stringFromDate: stopRoute.lastRefreshedDate];
+        lastRefreshedDateString = [dateFormatter stringFromDate: stopRoute.stop.lastRefreshedDate];
+        [dateFormatter release];
     }
-    bottomLabel.text = [NSString stringWithFormat:@"Last updated: %@", lastRefreshedDateString];
+    routeNameLabel.text = [NSString stringWithFormat:@"Last updated: %@", lastRefreshedDateString];
     
     /*
     cell.textLabel.text = [stopRoute routeName];

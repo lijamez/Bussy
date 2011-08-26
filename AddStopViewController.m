@@ -10,6 +10,7 @@
 #import "MyRoutesViewController.h"
 #import "Stop.h"
 #import "StopRouteChooserViewController.h"
+#import "TranslinkStopManager.h"
 
 @implementation AddStopViewController
 
@@ -60,7 +61,7 @@ int const MAX_FIELD_CHARS = 5;
 
     NSError * error = nil;
     
-    Stop * stop = [[Stop alloc] initWithAdapter:[[TranslinkAdapter alloc] init] stopId:stopNumber];
+    Stop * stop = [TranslinkStopManager getStopWithNumber:stopNumber];
     [stop refreshAndCatchError:&error];
     
     if (error)

@@ -35,11 +35,19 @@
     return self;
 }
 
+- (void) addStopRoute: (StopRoute*) stopRoute
+{
+    if (stopRoute == nil) return;
+    if ([array containsObject:stopRoute]) return;
+    
+    [array addObject:stopRoute];
+}
+
 - (void) refreshAndCatchError: (NSError**) error
 {
     status = REFRESHING;
     
-    [array removeAllObjects];
+    NSMutableArray * remainingRoutesToRefresh = [[NSMutableArray alloc] initWithArray:array];
     
     NSString * json = [adapter requestArrivalTimesAtStop:[stop stopID] error: error];
     
@@ -58,10 +66,28 @@
             NSString * entryRouteName = [entry objectForKey:@"routeName"];
             NSArray * entryTimes = [entry objectForKey:@"times"];
             
-            StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:entryDirection routeID:entryRouteID routeName:entryRouteName times:entryTimes lastRefreshedDate:[NSDate date]];
+            //StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:entryDirection routeID:entryRouteID routeName:entryRouteName times:entryTimes exists: YES];
             
-            [array addObject:stopRoute];
+            for (StopRoute * stopRoute in array)
+            {
+                if ([stopRoute.routeID caseInsensitiveCompare: entryRouteID] == NSOrderedSame &&
+                    [stopRoute.direction caseInsensitiveCompare: entryDirection] == NSOrderedSame)
+                {
+                    stopRoute.routeName = entryRouteName;
+                    stopRoute.times = entryTimes;
+                    
+                    [remainingRoutesToRefresh removeObject:stopRoute];
+                    break;
+                }
+            }
+            
         }
+    }
+    
+    //Flag the routes that did not manage to refresh
+    for (StopRoute * invalidStopRoute in remainingRoutesToRefresh)
+    {
+        invalidStopRoute.exists = NO;
     }
     
     status = VALID;

@@ -17,7 +17,9 @@ typedef enum
 
 @interface WatchedStopRoutesCollection : NSObject
 {
-    NSMutableDictionary * routesByStopNumber;
+    NSMutableDictionary * watchedRoutesByStopNumber;
+    NSMutableSet * watchedStops;
+    
     SortMethod stopsSortMethod;
     SortMethod stopRoutesSortMethod;
 }
@@ -25,7 +27,7 @@ typedef enum
 - (NSUInteger) countOfStops;
 - (NSUInteger) countOfRoutesAtStopNumber: (NSString*) stopNumber;
 - (NSUInteger) countOfRoutesAtStopIndex: (NSUInteger) stopIndex;
-- (NSUInteger) countOfItems;
+- (NSUInteger) countOfAllWatchedStopRoutes;
 - (NSArray*) stopNumbers;
 - (StopRoute*) stopRouteAtIndex: (NSUInteger) routeIndex withStopNumber: (NSString*) stopNumber;
 - (NSArray*) stopRoutesWithStopNumber: (NSString*) stopNumber;
@@ -35,6 +37,8 @@ typedef enum
 - (void) removeStopRouteAtIndex: (NSUInteger) routeIndex withStopIndex: (NSUInteger) stopIndex;
 - (NSArray*) stopRoutesWithStopIndex: (NSUInteger) stopIndex;
 -(BOOL) containsStopRoute:(StopRoute*)stopRoute;
+- (void) refreshAndCatchError: (NSError**) error;
+- (void) refreshStopsWithNumbers: (NSArray*) numbersOfStopsToRefresh andCatchError: (NSError**) error;
 
 @property (readwrite) SortMethod stopsSortMethod;
 @property (readwrite) SortMethod stopRoutesSortMethod;

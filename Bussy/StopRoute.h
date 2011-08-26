@@ -17,19 +17,21 @@
     NSString * routeID;
     NSString * routeName;
     NSArray * times;
-    NSDate * lastRefreshedDate;
+    BOOL exists;
 }
 
--(StopRoute*) initWithStop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes lastRefreshedDate: (NSDate*) inputLastRefreshedDate;
+-(StopRoute*) initWithStop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes exists: (BOOL) inputExists;
 
-@property (readonly) NSString * routeName;
-@property (readonly) NSArray * times;
-@property (readonly) NSString * routeID;
-@property (readonly) NSString * direction;
+@property (retain) NSString * routeName;
+@property (retain) NSArray * times;
+@property (retain) NSString * routeID;
+@property (retain) NSString * direction;
 @property (readonly) Stop * stop;
-@property (readonly) NSDate * lastRefreshedDate;
+@property (readwrite) BOOL exists;
 
 - (NSString*) generateTimesString;
+- (NSComparisonResult) compareStopRouteIDAscending: (StopRoute*) otherStopRoute;
+- (NSComparisonResult) compareStopRouteIDDescending: (StopRoute*) otherStopRoute;
 
 
 @end

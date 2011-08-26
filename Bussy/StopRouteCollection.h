@@ -21,6 +21,7 @@
 
 - (StopRouteCollection*) initWithAdapter: (TranslinkAdapter*) inputAdapter stop: (Stop*) inputStop;
 - (NSArray*) array;
+- (void) addStopRoute: (StopRoute*) stopRoute;
 
 @property (readonly) Stop * stop;
 

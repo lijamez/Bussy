@@ -10,9 +10,9 @@
 #import "Stop.h"
 
 @implementation StopRoute
-@synthesize times, routeName, routeID, stop, direction, lastRefreshedDate;
+@synthesize times, routeName, routeID, stop, direction, exists;
 
--(StopRoute*) initWithStop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes lastRefreshedDate: (NSDate*) inputLastRefreshedDate
+-(StopRoute*) initWithStop: (Stop*) inputStop direction: (NSString*) inputDirection routeID: (NSString*) inputRouteID routeName: (NSString*) inputRouteName times: (NSArray*) inputTimes exists: (BOOL) inputExists
 {
     self = [super init];
     if (self)
@@ -32,8 +32,7 @@
         times = inputTimes;
         [times retain];
         
-        lastRefreshedDate = inputLastRefreshedDate;
-        [lastRefreshedDate retain];
+        exists = inputExists;
         
     }
     
@@ -55,6 +54,27 @@
     }
     
     return timesString;
+}
+
+- (NSComparisonResult) compareStopRouteIDAscending: (StopRoute*) otherStopRoute
+{
+    return [self.routeID compare: otherStopRoute.routeID];
+}
+
+- (NSComparisonResult) compareStopRouteIDDescending: (StopRoute*) otherStopRoute
+{
+    NSComparisonResult result = [self.routeID compare: otherStopRoute.routeID];
+    
+    if (result == NSOrderedAscending)
+    {
+        return NSOrderedDescending;
+    }
+    else if (result == NSOrderedDescending)
+    {
+        return NSOrderedAscending;
+    }
+    
+    return NSOrderedSame;
 }
 
 - (BOOL) isEqual:(id)object
@@ -91,7 +111,7 @@
     [routeID release];
     [routeName release];
     [times release];
-    [lastRefreshedDate release];
+    
     [super dealloc];
 }
 

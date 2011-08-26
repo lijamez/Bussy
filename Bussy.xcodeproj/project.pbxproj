@@ -20,10 +20,11 @@
 		A01AFFB91400DD4D00C2A0B2 /* topAndBottomRow.png in Resources */ = {isa = PBXBuildFile; fileRef = A01AFFB71400DD4D00C2A0B2 /* topAndBottomRow.png */; };
 		A01AFFBC1400DE0100C2A0B2 /* topAndBottomRowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = A01AFFBB1400DE0100C2A0B2 /* topAndBottomRowSelected.png */; };
 		A01AFFC61400E1D800C2A0B2 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = A01AFFC51400E1D800C2A0B2 /* Background.png */; };
-		A01AFFCC1400E67600C2A0B2 /* SectionHeaderBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A01AFFCB1400E67600C2A0B2 /* SectionHeaderBackground.png */; };
 		A01AFFCF1400E7B400C2A0B2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A01AFFCD1400E7B400C2A0B2 /* Default.png */; };
 		A01AFFD01400E7B400C2A0B2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A01AFFCE1400E7B400C2A0B2 /* Default@2x.png */; };
 		A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */ = {isa = PBXBuildFile; fileRef = A02B3E5C13BD83E7009FCCE3 /* Stop.m */; };
+		A04611F2140766D8004B8214 /* SectionHeaderStripes.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611F0140766D8004B8214 /* SectionHeaderStripes.png */; };
+		A04611F3140766D8004B8214 /* SectionHeaderBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611F1140766D8004B8214 /* SectionHeaderBackground.png */; };
 		A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */; };
 		A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
@@ -59,6 +60,7 @@
 		A07FE81A13EBCFFB00567B09 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A07FE80F13EBCFFB00567B09 /* SBJsonWriter.m */; };
 		A080847013C56B7D00DEC160 /* StopRouteChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */; };
 		A080847113C56B7D00DEC160 /* StopRouteChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */; };
+		A0A938B91404D10A0094206E /* TranslinkStopManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A938B81404D10A0094206E /* TranslinkStopManager.m */; };
 		A0B2353F13F751E400018A59 /* TranslinkColors.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B2353E13F751E400018A59 /* TranslinkColors.m */; };
 		A0B2354713F7643600018A59 /* indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B2354613F7643600018A59 /* indicator.png */; };
 		A0BEB29813C8634300F5F29F /* WatchedStopRoutesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEB29713C8634300F5F29F /* WatchedStopRoutesCollection.m */; };
@@ -98,11 +100,12 @@
 		A01AFFB71400DD4D00C2A0B2 /* topAndBottomRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRow.png; sourceTree = "<group>"; };
 		A01AFFBB1400DE0100C2A0B2 /* topAndBottomRowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRowSelected.png; sourceTree = "<group>"; };
 		A01AFFC51400E1D800C2A0B2 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
-		A01AFFCB1400E67600C2A0B2 /* SectionHeaderBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SectionHeaderBackground.png; sourceTree = "<group>"; };
 		A01AFFCD1400E7B400C2A0B2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A01AFFCE1400E7B400C2A0B2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		A02B3E5B13BD83E7009FCCE3 /* Stop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stop.h; sourceTree = "<group>"; };
 		A02B3E5C13BD83E7009FCCE3 /* Stop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stop.m; sourceTree = "<group>"; };
+		A04611F0140766D8004B8214 /* SectionHeaderStripes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SectionHeaderStripes.png; sourceTree = "<group>"; };
+		A04611F1140766D8004B8214 /* SectionHeaderBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SectionHeaderBackground.png; sourceTree = "<group>"; };
 		A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteDetailsViewController.h; sourceTree = "<group>"; };
 		A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteDetailsViewController.m; sourceTree = "<group>"; };
 		A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 		A080846D13C56B7D00DEC160 /* StopRouteChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteChooserViewController.h; sourceTree = "<group>"; };
 		A080846E13C56B7D00DEC160 /* StopRouteChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteChooserViewController.m; sourceTree = "<group>"; };
 		A080846F13C56B7D00DEC160 /* StopRouteChooserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteChooserViewController.xib; sourceTree = "<group>"; };
+		A0A938B71404D10A0094206E /* TranslinkStopManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslinkStopManager.h; sourceTree = "<group>"; };
+		A0A938B81404D10A0094206E /* TranslinkStopManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslinkStopManager.m; sourceTree = "<group>"; };
 		A0B2353D13F751E400018A59 /* TranslinkColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslinkColors.h; sourceTree = "<group>"; };
 		A0B2353E13F751E400018A59 /* TranslinkColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslinkColors.m; sourceTree = "<group>"; };
 		A0B2354613F7643600018A59 /* indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = indicator.png; sourceTree = "<group>"; };
@@ -381,6 +386,8 @@
 				A0E61DFE1401616000D8AAB1 /* AbstractTranslinkObject.m */,
 				A0DFBD1A140372F0004AB22B /* BussyConstants.h */,
 				A0DFBD1B140372F0004AB22B /* BussyConstants.m */,
+				A0A938B71404D10A0094206E /* TranslinkStopManager.h */,
+				A0A938B81404D10A0094206E /* TranslinkStopManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -397,7 +404,8 @@
 		A0B3621413F71A940032F8B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				A01AFFCB1400E67600C2A0B2 /* SectionHeaderBackground.png */,
+				A04611F0140766D8004B8214 /* SectionHeaderStripes.png */,
+				A04611F1140766D8004B8214 /* SectionHeaderBackground.png */,
 				A01AFFC51400E1D800C2A0B2 /* Background.png */,
 				A01AFFBB1400DE0100C2A0B2 /* topAndBottomRowSelected.png */,
 				A01AFFB71400DD4D00C2A0B2 /* topAndBottomRow.png */,
@@ -522,9 +530,10 @@
 				A01AFFB91400DD4D00C2A0B2 /* topAndBottomRow.png in Resources */,
 				A01AFFBC1400DE0100C2A0B2 /* topAndBottomRowSelected.png in Resources */,
 				A01AFFC61400E1D800C2A0B2 /* Background.png in Resources */,
-				A01AFFCC1400E67600C2A0B2 /* SectionHeaderBackground.png in Resources */,
 				A01AFFCF1400E7B400C2A0B2 /* Default.png in Resources */,
 				A01AFFD01400E7B400C2A0B2 /* Default@2x.png in Resources */,
+				A04611F2140766D8004B8214 /* SectionHeaderStripes.png in Resources */,
+				A04611F3140766D8004B8214 /* SectionHeaderBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +598,7 @@
 				A009DFFD14007D19006E1976 /* BussyTableHeaderView.m in Sources */,
 				A0E61DFF1401616000D8AAB1 /* AbstractTranslinkObject.m in Sources */,
 				A0DFBD1C140372F0004AB22B /* BussyConstants.m in Sources */,
+				A0A938B91404D10A0094206E /* TranslinkStopManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
