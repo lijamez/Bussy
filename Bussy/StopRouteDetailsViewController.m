@@ -11,7 +11,7 @@
 
 @implementation StopRouteDetailsViewController
 
-@synthesize stopRouteNameLabel, stopNumberLabel, directionLabel, timesTableView, lastRefreshedLabel, exportBarButton, noServiceLabel;
+@synthesize stopRouteNumberLabel, stopRouteNameLabel, stopNumberLabel, directionLabel, timesTableView, lastRefreshedLabel, exportBarButton, noServiceLabel;
 @synthesize stopRoute;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -119,8 +119,8 @@
     [self setExportBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet)]];
     self.navigationItem.rightBarButtonItem = exportBarButton;
     
-    
-    stopRouteNameLabel.text = stopRoute.routeName;
+    stopRouteNumberLabel.text = stopRoute.routeID;
+    stopRouteNameLabel.text = [stopRoute displayRouteName];
     stopNumberLabel.text = [NSString stringWithFormat:@"Stop Number: %@", stopRoute.stop.stopID];
     directionLabel.text = [NSString stringWithFormat:@"Direction: %@", stopRoute.direction];
     

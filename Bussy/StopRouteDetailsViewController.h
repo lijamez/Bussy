@@ -11,6 +11,7 @@
 
 @interface StopRouteDetailsViewController : UIViewController<UIActionSheetDelegate>
 {
+    UILabel * stopRouteNumberLabel;
     UILabel * stopRouteNameLabel;
     UILabel * stopNumberLabel;
     UILabel * directionLabel;
@@ -23,6 +24,7 @@
 }
 
 @property (nonatomic, retain) UIBarButtonItem * exportBarButton;
+@property (nonatomic, retain) IBOutlet UILabel * stopRouteNumberLabel;
 @property (nonatomic, retain) IBOutlet UILabel * stopRouteNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel * stopNumberLabel;
 @property (nonatomic, retain) IBOutlet UILabel * directionLabel;

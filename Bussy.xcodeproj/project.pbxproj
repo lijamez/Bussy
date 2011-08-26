@@ -24,7 +24,7 @@
 		A04611F2140766D8004B8214 /* SectionHeaderStripes.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611F0140766D8004B8214 /* SectionHeaderStripes.png */; };
 		A04611F3140766D8004B8214 /* SectionHeaderBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611F1140766D8004B8214 /* SectionHeaderBackground.png */; };
 		A04611F614077B5E004B8214 /* topAndBottomRow.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611F414077B5E004B8214 /* topAndBottomRow.png */; };
-		A04611F714077B5E004B8214 /* topAndBottomRowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611F514077B5E004B8214 /* topAndBottomRowSelected.png */; };
+		A04611FB14078546004B8214 /* topAndBottomRowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611FA14078546004B8214 /* topAndBottomRowSelected.png */; };
 		A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */; };
 		A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
@@ -105,7 +105,7 @@
 		A04611F0140766D8004B8214 /* SectionHeaderStripes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SectionHeaderStripes.png; sourceTree = "<group>"; };
 		A04611F1140766D8004B8214 /* SectionHeaderBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SectionHeaderBackground.png; sourceTree = "<group>"; };
 		A04611F414077B5E004B8214 /* topAndBottomRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRow.png; sourceTree = "<group>"; };
-		A04611F514077B5E004B8214 /* topAndBottomRowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRowSelected.png; sourceTree = "<group>"; };
+		A04611FA14078546004B8214 /* topAndBottomRowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRowSelected.png; sourceTree = "<group>"; };
 		A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteDetailsViewController.h; sourceTree = "<group>"; };
 		A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteDetailsViewController.m; sourceTree = "<group>"; };
 		A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
@@ -404,8 +404,8 @@
 		A0B3621413F71A940032F8B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A04611FA14078546004B8214 /* topAndBottomRowSelected.png */,
 				A04611F414077B5E004B8214 /* topAndBottomRow.png */,
-				A04611F514077B5E004B8214 /* topAndBottomRowSelected.png */,
 				A04611F0140766D8004B8214 /* SectionHeaderStripes.png */,
 				A04611F1140766D8004B8214 /* SectionHeaderBackground.png */,
 				A01AFFC51400E1D800C2A0B2 /* Background.png */,
@@ -533,7 +533,7 @@
 				A04611F2140766D8004B8214 /* SectionHeaderStripes.png in Resources */,
 				A04611F3140766D8004B8214 /* SectionHeaderBackground.png in Resources */,
 				A04611F614077B5E004B8214 /* topAndBottomRow.png in Resources */,
-				A04611F714077B5E004B8214 /* topAndBottomRowSelected.png in Resources */,
+				A04611FB14078546004B8214 /* topAndBottomRowSelected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
