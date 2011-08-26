@@ -21,7 +21,7 @@
 
 @synthesize addBarButton, refreshBarButton, watchedStopRoutes, imageView, stopRoutesTableView, noRoutesLabel;
 
-CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
+CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 
 //Override
 - (UIView*) HUDParentView
@@ -274,8 +274,24 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 {
     if (section >= [[watchedStopRoutes stopNumbers] count]) return nil;
     
+    Stop * stop = [TranslinkStopManager getStopWithNumber:[[watchedStopRoutes stopNumbers] objectAtIndex: section ]];
+    
     BussyTableHeaderView * headerView = [[BussyTableHeaderView alloc] init];
-    headerView.headerLabel.text =  [NSString stringWithFormat:@"Stop# %@", [[watchedStopRoutes stopNumbers] objectAtIndex:section]];
+    headerView.headerLabel.text = [NSString stringWithFormat:@"Stop# %@", stop.stopID];
+    
+    
+     NSString * lastRefreshedDateString = @"Never!";
+     if (stop.lastRefreshedDate != nil)
+     {
+         NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] retain];
+         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+         lastRefreshedDateString = [dateFormatter stringFromDate: stop.lastRefreshedDate];
+         [dateFormatter release];
+     }     
+    
+    headerView.subtitleLabel.text = [NSString stringWithFormat:@"Updated: %@", lastRefreshedDateString];
+    
     
     return headerView;
 }
@@ -322,9 +338,9 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    const NSInteger TOP_LABEL_TAG = 1001;
-    const NSInteger MIDDLE_LABEL_TAG = 1002;
-	const NSInteger BOTTOM_LABEL_TAG = 1003;
+    const NSInteger ROUTE_NUMBER_LABEL_TAG = 1001;
+    const NSInteger ROUTE_TIMES_LABEL_TAG = 1002;
+	const NSInteger ROUTE_NAME_LABEL_TAG = 1003;
     
     UILabel *routeNumberLabel;
     UILabel *routeTimesLabel;
@@ -342,65 +358,66 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
                                initWithImage:indicatorImage]
                               autorelease];
         
-        const CGFloat TOP_LABEL_HEIGHT = 20;
-        const CGFloat MIDDLE_LABEL_HEIGHT = 20;
-        const CGFloat BOTTOM_LABEL_HEIGHT = 15;
+        const CGFloat ROUTE_NUMBER_LABEL_HEIGHT = 26;
+        const CGFloat ROUTE_NUMBER_LABEL_WIDTH = 48;
+        const CGFloat ROUTE_TIMES_LABEL_HEIGHT = 20;
+        const CGFloat ROUTE_NAME_LABEL_HEIGHT = 22;
 
         
-        //Top Label
+        //Route Number Label
         routeNumberLabel =
         [[[UILabel alloc]
           initWithFrame:
           CGRectMake(
                      2.0 * cell.indentationWidth,
-                     0.5 * (tableView.rowHeight - TOP_LABEL_HEIGHT - MIDDLE_LABEL_HEIGHT - BOTTOM_LABEL_HEIGHT),
-                     tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
-                     TOP_LABEL_HEIGHT)]
+                     tableView.rowHeight * 0.5 - ROUTE_NUMBER_LABEL_HEIGHT,
+                     ROUTE_NUMBER_LABEL_WIDTH,
+                     ROUTE_NUMBER_LABEL_HEIGHT)]
          autorelease];
         [cell.contentView addSubview:routeNumberLabel];
         
-        routeNumberLabel.tag = TOP_LABEL_TAG;
+        routeNumberLabel.tag = ROUTE_NUMBER_LABEL_TAG;
         routeNumberLabel.backgroundColor = [UIColor clearColor];
         routeNumberLabel.textColor = [UIColor whiteColor];
-        //topLabel.highlightedTextColor = [UIColor blackColor];
-        routeNumberLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize] - 2];
+        routeNumberLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]+6];
         
-        //Middle Label
+        //Route Times Label
         routeTimesLabel =
         [[[UILabel alloc]
           initWithFrame:
           CGRectMake(
-                     2.0 * cell.indentationWidth,
-                     0.5 * (tableView.rowHeight - TOP_LABEL_HEIGHT - MIDDLE_LABEL_HEIGHT - BOTTOM_LABEL_HEIGHT) + TOP_LABEL_HEIGHT,
-                     tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
-                     MIDDLE_LABEL_HEIGHT)]
+                     2.0 * cell.indentationWidth + ROUTE_NUMBER_LABEL_WIDTH + cell.indentationWidth,
+                     tableView.rowHeight * 0.5 - ROUTE_TIMES_LABEL_HEIGHT,
+                     tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width - ROUTE_NUMBER_LABEL_WIDTH - cell.indentationWidth,
+                     ROUTE_TIMES_LABEL_HEIGHT)]
          autorelease];
         [cell.contentView addSubview:routeTimesLabel];
         
-        routeTimesLabel.tag = MIDDLE_LABEL_TAG;
+        routeTimesLabel.tag = ROUTE_TIMES_LABEL_TAG;
         routeTimesLabel.backgroundColor = [UIColor clearColor];
         routeTimesLabel.textColor = [UIColor whiteColor];
         //middleLabel.highlightedTextColor = [UIColor blackColor];
-        routeTimesLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 2];
+        routeTimesLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize]-2];
         
-        //Bottom Label
+        //Route Name Label
         routeNameLabel =
         [[[UILabel alloc]
           initWithFrame:
           CGRectMake(
                      2.0 * cell.indentationWidth,
-                     0.5 * (tableView.rowHeight - TOP_LABEL_HEIGHT - MIDDLE_LABEL_HEIGHT - BOTTOM_LABEL_HEIGHT) + TOP_LABEL_HEIGHT + MIDDLE_LABEL_HEIGHT,
+                     0.5 * (tableView.rowHeight),
                      tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
-                     BOTTOM_LABEL_HEIGHT)]
+                     ROUTE_NAME_LABEL_HEIGHT)]
          autorelease];
         [cell.contentView addSubview:routeNameLabel];
         
         // Bottom Label
-        routeNameLabel.tag = BOTTOM_LABEL_TAG;
+        routeNameLabel.tag = ROUTE_NAME_LABEL_TAG;
         routeNameLabel.backgroundColor = [UIColor clearColor];
-        routeNameLabel.textColor = [UIColor colorWithRed:3.0/255.0 green:20.0/255.0 blue:40.0/255.0 alpha:1.0];
+        routeNameLabel.textColor = [UIColor colorWithRed:213.0/255.0 green:235.0/255.0 blue:253.0/255.0 alpha:1.0];
         //bottomLabel.highlightedTextColor = [UIColor grayColor];
-        routeNameLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize] - 5];
+        [routeNameLabel setAdjustsFontSizeToFitWidth:NO];
+        routeNameLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]-4];
         
         
         //
@@ -413,13 +430,13 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     }
     else
     {
-        routeNumberLabel = (UILabel *)[cell viewWithTag:TOP_LABEL_TAG];
-		routeNameLabel = (UILabel *)[cell viewWithTag:BOTTOM_LABEL_TAG];
+        routeNumberLabel = (UILabel *)[cell viewWithTag:ROUTE_NUMBER_LABEL_TAG];
+		routeNameLabel = (UILabel *)[cell viewWithTag:ROUTE_NAME_LABEL_TAG];
     }
     
     StopRoute * stopRoute = [watchedStopRoutes stopRouteAtIndex:indexPath.row withStopIndex:indexPath.section];
     
-    routeNumberLabel.text = [stopRoute routeName];
+    routeNumberLabel.text = [stopRoute routeID];
     
     NSString * timesString = [stopRoute generateTimesString];
     if (timesString == (id)[NSNull null] || timesString.length == 0 )
@@ -428,28 +445,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 100;
     }
     routeTimesLabel.text = timesString;
     
-    NSString * lastRefreshedDateString = @"Never!";
-    if (stopRoute.stop.lastRefreshedDate != nil)
-    {
-        NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] retain];
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-        lastRefreshedDateString = [dateFormatter stringFromDate: stopRoute.stop.lastRefreshedDate];
-        [dateFormatter release];
-    }
-    routeNameLabel.text = [NSString stringWithFormat:@"Last updated: %@", lastRefreshedDateString];
-    
-    /*
-    cell.textLabel.text = [stopRoute routeName];
-    cell.detailTextLabel.numberOfLines = 2;
-    
-    NSString * stopNumberLine = [NSString stringWithFormat:@"Stop Number: %@", [[stopRoute stop] stopID]];
-    NSString * routeTimesLine = [stopRoute generateTimesString];
-    
-    NSString * details = [NSString stringWithFormat:@"%@\n%@", stopNumberLine, routeTimesLine];
-    cell.detailTextLabel.text = details;
-*/
-    
+    routeNameLabel.text = [stopRoute displayRouteName];
     
     //Set the background
 	UIImage *rowBackground;

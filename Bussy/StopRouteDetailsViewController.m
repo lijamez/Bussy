@@ -11,7 +11,7 @@
 
 @implementation StopRouteDetailsViewController
 
-@synthesize stopRouteNameLabel, stopNumberLabel, timesTableView, lastRefreshedLabel, exportBarButton, noServiceLabel;
+@synthesize stopRouteNameLabel, stopNumberLabel, directionLabel, timesTableView, lastRefreshedLabel, exportBarButton, noServiceLabel;
 @synthesize stopRoute;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -122,6 +122,7 @@
     
     stopRouteNameLabel.text = stopRoute.routeName;
     stopNumberLabel.text = [NSString stringWithFormat:@"Stop Number: %@", stopRoute.stop.stopID];
+    directionLabel.text = [NSString stringWithFormat:@"Direction: %@", stopRoute.direction];
     
     NSString * lastRefreshedString = @"Never";
     if (stopRoute.stop.lastRefreshedDate != nil)

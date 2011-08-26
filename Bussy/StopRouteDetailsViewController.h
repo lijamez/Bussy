@@ -13,6 +13,7 @@
 {
     UILabel * stopRouteNameLabel;
     UILabel * stopNumberLabel;
+    UILabel * directionLabel;
     UILabel * lastRefreshedLabel;
     UITableView * timesTableView;
     UIBarButtonItem * exportBarButton;
@@ -24,6 +25,7 @@
 @property (nonatomic, retain) UIBarButtonItem * exportBarButton;
 @property (nonatomic, retain) IBOutlet UILabel * stopRouteNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel * stopNumberLabel;
+@property (nonatomic, retain) IBOutlet UILabel * directionLabel;
 @property (nonatomic, retain) IBOutlet UILabel * lastRefreshedLabel;
 @property (nonatomic, retain) IBOutlet UITableView * timesTableView;
 @property (nonatomic, retain) IBOutlet UILabel * noServiceLabel;

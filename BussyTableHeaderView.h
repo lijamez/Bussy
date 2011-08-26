@@ -11,8 +11,11 @@
 @interface BussyTableHeaderView : UIView {
     
     UILabel * headerLabel;
+    UILabel * subtitleLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel * headerLabel;
+@property (nonatomic, retain) IBOutlet UILabel * subtitleLabel;
+
 
 @end

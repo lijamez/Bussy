@@ -56,6 +56,31 @@
     return timesString;
 }
 
+- (NSString*) displayRouteName
+{
+    if (routeName == nil) return nil;
+    
+    //Make sure that the hyphen is at the beginning so we can chop off the route number
+    NSUInteger threshold = 5;
+    
+    NSRange rangeOfHyphen = [routeName rangeOfString:@"-"];
+    
+    if (rangeOfHyphen.location == NSNotFound || rangeOfHyphen.location > threshold)
+    {
+        return routeName;
+    }
+
+
+    if (rangeOfHyphen.location+1 >= [routeName length])
+    {
+        //Weird case... so be safe and just return the original route name
+        return routeName;
+    }
+        
+    NSString * displayRouteName = [routeName substringFromIndex:rangeOfHyphen.location+1];
+    return [displayRouteName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
 - (NSComparisonResult) compareStopRouteIDAscending: (StopRoute*) otherStopRoute
 {
     return [self.routeID compare: otherStopRoute.routeID];

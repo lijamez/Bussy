@@ -30,6 +30,7 @@
 @property (readwrite) BOOL exists;
 
 - (NSString*) generateTimesString;
+- (NSString*) displayRouteName;
 - (NSComparisonResult) compareStopRouteIDAscending: (StopRoute*) otherStopRoute;
 - (NSComparisonResult) compareStopRouteIDDescending: (StopRoute*) otherStopRoute;
 

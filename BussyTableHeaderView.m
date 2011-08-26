@@ -10,7 +10,7 @@
 
 @implementation BussyTableHeaderView
 
-@synthesize headerLabel;
+@synthesize headerLabel, subtitleLabel;
 
 - (id)initWithFrame:(CGRect)frame
 {
