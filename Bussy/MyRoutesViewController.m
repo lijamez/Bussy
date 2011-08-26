@@ -88,7 +88,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Hey!" message:@"This route has already been added." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ಠ_ಠ" message:@"This route has already been added." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         [alert release];
     }

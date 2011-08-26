@@ -47,7 +47,7 @@
 {
     status = REFRESHING;
     
-    NSMutableArray * remainingRoutesToRefresh = [[NSMutableArray alloc] initWithArray:array];
+    NSMutableArray * existingRoutesToRefresh = [[NSMutableArray alloc] initWithArray:array];
     
     NSString * json = [adapter requestArrivalTimesAtStop:[stop stopID] error: error];
     
@@ -68,6 +68,8 @@
             
             //StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:entryDirection routeID:entryRouteID routeName:entryRouteName times:entryTimes exists: YES];
             
+            BOOL updatedExistingRoute = NO;
+            
             for (StopRoute * stopRoute in array)
             {
                 if ([stopRoute.routeID caseInsensitiveCompare: entryRouteID] == NSOrderedSame &&
@@ -76,16 +78,23 @@
                     stopRoute.routeName = entryRouteName;
                     stopRoute.times = entryTimes;
                     
-                    [remainingRoutesToRefresh removeObject:stopRoute];
+                    [existingRoutesToRefresh removeObject:stopRoute];
+                    updatedExistingRoute = YES;
                     break;
                 }
+            }
+            
+            if (!updatedExistingRoute)
+            {
+                StopRoute * stopRoute = [[StopRoute alloc] initWithStop:self.stop direction:entryDirection routeID:entryRouteID routeName:entryRouteName times:entryTimes exists:YES];
+                [array addObject:stopRoute];
             }
             
         }
     }
     
     //Flag the routes that did not manage to refresh
-    for (StopRoute * invalidStopRoute in remainingRoutesToRefresh)
+    for (StopRoute * invalidStopRoute in existingRoutesToRefresh)
     {
         invalidStopRoute.exists = NO;
     }

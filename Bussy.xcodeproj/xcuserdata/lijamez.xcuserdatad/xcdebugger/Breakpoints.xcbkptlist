@@ -1001,11 +1001,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteCollection.m"
-         timestampString = "336026843.422605"
+         timestampString = "336036492.261297"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
          landmarkName = "-refreshAndCatchError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1021,6 +1021,20 @@
          startingLineNumber = "196"
          endingLineNumber = "196"
          landmarkName = "-loadDataFromSave"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "AddStopViewController.m"
+         timestampString = "336036016.227746"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
+         landmarkName = "-processStopNumber:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
