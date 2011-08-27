@@ -61,7 +61,6 @@
     HUD.detailsLabelText = detailsText;
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.

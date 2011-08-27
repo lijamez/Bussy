@@ -27,8 +27,6 @@
     UIImageView * imageView;
     UITableView * stopRoutesTableView;
     UILabel * noRoutesLabel;
-    
-    NSTimeInterval minAgeToRefresh;
 }
 
 @property (nonatomic, retain) UIBarButtonItem * addBarButton;
@@ -42,6 +40,8 @@
 - (IBAction)	addWatchedStopRoute:		(id) sender;
 - (void) loadDataFromSave;
 - (void) refreshRoutesWhenNecessary;
+- (void) refreshRoutesWhenNecessaryAsync;
+-(void) receiveNotificationRefreshStatusUpdate: (NSNotification*) notification;
 
 - (void) save;
 

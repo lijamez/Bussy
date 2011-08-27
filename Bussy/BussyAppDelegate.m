@@ -29,6 +29,8 @@
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
+    [[NSNotificationCenter defaultCenter] addObserver:rootViewController selector:@selector(refreshRoutesWhenNecessaryAsync) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
     return YES;		
 }
 

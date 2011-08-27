@@ -77,7 +77,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     
     [watchedStopDictionaries writeToFile:watchedStopRoutesSavePath atomically:YES];
     NSLog(@"Saved!");
-}
+;}
 
 - (void) didReceiveStopRoute: (StopRoute*) newStopRoute
 {
@@ -101,7 +101,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     UINavigationController * addStopRouteNavigationController = [[UINavigationController alloc] initWithRootViewController:addStopView];
     addStopRouteNavigationController.navigationBar.tintColor = [TranslinkColors GetTranslinkBlue];
     [self presentModalViewController:addStopRouteNavigationController animated:YES];
-}
+;}
 
 - (void) refreshWatchedStopRoutes
 {    
@@ -125,12 +125,34 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 
 }
 
-- (void) refreshRoutes: (id) sender
+-(void) refreshStopsWithNumbers: (NSArray*) outdatedStopNumbers
+{
+    if ([watchedStopRoutes countOfAllWatchedStopRoutes] <= 0)
+    {
+        return;
+    }
+    
+    NSError * error = nil;
+    
+    [watchedStopRoutes refreshStopsWithNumbers:outdatedStopNumbers andCatchError:&error];
+    
+    if (error)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    
+    [self.stopRoutesTableView reloadData];
+
+}
+
+- (void) refreshRoutesButtonWasTapped: (id) sender
 {    
     [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:@"Refreshing Routes" DimBackground:NO animated:YES onTarget:self withObject:nil];
 }
 
-- (void) refreshRoutesWhenNecessary
+- (NSArray*) getOutdatedStopNumbers
 {    
     NSTimeInterval greatestTimeInterval = 0;
     
@@ -145,23 +167,32 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
         if (interval > greatestTimeInterval)
             greatestTimeInterval = interval;
         
-        if (greatestTimeInterval >= minAgeToRefresh)
+        if (greatestTimeInterval >= DEFAULT_MIN_AGE_FOR_AUTO_REFRESH_IN_SECS)
         {
             [outOfDateStopNumbers addObject:stopNumber];
         }
     }
     
-    NSError * error = nil;
-
-    [watchedStopRoutes refreshStopsWithNumbers:outOfDateStopNumbers andCatchError:&error];
-    
-    [self.stopRoutesTableView reloadData];
+    return [[NSArray alloc] initWithArray:outOfDateStopNumbers];
 }
 
 - (void) refreshRoutesWhenNecessaryAsync
 {
-    [[NSThread alloc] initWithTarget:self selector:@selector(refreshRoutesWhenNecessary) object:nil];
+    NSArray * outdatedStopNumbers = [self getOutdatedStopNumbers];
+
+    if (outdatedStopNumbers.count > 0)
+    {
+        [self showHUDWithSelector:@selector(refreshStopsWithNumbers:) mode:MBProgressHUDModeIndeterminate text:@"Refreshing Routes" DimBackground:NO animated:YES onTarget:self withObject:outdatedStopNumbers];
+    }
     
+}
+
+-(void) receiveNotificationRefreshStatusUpdate: (NSNotification*) notification
+{
+    NSDictionary * userInfo = notification.userInfo;
+    NSString * message = [NSString stringWithFormat:@"%@ of %@", [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_CURRENT_COUNT], [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_TOTAL_COUNT]];
+    
+    [self updateHUDWithDetailsText: message];
 }
 
 - (void) loadDataFromSave
@@ -210,9 +241,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     
     [self.stopRoutesTableView reloadData];
     
-    //Load Settings 
-    //TODO Dynamically set these values when a settings view is implemented
-    minAgeToRefresh = DEFAULT_MIN_AGE_FOR_AUTO_REFRESH_IN_SECS;
 
 }
 
@@ -220,9 +248,9 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshRoutesWhenNecessaryAsync) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotificationRefreshStatusUpdate:) name:REFRESH_NOTIFICATION_UPDATE_NAME object:nil];
         
-    [self setRefreshBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutes:)]];
+    [self setRefreshBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutesButtonWasTapped:)]];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = refreshBarButton;
     
     [self setAddBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWatchedStopRoute:)]];

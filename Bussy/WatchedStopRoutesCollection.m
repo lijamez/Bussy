@@ -9,6 +9,7 @@
 #import "WatchedStopRoutesCollection.h"
 #import "StopRoute.h"
 #import "Stop.h"
+#import "BussyConstants.h"
 
 @implementation WatchedStopRoutesCollection
 
@@ -242,13 +243,28 @@
     return NO;
 }
 
+- (NSDictionary*) makeUserInfoWithCurrentStopCount: (NSString*) currentStopCount andTotal: (NSString*) totalStopCount
+{
+    NSMutableDictionary * userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setObject:currentStopCount forKey:REFRESH_NOTIFICATION_USERINFO_CURRENT_COUNT];
+    [userInfo setObject:totalStopCount forKey:REFRESH_NOTIFICATION_USERINFO_TOTAL_COUNT];
+    
+    return userInfo;
+}
+
 - (void) refreshStopsWithNumbers: (NSArray*) numbersOfStopsToRefresh andCatchError: (NSError**) error
 {
     if (numbersOfStopsToRefresh == nil) return;
         
+    NSUInteger currentCount = 0;
     
     for (NSString * stopNumber in numbersOfStopsToRefresh)
     {
+        currentCount++;
+        
+        NSDictionary * userInfo = [self makeUserInfoWithCurrentStopCount:[NSString stringWithFormat:@"%d",currentCount] andTotal:[NSString stringWithFormat:@"%d", numbersOfStopsToRefresh.count]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_NAME object:self userInfo: userInfo];
+        
         Stop * stop = [self getStopByNumber:stopNumber];
 
         [stop refreshAndCatchError:error];
