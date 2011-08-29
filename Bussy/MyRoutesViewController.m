@@ -56,7 +56,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
         
         NSMutableArray * watchedStopRouteDictionaries = [[[NSMutableArray alloc] init] autorelease]; 
         
-        for (StopRoute * stopRoute in [watchedStopRoutes stopRoutesWithStopNumber:stopNumber])
+        NSArray * stopRoutes = [watchedStopRoutes stopRoutesWithStopNumber:stopNumber];
+        for (StopRoute * stopRoute in stopRoutes)
         {
             
             NSMutableDictionary * stopRouteDictionary = [[NSMutableDictionary alloc] init];
@@ -69,6 +70,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
             
             [watchedStopRouteDictionaries addObject:stopRouteDictionary];
         }
+        [stopRoutes release];
         
         [stopDictionary setObject:watchedStopRouteDictionaries forKey:@"StopRoutes"];
         
@@ -79,19 +81,28 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     NSLog(@"Saved!");
 ;}
 
+- (void) insertStopRoute: (StopRoute*) stopRoute
+{
+    if ([watchedStopRoutes containsStopRoute:stopRoute]) return;
+    
+    [watchedStopRoutes insertStopRoute:stopRoute];
+    [self.stopRoutesTableView reloadData];
+}
+
 - (void) didReceiveStopRoute: (StopRoute*) newStopRoute
 {
     if (![watchedStopRoutes containsStopRoute:newStopRoute])
     {
-        [watchedStopRoutes insertStopRoute:newStopRoute];
-        [self.stopRoutesTableView reloadData];
+        [self insertStopRoute:newStopRoute];
+        [self showHUDWithCompletionMessage:@"Route Added" details:@"" type: HUD_TYPE_SUCCESS target:self];
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ಠ_ಠ" message:@"This route has already been added." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
+        [self showHUDWithCompletionMessage:@"Route Already Added" details:@"" type: HUD_TYPE_WARNING target:self];
     }
+    
+    NSIndexPath * indexPath = [watchedStopRoutes getIndexPathForStopRoute:newStopRoute];
+    [self.stopRoutesTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (IBAction) addWatchedStopRoute: (id) sender
@@ -105,14 +116,20 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 
 - (void) refreshWatchedStopRoutes
 {    
-    if ([watchedStopRoutes countOfAllWatchedStopRoutes] <= 0)
-    {
-        return;
-    }
+    if ([watchedStopRoutes countOfAllWatchedStopRoutes] <= 0) return;
+    if ([watchedStopRoutes isRefreshing]) return;
+    
+    UIBackgroundTaskIdentifier bti = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [watchedStopRoutes requestCancel]; 
+    }];
+    
     
     NSError * error = nil;
     
     [watchedStopRoutes refreshAndCatchError:&error];
+    
+    [[UIApplication sharedApplication] endBackgroundTask:bti]; 
+
     
     if (error)
     {
@@ -127,14 +144,19 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 
 -(void) refreshStopsWithNumbers: (NSArray*) outdatedStopNumbers
 {
-    if ([watchedStopRoutes countOfAllWatchedStopRoutes] <= 0)
-    {
-        return;
-    }
+    if ([watchedStopRoutes countOfAllWatchedStopRoutes] <= 0) return;
+    if ([watchedStopRoutes isRefreshing]) return;
+    
+    
+    UIBackgroundTaskIdentifier bti = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [watchedStopRoutes requestCancel]; 
+    }];
     
     NSError * error = nil;
     
     [watchedStopRoutes refreshStopsWithNumbers:outdatedStopNumbers andCatchError:&error];
+    
+    [[UIApplication sharedApplication] endBackgroundTask:bti]; 
     
     if (error)
     {
@@ -144,12 +166,17 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     }
     
     [self.stopRoutesTableView reloadData];
+    
+    
 
 }
 
 - (void) refreshRoutesButtonWasTapped: (id) sender
 {    
-    [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:@"Refreshing Routes" DimBackground:NO animated:YES onTarget:self withObject:nil];
+    if (![watchedStopRoutes isRefreshing])
+    {
+        [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:@"Refreshing Routes" DimBackground:NO animated:YES onTarget:self withObject:nil];
+    }
 }
 
 - (NSArray*) getOutdatedStopNumbers
@@ -182,7 +209,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 
     if (outdatedStopNumbers.count > 0)
     {
-        [self showHUDWithSelector:@selector(refreshStopsWithNumbers:) mode:MBProgressHUDModeIndeterminate text:@"Refreshing Routes" DimBackground:NO animated:YES onTarget:self withObject:outdatedStopNumbers];
+        [self showHUDWithSelector:@selector(refreshStopsWithNumbers:) mode:MBProgressHUDModeIndeterminate text:@"Refreshing" DimBackground:NO animated:YES onTarget:self withObject:outdatedStopNumbers];
     }
     
 }
@@ -193,6 +220,14 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     NSString * message = [NSString stringWithFormat:@"%@ of %@", [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_CURRENT_COUNT], [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_TOTAL_COUNT]];
     
     [self updateHUDWithDetailsText: message];
+}
+
+-(void) receiveNotificationRefreshEnded: (NSNotification*) notification
+{
+    NSDictionary * userInfo = notification.userInfo;
+    NSString * reason = [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_REASON];
+    
+    [self updateHUDWithCompletionMessage:reason];
 }
 
 - (void) loadDataFromSave
@@ -226,7 +261,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
                 
                 [stop.routes addStopRoute:stopRoute];
                 
-                [self didReceiveStopRoute:stopRoute];
+                [self insertStopRoute:stopRoute];
             }
             
         }
@@ -249,6 +284,8 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotificationRefreshStatusUpdate:) name:REFRESH_NOTIFICATION_UPDATE_NAME object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotificationRefreshEnded:) name:REFRESH_NOTIFICATION_UPDATE_ENDED_NAME object:nil];
         
     [self setRefreshBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutesButtonWasTapped:)]];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = refreshBarButton;
@@ -311,7 +348,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
      NSString * lastRefreshedDateString = @"Never!";
      if (stop.lastRefreshedDate != nil)
      {
-         NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] retain];
+         NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
          [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
          [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
          lastRefreshedDateString = [dateFormatter stringFromDate: stop.lastRefreshedDate];
@@ -408,6 +445,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
         routeNumberLabel.backgroundColor = [UIColor clearColor];
         routeNumberLabel.textColor = [UIColor whiteColor];
         routeNumberLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]+6];
+        routeNumberLabel.shadowColor = [UIColor blackColor];
         
         //Route Times Label
         routeTimesLabel =
@@ -426,6 +464,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
         routeTimesLabel.textColor = [UIColor whiteColor];
         //middleLabel.highlightedTextColor = [UIColor blackColor];
         routeTimesLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize]-2];
+        routeTimesLabel.shadowColor = [UIColor blackColor];
         
         //Route Name Label
         routeNameLabel =
@@ -446,7 +485,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
         //bottomLabel.highlightedTextColor = [UIColor grayColor];
         [routeNameLabel setAdjustsFontSizeToFitWidth:NO];
         routeNameLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]-4];
-        
+        routeNameLabel.shadowColor = [UIColor blackColor];
         
         //
 		// Create a background image view.
@@ -482,21 +521,25 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 	NSInteger row = [indexPath row];
 	if (row == 0 && row == sectionRows - 1)
 	{
+        //One and only one row
 		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
 		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
 	}
 	else if (row == 0)
 	{
+        //First Row
 		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
 		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
 	}
 	else if (row == sectionRows - 1)
 	{
+        //Last Row
 		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
 		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
 	}
 	else
 	{
+        //Middle Row
 		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
 		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
 	}

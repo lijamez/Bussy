@@ -22,8 +22,12 @@ typedef enum
     
     SortMethod stopsSortMethod;
     SortMethod stopRoutesSortMethod;
+    
+    BOOL isRefreshing;
+    BOOL shouldCancel;
 }
 
+- (NSIndexPath*) getIndexPathForStopRoute: (StopRoute*) theStopRoute;
 - (NSUInteger) countOfStops;
 - (NSUInteger) countOfRoutesAtStopNumber: (NSString*) stopNumber;
 - (NSUInteger) countOfRoutesAtStopIndex: (NSUInteger) stopIndex;
@@ -39,9 +43,10 @@ typedef enum
 -(BOOL) containsStopRoute:(StopRoute*)stopRoute;
 - (void) refreshAndCatchError: (NSError**) error;
 - (void) refreshStopsWithNumbers: (NSArray*) numbersOfStopsToRefresh andCatchError: (NSError**) error;
+- (void) requestCancel;
 
 @property (readwrite) SortMethod stopsSortMethod;
 @property (readwrite) SortMethod stopRoutesSortMethod;
-
+@property (readonly) BOOL isRefreshing;
 
 @end

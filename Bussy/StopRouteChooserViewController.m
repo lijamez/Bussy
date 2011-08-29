@@ -29,6 +29,8 @@
 
 - (void)dealloc
 {
+    [stopRouteTableView release];
+    [stopRoutes release];
     [super dealloc];
 }
 

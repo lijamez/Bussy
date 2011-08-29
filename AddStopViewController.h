@@ -21,7 +21,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITextField * stopNumberTextField;
-
+@property (nonatomic, retain) StopRouteCollection * foundStopRoutes;
 @property (nonatomic, assign) id<ModalViewDelegate> delegate;
 
 @end

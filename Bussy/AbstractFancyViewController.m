@@ -61,6 +61,70 @@
     HUD.detailsLabelText = detailsText;
 }
 
+- (void) updateHUDWithCompletionMessage: (NSString*) message
+{
+    if (!HUD.taskInProgress) return;
+    
+    NSString * labelText = message;
+     
+    if (labelText == nil)
+        labelText = @"Completed";
+    
+    HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Check.png"]] autorelease];
+	HUD.mode = MBProgressHUDModeCustomView;
+	HUD.labelText = labelText;
+    HUD.detailsLabelText = @"";
+    sleep(1);
+}
+
+-(void) sleepForSecs: (NSNumber*) seconds
+{
+    sleep(seconds.integerValue);
+}
+
+-(void) showHUDWithCompletionMessage: (NSString*) message details: (NSString*) detailsMessage type: (CompletionHUDType) type target: (id) target
+{
+    if (HUD != nil)
+    {
+        [HUD release];
+    }
+    
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [[self HUDParentView] addSubview:HUD];
+    HUD.delegate = self;  
+    
+    
+    if (message != nil)
+    {
+        HUD.labelText = message;
+    }
+    
+    if (detailsMessage != nil)
+    {
+        HUD.detailsLabelText = detailsMessage;    
+    }
+    
+    HUD.dimBackground = NO;
+    
+    if (type == HUD_TYPE_SUCCESS)
+    {
+        HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Check.png"]];
+    }
+    else if (type == HUD_TYPE_WARNING)
+    {
+        HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Exclamation.png"]];
+    }
+    else if (type == HUD_TYPE_FAILURE)
+    {
+        HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Cross.png"]];
+    }
+    
+    HUD.mode = MBProgressHUDModeCustomView;
+
+    
+    [HUD showWhileExecuting:@selector(sleepForSecs:) onTarget:target withObject:[NSNumber numberWithInt:2] animated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.

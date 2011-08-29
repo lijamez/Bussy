@@ -39,7 +39,6 @@
 
 - (IBAction)	addWatchedStopRoute:		(id) sender;
 - (void) loadDataFromSave;
-- (void) refreshRoutesWhenNecessary;
 - (void) refreshRoutesWhenNecessaryAsync;
 -(void) receiveNotificationRefreshStatusUpdate: (NSNotification*) notification;
 

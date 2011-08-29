@@ -14,7 +14,7 @@
 
 @implementation AddStopViewController
 
-@synthesize stopNumberTextField;
+@synthesize stopNumberTextField, foundStopRoutes;
 @synthesize delegate;
 
 int const MAX_FIELD_CHARS = 5;
@@ -47,7 +47,7 @@ int const MAX_FIELD_CHARS = 5;
         
         [self.navigationController pushViewController:stopRouteChooserView animated:YES];
         
-        foundStopRoutes = nil;
+        self.foundStopRoutes = nil;
     }
     else
     {
@@ -75,7 +75,7 @@ int const MAX_FIELD_CHARS = 5;
     if ([stopNumber isEqualToString:stop.stopID] && [stop.routes.array count] > 0)
     {
         
-        foundStopRoutes = [stop routes];
+        self.foundStopRoutes = [stop routes];
 
     }
     else
@@ -97,6 +97,15 @@ int const MAX_FIELD_CHARS = 5;
         [alert release];
         return;
     }
+    
+    if ([newStopNumber length] != 5)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"A stop number is 5 digits long." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+    
     
     [stopNumberTextField resignFirstResponder];
 

@@ -127,11 +127,12 @@
     NSString * lastRefreshedString = @"Never";
     if (stopRoute.stop.lastRefreshedDate != nil)
     {
-        NSDateFormatter * dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterLongStyle];
         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
         
         lastRefreshedString = [dateFormatter stringFromDate:stopRoute.stop.lastRefreshedDate];
+        [dateFormatter release];
     }
     
     lastRefreshedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", lastRefreshedString];

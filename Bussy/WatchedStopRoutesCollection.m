@@ -13,7 +13,7 @@
 
 @implementation WatchedStopRoutesCollection
 
-@synthesize stopsSortMethod, stopRoutesSortMethod;
+@synthesize stopsSortMethod, stopRoutesSortMethod, isRefreshing;
 
 - (id)init
 {
@@ -48,6 +48,28 @@
     }
     
     return [watchedRoutesByStopNumber allKeys];
+}
+
+
+- (NSIndexPath*) getIndexPathForStopRoute: (StopRoute*) theStopRoute
+{
+    for (int stopIndex = 0; stopIndex < [[self sortedKeys] count]; stopIndex++)
+    {        
+        NSString * stopNumber = [[self sortedKeys] objectAtIndex:stopIndex];
+        NSArray * stopRoutes = [watchedRoutesByStopNumber objectForKey:stopNumber];
+        
+        for (int stopRouteIndex = 0; stopRouteIndex < [stopRoutes count]; stopRouteIndex++)
+        {
+            StopRoute * stopRoute = [stopRoutes objectAtIndex:stopRouteIndex];
+            
+            if ([stopRoute isEqual: theStopRoute])
+            {
+                return [NSIndexPath indexPathForRow:stopRouteIndex inSection:stopIndex];
+            }
+        }
+    }
+    
+    return nil;
 }
 
 - (Stop*) getStopByNumber: (NSString*) stopNumber
@@ -87,6 +109,7 @@
     
     return stopRoutes;
 }
+
 
 - (NSUInteger) countOfStops
 {
@@ -215,7 +238,6 @@
     {
         [watchedStops removeObject:stopRouteToRemove.stop];
         [watchedRoutesByStopNumber removeObjectForKey:stopNumber];
-
     }
 }
 
@@ -243,7 +265,7 @@
     return NO;
 }
 
-- (NSDictionary*) makeUserInfoWithCurrentStopCount: (NSString*) currentStopCount andTotal: (NSString*) totalStopCount
+- (NSDictionary*) makeUpdateNotificationUserInfoWithCurrentStopCount: (NSString*) currentStopCount andTotal: (NSString*) totalStopCount
 {
     NSMutableDictionary * userInfo = [[NSMutableDictionary alloc] init];
     [userInfo setObject:currentStopCount forKey:REFRESH_NOTIFICATION_USERINFO_CURRENT_COUNT];
@@ -252,23 +274,53 @@
     return userInfo;
 }
 
+- (NSDictionary*) makeUpdateEndedUserInfoWithReason: (NSString*) reason
+{
+    NSMutableDictionary * userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setObject:reason forKey:REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_REASON];
+    
+    return userInfo;
+}
+
 - (void) refreshStopsWithNumbers: (NSArray*) numbersOfStopsToRefresh andCatchError: (NSError**) error
 {
+    if (self.isRefreshing) return;
+    
+    isRefreshing = YES;
+    
     if (numbersOfStopsToRefresh == nil) return;
         
     NSUInteger currentCount = 0;
     
     for (NSString * stopNumber in numbersOfStopsToRefresh)
     {
+        if (shouldCancel)
+        {
+            NSDictionary * userInfo = [self makeUpdateEndedUserInfoWithReason:@"Cancelled"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_ENDED_NAME object:self userInfo: userInfo];
+            
+            break;
+        }
+            
+        
         currentCount++;
         
-        NSDictionary * userInfo = [self makeUserInfoWithCurrentStopCount:[NSString stringWithFormat:@"%d",currentCount] andTotal:[NSString stringWithFormat:@"%d", numbersOfStopsToRefresh.count]];
+        NSDictionary * userInfo = [self makeUpdateNotificationUserInfoWithCurrentStopCount:[NSString stringWithFormat:@"%d",currentCount] andTotal:[NSString stringWithFormat:@"%d", numbersOfStopsToRefresh.count]];
         [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_NAME object:self userInfo: userInfo];
         
         Stop * stop = [self getStopByNumber:stopNumber];
 
         [stop refreshAndCatchError:error];
     }
+    
+    if (currentCount == [numbersOfStopsToRefresh count])
+    {
+        NSDictionary * userInfo = [self makeUpdateEndedUserInfoWithReason:@"Completed"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_ENDED_NAME object:self userInfo: userInfo];
+    }
+    
+    isRefreshing = NO;
+    shouldCancel = NO;
 }
 
 - (void) refreshAndCatchError: (NSError**) error
@@ -276,9 +328,15 @@
     [self refreshStopsWithNumbers:[self sortedKeys] andCatchError:error];
 }
 
+- (void) requestCancel
+{
+    shouldCancel = YES;
+}
+
 - (void) dealloc
 {
     [watchedRoutesByStopNumber release];
+    [watchedStops release];
     
     [super dealloc];
 }
