@@ -12,9 +12,17 @@
     
     UILabel * appNameLabel;
     UILabel * versionLabel;
+    UILabel * copyrightLabel;
+    UILabel * acknowledgementsLabel;
+    UILabel * acknowledgementsContentsLabel;
+    UILabel * disclaimerLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel * appNameLabel;
 @property (nonatomic, retain) IBOutlet UILabel * versionLabel;
+@property (nonatomic, retain) IBOutlet UILabel * copyrightLabel;
+@property (nonatomic, retain) IBOutlet UILabel * acknowledgementsLabel;
+@property (nonatomic, retain) IBOutlet UILabel * acknowledgementsContentsLabel;
+@property (nonatomic, retain) IBOutlet UILabel * disclaimerLabel;
 
 @end

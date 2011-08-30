@@ -1,0 +1,56 @@
+/* 
+ Localizable.strings
+ Bussy
+ 
+ Created by James Li on 11-08-29.
+ Copyright (c) 2011 University of British Columbia. All rights reserved.
+ */
+
+//View Titles
+"ViewTitle_MyRoutes" = "我的行走路线";
+"ViewTitle_RouteDetails" = "细节";
+"ViewTitle_EnterStopNumber" = "停车站号码";
+"ViewName_ChooseRoute" = "选择路线";
+
+
+//HUD Messages
+"HUDMessage_RouteAdded" = "加入";
+"HUDMessage_RouteAlreadyAdded" = "已经加入";
+"HUDMessage_RefreshingRoutes" = "Refreshing Routes";
+"HUDMessage_FetchingRoutes" = "Fetching Routes...";
+"HUDMessage_Completed" = "完成";
+
+//General Terminology
+"ArrivalTimes" = "Arrival Times";
+"Stop" = "Stop";
+"StopNumber" = "Stop Number";
+"Direction" = "Direction";
+"Copyright" = "Copyright";
+"Never" = "Never";
+"Updated" = "Updated";
+"LastUpdated" = "Last Updated";
+"Version" = "Version";
+
+//Navigation Words
+"Error" = "Error";
+"OK" = "OK";
+"Cancel" = "Cancel";
+"Next" = "Next";
+
+
+//View-Specific Messages/Labels
+"ActionSheetLabel_SelectAnAction" = "Select an action";
+"ActionSheetButton_ShowInMaps" = "Show in Maps";
+
+"RoutesList_NoServiceAtThisTime" = "No service at this time";
+
+"StopRouteDetails_NoServiceMessage" = "No Service At This Time";
+
+"AddRoute_EnterStopNumber" = "Enter a stop number";
+
+"DialogMessage_StopNumberNotFound" = "Stop number not found.";
+"DialogMessage_MissingStopNumber" = "Please enter a stop number.";
+"DialogMessage_InsufficientStopNumberDigits" = "A stop number must be 5 digits.";
+
+"About_AcknowledgementsHeader" = "Acknowledgements";
+"About_Disclaimer" = "While this app retrieves information from Translink's API, the data presented is provided without any guarantee of accuracy or completeness.";

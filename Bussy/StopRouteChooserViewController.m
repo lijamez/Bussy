@@ -22,7 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"Choose Route";
+        self.title = NSLocalizedString(@"ViewName_ChooseRoute", nil);
     }
     return self;
 }

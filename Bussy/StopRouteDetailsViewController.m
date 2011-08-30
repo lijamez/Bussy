@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"Details";
+        self.title = NSLocalizedString(@"ViewTitle_RouteDetails", @"Name of the Details view");
     }
     return self;
 }
@@ -64,7 +64,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
     if (section == 0) {
-        return @"Arrival Times";
+        return NSLocalizedString(@"ArrivalTimes" , @"Arrival Times table header");
     }
     
     return @"";
@@ -74,7 +74,7 @@
 - (void) showActionSheet
 {
     
-    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select an action" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Show in Maps", nil];
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle: NSLocalizedString(@"ActionSheetLabel_SelectAnAction", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"ActionSheetButton_ShowInMaps", @"Show in Maps action sheet button label"), nil];
     
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     [actionSheet showInView:self.parentViewController.tabBarController.view];
@@ -119,12 +119,14 @@
     [self setExportBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet)]];
     self.navigationItem.rightBarButtonItem = exportBarButton;
     
+    noServiceLabel.text = [NSString stringWithFormat:@"%@ :(", NSLocalizedString(@"StopRouteDetails_NoServiceMessage", nil)];
+    
     stopRouteNumberLabel.text = stopRoute.routeID;
     stopRouteNameLabel.text = [stopRoute displayRouteName];
-    stopNumberLabel.text = [NSString stringWithFormat:@"Stop Number: %@", stopRoute.stop.stopID];
-    directionLabel.text = [NSString stringWithFormat:@"Direction: %@", stopRoute.direction];
+    stopNumberLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"StopNumber", nil), stopRoute.stop.stopID];
+    directionLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Direction", nil), stopRoute.direction];
     
-    NSString * lastRefreshedString = @"Never";
+    NSString * lastRefreshedString = NSLocalizedString(@"Never", nil);
     if (stopRoute.stop.lastRefreshedDate != nil)
     {
         NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
@@ -135,7 +137,7 @@
         [dateFormatter release];
     }
     
-    lastRefreshedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", lastRefreshedString];
+    lastRefreshedLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"LastUpdated", nil), lastRefreshedString];
     
 }
 

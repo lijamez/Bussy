@@ -94,11 +94,11 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     if (![watchedStopRoutes containsStopRoute:newStopRoute])
     {
         [self insertStopRoute:newStopRoute];
-        [self showHUDWithCompletionMessage:@"Route Added" details:@"" type: HUD_TYPE_SUCCESS target:self];
+        [self showHUDWithCompletionMessage:NSLocalizedString(@"HUDMessage_RouteAdded", @"Route Added HUD Message") details:@"" type: HUD_TYPE_SUCCESS target:self];
     }
     else
     {
-        [self showHUDWithCompletionMessage:@"Route Already Added" details:@"" type: HUD_TYPE_WARNING target:self];
+        [self showHUDWithCompletionMessage:NSLocalizedString(@"HUDMessage_RouteAlreadyAdded", @"Route Already Added HUD Message") details:@"" type: HUD_TYPE_WARNING target:self];
     }
     
     NSIndexPath * indexPath = [watchedStopRoutes getIndexPathForStopRoute:newStopRoute];
@@ -133,7 +133,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     
     if (error)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error String") message:[error localizedDescription] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK String") otherButtonTitles:nil];
         [alert show];
         [alert release];
     }
@@ -160,7 +160,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     
     if (error)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error String") message:[error localizedDescription] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK String") otherButtonTitles:nil];
         [alert show];
         [alert release];
     }
@@ -175,7 +175,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 {    
     if (![watchedStopRoutes isRefreshing])
     {
-        [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:@"Refreshing Routes" DimBackground:NO animated:YES onTarget:self withObject:nil];
+        [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:NSLocalizedString(@"HUDMessage_RefreshingRoutes", @"Refreshing Routes HUD Message") DimBackground:NO animated:YES onTarget:self withObject:nil];
     }
 }
 
@@ -217,7 +217,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 -(void) receiveNotificationRefreshStatusUpdate: (NSNotification*) notification
 {
     NSDictionary * userInfo = notification.userInfo;
-    NSString * message = [NSString stringWithFormat:@"%@ of %@", [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_CURRENT_COUNT], [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_TOTAL_COUNT]];
+    NSString * message = [NSString stringWithFormat:@"%@/%@", [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_CURRENT_COUNT], [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_TOTAL_COUNT]];
     
     [self updateHUDWithDetailsText: message];
 }
@@ -293,7 +293,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     [self setAddBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWatchedStopRoute:)]];
     self.navigationController.navigationBar.topItem.rightBarButtonItem = addBarButton;
     
-    self.title = @"My Routes";
+    self.title = NSLocalizedString(@"ViewTitle_MyRoutes", @"My Routes View Title");
     self.navigationController.navigationBar.tintColor = [TranslinkColors GetTranslinkBlue];
     self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
@@ -342,10 +342,10 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     Stop * stop = [TranslinkStopManager getStopWithNumber:[[watchedStopRoutes stopNumbers] objectAtIndex: section ]];
     
     BussyTableHeaderView * headerView = [[BussyTableHeaderView alloc] init];
-    headerView.headerLabel.text = [NSString stringWithFormat:@"Stop# %@", stop.stopID];
+    headerView.headerLabel.text = [NSString stringWithFormat:@"%@# %@", NSLocalizedString(@"Stop", @"Bus Stop"), stop.stopID];
     
     
-     NSString * lastRefreshedDateString = @"Never!";
+     NSString * lastRefreshedDateString =[NSString stringWithFormat:@"%@!", NSLocalizedString(@"Never", nil)];
      if (stop.lastRefreshedDate != nil)
      {
          NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
@@ -355,7 +355,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
          [dateFormatter release];
      }     
     
-    headerView.subtitleLabel.text = [NSString stringWithFormat:@"Updated: %@", lastRefreshedDateString];
+    headerView.subtitleLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Updated", @"Updated String"), lastRefreshedDateString];
     
     
     return headerView;
@@ -508,7 +508,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     NSString * timesString = [stopRoute generateTimesString];
     if (timesString == (id)[NSNull null] || timesString.length == 0 )
     {
-        timesString = @"No service at this time";
+        timesString = NSLocalizedString(@"RoutesList_NoServiceAtThisTime", @"There is no service right now.");
     }
     routeTimesLabel.text = timesString;
     

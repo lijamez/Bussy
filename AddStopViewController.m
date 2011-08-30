@@ -14,7 +14,7 @@
 
 @implementation AddStopViewController
 
-@synthesize stopNumberTextField, foundStopRoutes;
+@synthesize stopNumberTextField, enterStopNumberLabel, foundStopRoutes;
 @synthesize delegate;
 
 int const MAX_FIELD_CHARS = 5;
@@ -25,7 +25,7 @@ int const MAX_FIELD_CHARS = 5;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"Stop Number";
+        self.title = NSLocalizedString(@"ViewTitle_EnterStopNumber", nil);
     }
     return self;
 }
@@ -66,7 +66,7 @@ int const MAX_FIELD_CHARS = 5;
     
     if (error)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
         [alert show];
         [alert release];
         return;
@@ -80,7 +80,7 @@ int const MAX_FIELD_CHARS = 5;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Stop number not found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"DialogMessage_StopNumberNotFound", @"Stop Number Not Found dialog message") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
         [alert show];
         [alert release];
     }
@@ -92,7 +92,7 @@ int const MAX_FIELD_CHARS = 5;
     
     if ([newStopNumber length] == 0)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a stop number." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"DialogMessage_MissingStopNumber", @"Please enter a stop number dialog message") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
         [alert show];
         [alert release];
         return;
@@ -100,7 +100,7 @@ int const MAX_FIELD_CHARS = 5;
     
     if ([newStopNumber length] != 5)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"A stop number is 5 digits long." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"DialogMessage_InsufficientStopNumberDigits", @"A stop number should be 5 digits long.") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
         [alert show];
         [alert release];
         return;
@@ -109,7 +109,7 @@ int const MAX_FIELD_CHARS = 5;
     
     [stopNumberTextField resignFirstResponder];
 
-    [self showHUDWithSelector:@selector(processStopNumber:) mode:MBProgressHUDModeIndeterminate text:@"Fetching Routes..." DimBackground:YES animated:YES onTarget:self withObject:newStopNumber];
+    [self showHUDWithSelector:@selector(processStopNumber:) mode:MBProgressHUDModeIndeterminate text:NSLocalizedString(@"HUDMessage_FetchingRoutes", nil) DimBackground:YES animated:YES onTarget:self withObject:newStopNumber];
     
 }
 
@@ -145,11 +145,13 @@ int const MAX_FIELD_CHARS = 5;
 {
     [super viewDidLoad];
     
-    UIBarButtonItem * cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(notifyIsCancelled:)];
+    UIBarButtonItem * cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(notifyIsCancelled:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    UIBarButtonItem * nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(notifyNext:)];
+    UIBarButtonItem * nextButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Next", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(notifyNext:)];
     self.navigationItem.rightBarButtonItem = nextButton;
+    
+    enterStopNumberLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"AddRoute_EnterStopNumber", nil)];
     
 }
 

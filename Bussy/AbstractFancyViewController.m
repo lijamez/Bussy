@@ -68,7 +68,7 @@
     NSString * labelText = message;
      
     if (labelText == nil)
-        labelText = @"Completed";
+        labelText = NSLocalizedString(@"HUDMessage_Completed", nil);
     
     HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Check.png"]] autorelease];
 	HUD.mode = MBProgressHUDModeCustomView;

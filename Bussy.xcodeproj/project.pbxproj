@@ -13,16 +13,17 @@
 		A00E7D1D13F8D731005CFAEC /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00E7D1C13F8D731005CFAEC /* star@2x.png */; };
 		A00E7D1F13F8D742005CFAEC /* preferences@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00E7D1E13F8D742005CFAEC /* preferences@2x.png */; };
 		A00E7D2113F8D7C6005CFAEC /* indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00E7D2013F8D7C6005CFAEC /* indicator@2x.png */; };
+		A01085B7140C8C0000B332F7 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01085B8140C8C0000B332F7 /* StopRouteDetailsViewController.xib */; };
 		A01AFFAE1400D2C800C2A0B2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01AFFAD1400D2C800C2A0B2 /* AudioToolbox.framework */; };
 		A01AFFB61400D87500C2A0B2 /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = A01AFFB51400D87500C2A0B2 /* click.wav */; };
 		A01AFFC61400E1D800C2A0B2 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = A01AFFC51400E1D800C2A0B2 /* Background.png */; };
 		A02B3E5D13BD83E7009FCCE3 /* Stop.m in Sources */ = {isa = PBXBuildFile; fileRef = A02B3E5C13BD83E7009FCCE3 /* Stop.m */; };
+		A037AB9E140B890100EDCBFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A037ABA0140B890100EDCBFF /* Localizable.strings */; };
 		A04611F2140766D8004B8214 /* SectionHeaderStripes.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611F0140766D8004B8214 /* SectionHeaderStripes.png */; };
 		A04611F3140766D8004B8214 /* SectionHeaderBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611F1140766D8004B8214 /* SectionHeaderBackground.png */; };
 		A04611F614077B5E004B8214 /* topAndBottomRow.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611F414077B5E004B8214 /* topAndBottomRow.png */; };
 		A04611FB14078546004B8214 /* topAndBottomRowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = A04611FA14078546004B8214 /* topAndBottomRowSelected.png */; };
 		A05B65EB13C828020039D219 /* StopRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */; };
-		A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */; };
 		A063462813BC537300CB5168 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462713BC537300CB5168 /* UIKit.framework */; };
 		A063462A13BC537300CB5168 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462913BC537300CB5168 /* Foundation.framework */; };
 		A063462C13BC537300CB5168 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063462B13BC537300CB5168 /* CoreGraphics.framework */; };
@@ -99,18 +100,20 @@
 		A00E7D1C13F8D731005CFAEC /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		A00E7D1E13F8D742005CFAEC /* preferences@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preferences@2x.png"; sourceTree = "<group>"; };
 		A00E7D2013F8D7C6005CFAEC /* indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "indicator@2x.png"; sourceTree = "<group>"; };
+		A01085B8140C8C0000B332F7 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
 		A01AFFAD1400D2C800C2A0B2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A01AFFB51400D87500C2A0B2 /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
 		A01AFFC51400E1D800C2A0B2 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		A02B3E5B13BD83E7009FCCE3 /* Stop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stop.h; sourceTree = "<group>"; };
 		A02B3E5C13BD83E7009FCCE3 /* Stop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stop.m; sourceTree = "<group>"; };
+		A037AB9F140B890100EDCBFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A037ABA1140B891100EDCBFF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A04611F0140766D8004B8214 /* SectionHeaderStripes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SectionHeaderStripes.png; sourceTree = "<group>"; };
 		A04611F1140766D8004B8214 /* SectionHeaderBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SectionHeaderBackground.png; sourceTree = "<group>"; };
 		A04611F414077B5E004B8214 /* topAndBottomRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRow.png; sourceTree = "<group>"; };
 		A04611FA14078546004B8214 /* topAndBottomRowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topAndBottomRowSelected.png; sourceTree = "<group>"; };
 		A05B65E813C828020039D219 /* StopRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopRouteDetailsViewController.h; sourceTree = "<group>"; };
 		A05B65E913C828020039D219 /* StopRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopRouteDetailsViewController.m; sourceTree = "<group>"; };
-		A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopRouteDetailsViewController.xib; sourceTree = "<group>"; };
 		A063462313BC537300CB5168 /* Bussy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bussy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A063462713BC537300CB5168 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A063462913BC537300CB5168 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -289,6 +292,7 @@
 				A063463013BC537300CB5168 /* InfoPlist.strings */,
 				A063463313BC537300CB5168 /* Bussy-Prefix.pch */,
 				A063463413BC537300CB5168 /* main.m */,
+				A037ABA0140B890100EDCBFF /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -349,7 +353,7 @@
 			children = (
 				A01AFFAA1400CE4100C2A0B2 /* Sounds */,
 				A0B3621413F71A940032F8B4 /* Images */,
-				A05B65EA13C828020039D219 /* StopRouteDetailsViewController.xib */,
+				A01085B8140C8C0000B332F7 /* StopRouteDetailsViewController.xib */,
 				A009DFFE14007D53006E1976 /* BussyTableHeaderView.xib */,
 				A0D89D2613F8BDB50094FA13 /* AboutViewController.xib */,
 				A063463913BC537300CB5168 /* MainWindow.xib */,
@@ -509,6 +513,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = A063461813BC537300CB5168;
 			productRefGroup = A063462413BC537300CB5168 /* Products */;
@@ -531,7 +536,7 @@
 				A063464113BC537300CB5168 /* MyRoutesViewController.xib in Resources */,
 				A07E596A13C16CE5004EBC0D /* AddStopViewController.xib in Resources */,
 				A080847113C56B7D00DEC160 /* StopRouteChooserViewController.xib in Resources */,
-				A05B65EC13C828020039D219 /* StopRouteDetailsViewController.xib in Resources */,
+				A01085B7140C8C0000B332F7 /* StopRouteDetailsViewController.xib in Resources */,
 				A0B2354713F7643600018A59 /* indicator.png in Resources */,
 				A0F305A513F86162004F431A /* preferences.png in Resources */,
 				A0F305B213F86162004F431A /* star.png in Resources */,
@@ -558,6 +563,7 @@
 				A0863314140B7DE800D84D44 /* 37x-Exclamation@2x.png in Resources */,
 				A086331F140B840A00D84D44 /* Bussy-Icon-Retina.png in Resources */,
 				A0863320140B840A00D84D44 /* Bussy-Icon.png in Resources */,
+				A037AB9E140B890100EDCBFF /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +651,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A037ABA0140B890100EDCBFF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A037AB9F140B890100EDCBFF /* en */,
+				A037ABA1140B891100EDCBFF /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		A063463013BC537300CB5168 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

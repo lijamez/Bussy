@@ -10,7 +10,7 @@
 
 @implementation AboutViewController
 
-@synthesize versionLabel, appNameLabel;
+@synthesize versionLabel, appNameLabel, copyrightLabel, acknowledgementsLabel, acknowledgementsContentsLabel, disclaimerLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,7 +36,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    versionLabel.text = [NSString stringWithFormat:@"Version %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+    versionLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Version", nil), [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+    acknowledgementsLabel.text = NSLocalizedString(@"About_AcknowledgementsHeader", nil);
+    disclaimerLabel.text = NSLocalizedString(@"About_Disclaimer", nil);
+    copyrightLabel.text = [NSString stringWithFormat:@"%@ © 2011 James Li", NSLocalizedString(@"Copyright", nil)];
     
 }
 

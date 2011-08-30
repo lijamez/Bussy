@@ -14,6 +14,7 @@
 
 @interface AddStopViewController : AbstractFancyViewController <UIAlertViewDelegate>{
     UITextField * stopNumberTextField;
+    UILabel * enterStopNumberLabel;
     
     id<ModalViewDelegate> delegate;
     
@@ -21,6 +22,8 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITextField * stopNumberTextField;
+@property (nonatomic, retain) IBOutlet UILabel * enterStopNumberLabel;
+
 @property (nonatomic, retain) StopRouteCollection * foundStopRoutes;
 @property (nonatomic, assign) id<ModalViewDelegate> delegate;
 
