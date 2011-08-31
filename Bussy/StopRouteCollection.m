@@ -27,7 +27,6 @@
         adapter = inputAdapter;
         [adapter retain];
         
-        //[self refreshAndCatchError: error];
         status = NOT_LOADED;
         
     }
@@ -66,8 +65,6 @@
             NSString * entryRouteName = [entry objectForKey:@"routeName"];
             NSArray * entryTimes = [entry objectForKey:@"times"];
             
-            //StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:entryDirection routeID:entryRouteID routeName:entryRouteName times:entryTimes exists: YES];
-            
             BOOL updatedExistingRoute = NO;
             
             for (StopRoute * stopRoute in array)
@@ -77,7 +74,8 @@
                 {
                     stopRoute.routeName = entryRouteName;
                     stopRoute.times = entryTimes;
-                    
+                    stopRoute.exists = YES;
+
                     [existingRoutesToRefresh removeObject:stopRoute];
                     updatedExistingRoute = YES;
                     break;

@@ -14,7 +14,8 @@ typedef enum
 {
     HUD_TYPE_SUCCESS,
     HUD_TYPE_WARNING,
-    HUD_TYPE_FAILURE
+    HUD_TYPE_FAILURE,
+    HUD_TYPE_ADD
 } CompletionHUDType;
 
 @interface AbstractFancyViewController : UIViewController<MBProgressHUDDelegate> {

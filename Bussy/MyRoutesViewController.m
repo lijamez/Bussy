@@ -19,7 +19,7 @@
 
 @implementation MyRoutesViewController
 
-@synthesize addBarButton, refreshBarButton, watchedStopRoutes, imageView, stopRoutesTableView, noRoutesLabel;
+@synthesize addBarButton, refreshBarButton, watchedStopRoutes, imageView, stopRoutesTableView, noRoutesLabel, noRoutesDetailsLabel;
 
 CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 
@@ -94,7 +94,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     if (![watchedStopRoutes containsStopRoute:newStopRoute])
     {
         [self insertStopRoute:newStopRoute];
-        [self showHUDWithCompletionMessage:NSLocalizedString(@"HUDMessage_RouteAdded", @"Route Added HUD Message") details:@"" type: HUD_TYPE_SUCCESS target:self];
+        [self showHUDWithCompletionMessage:NSLocalizedString(@"HUDMessage_RouteAdded", @"Route Added HUD Message") details:@"" type: HUD_TYPE_ADD target:self];
     }
     else
     {
@@ -173,7 +173,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 
 - (void) refreshRoutesButtonWasTapped: (id) sender
 {    
-    if (![watchedStopRoutes isRefreshing])
+    if (![watchedStopRoutes isRefreshing] && [watchedStopRoutes countOfStops] > 0)
     {
         [self showHUDWithSelector:@selector(refreshWatchedStopRoutes) mode:MBProgressHUDModeIndeterminate text:NSLocalizedString(@"HUDMessage_RefreshingRoutes", @"Refreshing Routes HUD Message") DimBackground:NO animated:YES onTarget:self withObject:nil];
     }
@@ -207,7 +207,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 {
     NSArray * outdatedStopNumbers = [self getOutdatedStopNumbers];
 
-    if (outdatedStopNumbers.count > 0)
+    if (outdatedStopNumbers.count > 0 && ![watchedStopRoutes isRefreshing])
     {
         [self showHUDWithSelector:@selector(refreshStopsWithNumbers:) mode:MBProgressHUDModeIndeterminate text:@"Refreshing" DimBackground:NO animated:YES onTarget:self withObject:outdatedStopNumbers];
     }
@@ -297,6 +297,9 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     self.navigationController.navigationBar.tintColor = [TranslinkColors GetTranslinkBlue];
     self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
+    noRoutesLabel.text = NSLocalizedString(@"RoutesList_NoRoutes", nil);
+    noRoutesDetailsLabel.text = NSLocalizedString(@"RoutesList_NoRoutesDetails", nil);
+    
     watchedStopRoutes = [[WatchedStopRoutesCollection alloc] init];
 
     [self loadDataFromSave];
@@ -374,10 +377,12 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     if ([watchedStopRoutes countOfStops] <= 0)
     {
         noRoutesLabel.hidden = NO;
+        noRoutesDetailsLabel.hidden = NO;
     }
     else
     {
         noRoutesLabel.hidden = YES;
+        noRoutesDetailsLabel.hidden = YES;
     }
     
     return [watchedStopRoutes countOfStops];
@@ -465,6 +470,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
         //middleLabel.highlightedTextColor = [UIColor blackColor];
         routeTimesLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize]-2];
         routeTimesLabel.shadowColor = [UIColor blackColor];
+        [routeTimesLabel setAdjustsFontSizeToFitWidth:YES];
         
         //Route Name Label
         routeNameLabel =
@@ -512,7 +518,14 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     }
     routeTimesLabel.text = timesString;
     
-    routeNameLabel.text = [stopRoute displayRouteName];
+    if ([stopRoute exists])
+    {
+        routeNameLabel.text = [stopRoute displayRouteName];
+    }
+    else
+    {
+        routeNameLabel.text = NSLocalizedString(@"RoutesList_RouteNotInService", nil);
+    }
     
     //Set the background
 	UIImage *rowBackground;

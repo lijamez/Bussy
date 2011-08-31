@@ -43,6 +43,9 @@
 "ActionSheetButton_ShowInMaps" = "Show in Maps";
 
 "RoutesList_NoServiceAtThisTime" = "No service at this time";
+"RoutesList_RouteNotInService" = "Route is no longer in service";
+"RoutesList_NoRoutes" = "No Routes";
+"RoutesList_NoRoutesDetails" = "Add one by tapping the + button";
 
 "StopRouteDetails_NoServiceMessage" = "No Service At This Time";
 

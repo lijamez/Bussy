@@ -205,8 +205,8 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string type="base64-UTF8" key="IBUIText">anNvbi1mcmFtZXdvcmsgLSBKU09OIFBhcnNlcgpNQlByb2dyZXNzSFVEIC0gQWN0aXZpdHkgVmlld3MK
-QXBwLUJpdHMgLSBUb29sYmFyIEljb25zCg</string>
+						<string type="base64-UTF8" key="IBUIText">anNvbi1mcmFtZXdvcmsgLSBKU09OIFBhcnNlcgpNQlByb2dyZXNzSFVEIC0gQWN0aXZpdHkgSFVECkFw
+cC1CaXRzIC0gVG9vbGJhciBJY29ucwpKYXNvbiBHb25nIC0gQ2hpbmVzZSBMb2NhbGl6YXRpb24</string>
 						<reference key="IBUITextColor" ref="914060742"/>
 						<nil key="IBUIHighlightedColor"/>
 						<reference key="IBUIShadowColor" ref="862305910"/>

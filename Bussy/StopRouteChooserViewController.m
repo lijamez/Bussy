@@ -22,7 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = NSLocalizedString(@"ViewName_ChooseRoute", nil);
+        self.title = NSLocalizedString(@"ViewTitle_ChooseRoute", nil);
     }
     return self;
 }
@@ -85,9 +85,8 @@
     
     StopRoute * stopRoute = [stopRoutes.array objectAtIndex:indexPath.row];
     cell.textLabel.text = [stopRoute routeName];
-    
     cell.detailTextLabel.text = [stopRoute generateTimesString];
-    
+    cell.imageView.image = [UIImage imageNamed:@"37x-Add.png"];
     // Configure the cell.
     return cell;
 

@@ -17,6 +17,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = NSLocalizedString(@"ViewTitle_About", nil);
     }
     return self;
 }

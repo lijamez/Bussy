@@ -110,6 +110,10 @@
     {
         HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Check.png"]];
     }
+    else if (type == HUD_TYPE_ADD)
+    {
+        HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Plus.png"]];
+    }
     else if (type == HUD_TYPE_WARNING)
     {
         HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Exclamation.png"]];

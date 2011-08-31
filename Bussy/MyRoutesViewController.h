@@ -27,6 +27,8 @@
     UIImageView * imageView;
     UITableView * stopRoutesTableView;
     UILabel * noRoutesLabel;
+    UILabel * noRoutesDetailsLabel;
+
 }
 
 @property (nonatomic, retain) UIBarButtonItem * addBarButton;
@@ -34,6 +36,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView * imageView;
 @property (nonatomic, retain) IBOutlet UITableView * stopRoutesTableView;
 @property (nonatomic, retain) IBOutlet UILabel * noRoutesLabel;
+@property (nonatomic, retain) IBOutlet UILabel * noRoutesDetailsLabel;
 
 @property (nonatomic, retain) WatchedStopRoutesCollection * watchedStopRoutes;
 
