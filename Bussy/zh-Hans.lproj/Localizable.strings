@@ -11,7 +11,7 @@
 "ViewTitle_RouteDetails" = "细节";
 "ViewTitle_EnterStopNumber" = "停车站号码";
 "ViewName_ChooseRoute" = "选择路线";
-
+"ViewTitle_NearMe" = "Near Me";
 
 //HUD Messages
 "HUDMessage_RouteAdded" = "加入";
@@ -24,6 +24,8 @@
 "ArrivalTimes" = "Arrival Times";
 "Stop" = "Stop";
 "StopNumber" = "Stop Number";
+"Route" = "Route";
+"RouteNumber" = "Route Number";
 "Direction" = "Direction";
 "Copyright" = "Copyright";
 "Never" = "Never";
@@ -37,10 +39,11 @@
 "Cancel" = "Cancel";
 "Next" = "Next";
 
-
 //View-Specific Messages/Labels
 "ActionSheetLabel_SelectAnAction" = "Select an action";
 "ActionSheetButton_ShowInMaps" = "Show in Maps";
+"ActionSheetButton_RemoveRoute" = "Remove Route";
+"ActionSheetButton_RefreshStop" = "Refresh";
 
 "RoutesList_NoServiceAtThisTime" = "No service at this time";
 "RoutesList_RouteNotInService" = "Route is no longer in service";

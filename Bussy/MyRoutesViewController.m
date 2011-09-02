@@ -294,7 +294,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     self.navigationController.navigationBar.topItem.rightBarButtonItem = addBarButton;
     
     self.title = NSLocalizedString(@"ViewTitle_MyRoutes", @"My Routes View Title");
-    self.navigationController.navigationBar.tintColor = [TranslinkColors GetTranslinkBlue];
+    self.navigationController.navigationBar.tintColor = [TranslinkColors GetTranslinkBlue];;
     self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
     noRoutesLabel.text = NSLocalizedString(@"RoutesList_NoRoutes", nil);
@@ -403,7 +403,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     
     return TABLE_VIEW_CELL_HEIGHT;
 }
-
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -564,16 +563,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -606,23 +595,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     }   
 }
 
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AudioServicesPlaySystemSound (clickSoundEffect);
@@ -633,15 +605,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     detailsViewController.stopRoute = selectedStopRoute;
     
     [self.navigationController pushViewController:detailsViewController animated:YES];
-    
-
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-	*/
 }
 
 - (void)didReceiveMemoryWarning

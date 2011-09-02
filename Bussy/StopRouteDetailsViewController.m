@@ -6,8 +6,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import "StopRouteDetailsViewController.h"
 #import "Stop.h"
+#import "ActionSheetAction.h"
 
 @implementation StopRouteDetailsViewController
 
@@ -40,6 +42,28 @@
     [[UIApplication sharedApplication] openURL:url];
 }
 
+- (void) shareViaSMS
+{
+    MFMessageComposeViewController * messageViewController = [[MFMessageComposeViewController alloc] init];
+    
+    NSString * messageBody = [NSString stringWithFormat:@"%@: %@\n%@: %@\n%@: %@",
+                              NSLocalizedString(@"StopNumber", nil), [stopRoute.stop stopID],
+                              NSLocalizedString(@"Route", nil), [stopRoute routeID],
+                              NSLocalizedString(@"ArrivalTimes", nil), [stopRoute generateTimesString]];
+    
+    messageViewController.body = messageBody;
+    [messageBody release];
+    
+    messageViewController.messageComposeDelegate = self;
+
+    [self presentModalViewController:messageViewController animated:YES];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissModalViewControllerAnimated:YES];
+    [controller release];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -71,10 +95,37 @@
     
 }
 
+- (void) initializeActionSheetActions
+{
+    actionSheetActions = [[NSMutableArray alloc] init];
+    
+    //Show in Maps
+    ActionSheetAction * showInMapsAction = [[ActionSheetAction alloc] initWithActionName:NSLocalizedString(@"ActionSheetButton_ShowInMaps", nil) selector:@selector(openInMaps)];
+    [actionSheetActions addObject:showInMapsAction];
+    
+    //Share via SMS
+    if ([MFMessageComposeViewController canSendText])
+    {
+        ActionSheetAction * sendViaSMSAction = [[ActionSheetAction alloc] initWithActionName:NSLocalizedString(@"ActionSheetButton_ShareViaSMS", nil) selector:@selector(shareViaSMS)];
+        [actionSheetActions addObject:sendViaSMSAction];
+    }
+    
+    
+}
+
 - (void) showActionSheet
 {
     
-    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle: NSLocalizedString(@"ActionSheetLabel_SelectAnAction", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"ActionSheetButton_ShowInMaps", @"Show in Maps action sheet button label"), nil];
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle: NSLocalizedString(@"ActionSheetLabel_SelectAnAction", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    for (int i = 0; i < actionSheetActions.count; i++)
+    {
+        ActionSheetAction * action = [actionSheetActions objectAtIndex:i];
+        [actionSheet addButtonWithTitle:action.actionName];
+    }
+    
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+    actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
     
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     [actionSheet showInView:self.parentViewController.tabBarController.view];
@@ -84,9 +135,13 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    if (buttonIndex == 0) {
-        [self openInMaps];
-    }
+    if (buttonIndex >= actionSheetActions.count) return;
+    
+    ActionSheetAction * action = [actionSheetActions objectAtIndex:buttonIndex];
+    
+    if (action == nil) return;
+        
+    [self performSelector:action.actionMethod];
     
 }
 
@@ -114,7 +169,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
     [self setExportBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet)]];
     self.navigationItem.rightBarButtonItem = exportBarButton;
@@ -138,6 +192,10 @@
     }
     
     lastRefreshedLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"LastUpdated", nil), lastRefreshedString];
+    
+    [self initializeActionSheetActions];
+    
+    
     
 }
 

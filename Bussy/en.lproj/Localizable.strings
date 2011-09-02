@@ -12,6 +12,7 @@
 "ViewTitle_EnterStopNumber" = "Stop Number";
 "ViewTitle_ChooseRoute" = "Choose Route";
 "ViewTitle_About" = "About";
+"ViewTitle_NearMe" = "Near Me";
 
 //HUD Messages
 "HUDMessage_RouteAdded" = "Route Added";
@@ -24,6 +25,8 @@
 "ArrivalTimes" = "Arrival Times";
 "Stop" = "Stop";
 "StopNumber" = "Stop Number";
+"Route" = "Route";
+"RouteNumber" = "Route Number";
 "Direction" = "Direction";
 "Copyright" = "Copyright";
 "Never" = "Never";
@@ -37,10 +40,10 @@
 "Cancel" = "Cancel";
 "Next" = "Next";
 
-
 //View-Specific Messages/Labels
 "ActionSheetLabel_SelectAnAction" = "Select an action";
 "ActionSheetButton_ShowInMaps" = "Show in Maps";
+"ActionSheetButton_ShareViaSMS" = "Share via SMS";
 
 "RoutesList_NoServiceAtThisTime" = "No service at this time";
 "RoutesList_RouteNotInService" = "Route is no longer in service";
@@ -56,4 +59,4 @@
 "DialogMessage_InsufficientStopNumberDigits" = "A stop number must be 5 digits.";
 
 "About_AcknowledgementsHeader" = "Acknowledgements";
-"About_Disclaimer" = "While this app retrieves information from Translink's API, the data presented is provided without any guarantee of accuracy or completeness.";
+"About_Disclaimer" = "While this app retrieves information from TransLink's API, the data presented is provided without any guarantee of accuracy or completeness.";

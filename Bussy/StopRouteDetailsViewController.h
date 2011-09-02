@@ -6,10 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import <UIKit/UIKit.h>
 #import "StopRoute.h"
 
-@interface StopRouteDetailsViewController : UIViewController<UIActionSheetDelegate>
+@interface StopRouteDetailsViewController : UIViewController<UIActionSheetDelegate, MFMessageComposeViewControllerDelegate>
 {
     UILabel * stopRouteNumberLabel;
     UILabel * stopRouteNameLabel;
@@ -21,6 +22,7 @@
     UILabel * noServiceLabel;
     
     StopRoute * stopRoute;
+    NSMutableArray * actionSheetActions;
 }
 
 @property (nonatomic, retain) UIBarButtonItem * exportBarButton;

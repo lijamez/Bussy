@@ -245,13 +245,207 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteDetailsViewController.m"
-         timestampString = "331920130.329205"
+         timestampString = "336642040.828031"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "12"
-         endingLineNumber = "12"
+         startingLineNumber = "14"
+         endingLineNumber = "14"
          landmarkName = "@implementation StopRouteDetailsViewController"
          landmarkType = "3">
+         <Locations>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController noServiceLabel]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.203998"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController setNoServiceLabel:]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.204263"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController exportBarButton]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.204476"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController setExportBarButton:]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.204684"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController lastRefreshedLabel]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.204916"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController setLastRefreshedLabel:]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.20511"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController timesTableView]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.205333"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController setTimesTableView:]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.205533"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController directionLabel]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.205729"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController setDirectionLabel:]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.205942"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController stopNumberLabel]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.206218"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController setStopNumberLabel:]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.206398"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController stopRouteNameLabel]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.206581"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController setStopRouteNameLabel:]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.206759"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController stopRouteNumberLabel]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.206958"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[StopRouteDetailsViewController setStopRouteNumberLabel:]"
+               urlString = "file://localhost/Users/lijamez/Documents/Bussy/Bussy/StopRouteDetailsViewController.m"
+               timestampString = "336639255.207122"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "15"
+               endingLineNumber = "15">
+            </Location>
+         </Locations>
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -343,12 +537,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteDetailsViewController.m"
-         timestampString = "336367790.591288"
+         timestampString = "336642156.713693"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "184"
+         endingLineNumber = "184"
+         landmarkName = "-initializeActionSheetActions"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -357,12 +551,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteDetailsViewController.m"
-         timestampString = "335568776.816309"
+         timestampString = "336642156.713693"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
+         landmarkName = "-initializeActionSheetActions"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -609,27 +803,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/MyRoutesViewController.m"
-         timestampString = "336462683.757132"
+         timestampString = "336639254.946491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "578"
-         endingLineNumber = "578"
+         startingLineNumber = "567"
+         endingLineNumber = "567"
          landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Bussy/MyRoutesViewController.m"
-         timestampString = "336462683.757132"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "618"
-         endingLineNumber = "618"
-         landmarkName = "@implementation MyRoutesViewController"
-         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -735,11 +915,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/MyRoutesViewController.m"
-         timestampString = "336462683.757132"
+         timestampString = "336639254.946491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "584"
-         endingLineNumber = "584"
+         startingLineNumber = "573"
+         endingLineNumber = "573"
          landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -763,11 +943,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/MyRoutesViewController.m"
-         timestampString = "336462683.757132"
+         timestampString = "336639254.946491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "583"
-         endingLineNumber = "583"
+         startingLineNumber = "572"
+         endingLineNumber = "572"
          landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1237,11 +1417,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/MyRoutesViewController.m"
-         timestampString = "336458759.772244"
+         timestampString = "336639254.946491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "411"
-         endingLineNumber = "411"
+         startingLineNumber = "410"
+         endingLineNumber = "410"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1251,11 +1431,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/MyRoutesViewController.m"
-         timestampString = "336462683.757132"
+         timestampString = "336639254.946491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "564"
-         endingLineNumber = "564"
+         startingLineNumber = "563"
+         endingLineNumber = "563"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1293,11 +1473,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/MyRoutesViewController.m"
-         timestampString = "336462683.757132"
+         timestampString = "336639254.946491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "580"
-         endingLineNumber = "580"
+         startingLineNumber = "569"
+         endingLineNumber = "569"
          landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
