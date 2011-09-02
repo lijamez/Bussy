@@ -542,7 +542,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "184"
          endingLineNumber = "184"
-         landmarkName = "-initializeActionSheetActions"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -556,7 +556,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "173"
          endingLineNumber = "173"
-         landmarkName = "-initializeActionSheetActions"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1521,6 +1521,20 @@
          startingLineNumber = "91"
          endingLineNumber = "91"
          landmarkName = "-showHUDWithCompletionMessage:details:type:target:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Bussy/StopRouteDetailsViewController.m"
+         timestampString = "336642580.613186"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
+         landmarkName = "-messageComposeViewController:didFinishWithResult:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

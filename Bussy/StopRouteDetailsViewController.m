@@ -52,7 +52,6 @@
                               NSLocalizedString(@"ArrivalTimes", nil), [stopRoute generateTimesString]];
     
     messageViewController.body = messageBody;
-    [messageBody release];
     
     messageViewController.messageComposeDelegate = self;
 
