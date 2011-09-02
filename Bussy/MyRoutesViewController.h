@@ -44,6 +44,7 @@
 - (void) loadDataFromSave;
 - (void) refreshRoutesWhenNecessaryAsync;
 -(void) receiveNotificationRefreshStatusUpdate: (NSNotification*) notification;
+- (void) insertStopRoute: (StopRoute*) stopRoute;
 
 - (void) save;
 

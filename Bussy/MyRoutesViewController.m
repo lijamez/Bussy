@@ -36,12 +36,16 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     return [saveDataFolder stringByAppendingFormat:@"/watchedStopRoutes.plist"];
 }
 
-- (void) save
+- (NSString*) applicationOptionsSavePath
 {
-    NSString* watchedStopRoutesSavePath = [self watchedStopRoutesSavePath];
-    NSLog(@"Saving to %@...", watchedStopRoutesSavePath);
-    
-    //Construct serializable array
+    NSArray *saveDataPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *saveDataFolder = [saveDataPath objectAtIndex:0];
+    return [saveDataFolder stringByAppendingFormat:@"/applicationOptions.plist"];
+}
+
+- (void) save
+{    
+    //Serialize Watched Stops
     NSMutableArray * watchedStopDictionaries = [[[NSMutableArray alloc] init] autorelease];
     
     for (int stopIndex = 0; stopIndex < [watchedStopRoutes countOfStops]; stopIndex++)
@@ -77,9 +81,92 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
         [watchedStopDictionaries addObject:stopDictionary];
     }
     
-    [watchedStopDictionaries writeToFile:watchedStopRoutesSavePath atomically:YES];
-    NSLog(@"Saved!");
+    [watchedStopDictionaries writeToFile:[self watchedStopRoutesSavePath] atomically:YES];
+    
+    NSLog(@"Serialization of watched stops complete.");
+    
+    //Serialize Other Options
+    NSMutableDictionary * applicationOptions = [[[NSMutableDictionary alloc] init] autorelease];
+    [applicationOptions setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"AppVersion"];
+    
+    [applicationOptions writeToFile:[self applicationOptionsSavePath] atomically:YES];
+    
+    
+    NSLog(@"Serialization of application options complete.");
+    
+    
+    
+    NSLog(@"Serialization complete.");
 ;}
+
+- (void) loadDataFromSave
+{    
+    //Deserialize watched stops
+    NSString *pathToWatchedStopRoutesSaveFile = [self watchedStopRoutesSavePath];
+    NSLog(@"Loading watched stops from %@...", pathToWatchedStopRoutesSaveFile);
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToWatchedStopRoutesSaveFile])
+    {
+        NSArray * watchedStopDictionaries = [[NSArray alloc] initWithContentsOfFile:pathToWatchedStopRoutesSaveFile];
+        
+        for ( NSDictionary * stopDictionary in watchedStopDictionaries)
+        {
+            
+            NSString * savedStopID = [stopDictionary objectForKey:@"StopID"];
+            NSDate * savedLastRefreshedDate = [stopDictionary objectForKey:@"LastRefreshedDate"];
+            BOOL savedStopExists = [[stopDictionary objectForKey:@"StopExists"] boolValue];
+            NSArray * watchedStopRouteDictionaries = [stopDictionary objectForKey:@"StopRoutes"];
+            
+            Stop * stop = [TranslinkStopManager getStopWithNumber:savedStopID lastRefreshDate:savedLastRefreshedDate exists:savedStopExists];
+            
+            for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
+            {
+                NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
+                NSString * savedDirection = [stopRouteDictionary objectForKey:@"Direction"];
+                NSString * savedRouteName = [stopRouteDictionary objectForKey:@"RouteName"];
+                NSArray * savedRouteTimes = [stopRouteDictionary objectForKey:@"Times"];
+                BOOL savedExists = [[stopRouteDictionary objectForKey:@"RouteExists"] boolValue];
+                
+                StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:savedDirection routeID:savedRouteID routeName:savedRouteName times:savedRouteTimes exists:savedExists];
+                
+                [stop.routes addStopRoute:stopRoute];
+                
+                [self insertStopRoute:stopRoute];
+            }
+            
+        }
+        
+        NSLog(@"Deserialization of watched stops complete.");
+    }
+    else
+    {
+        watchedStopRoutes = [[WatchedStopRoutesCollection alloc] init];
+        NSLog(@"Watched stops save file not found.");
+    }
+    
+    [self.stopRoutesTableView reloadData];
+    
+    //Deserialize application options
+    NSString * applicationOptionsSaveFilePath = [self applicationOptionsSavePath];
+    NSLog(@"Loading application options from %@...", applicationOptionsSaveFilePath);
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:applicationOptionsSaveFilePath])
+    {
+        NSDictionary * applicationOptions = [[NSDictionary alloc] initWithContentsOfFile:applicationOptionsSaveFilePath];
+        
+        //TODO Just print out the application version for now...
+        NSString * applicationVersion = [applicationOptions objectForKey:@"AppVersion"];
+        NSLog(@"These save files came from application version %@", applicationVersion);
+        
+        NSLog(@"Deserialization of application options complete.");
+        
+    }
+    else
+    {
+        NSLog(@"Application options save file not found.");
+    }
+    
+}
 
 - (void) insertStopRoute: (StopRoute*) stopRoute
 {
@@ -230,54 +317,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     [self updateHUDWithCompletionMessage:reason];
 }
 
-- (void) loadDataFromSave
-{    
-    NSString *pathToWatchedStopRoutesSaveFile = [self watchedStopRoutesSavePath];
-    NSLog(@"Loading watched stops from %@...", pathToWatchedStopRoutesSaveFile);
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToWatchedStopRoutesSaveFile])
-    {
-        NSArray * watchedStopDictionaries = [[NSArray alloc] initWithContentsOfFile:pathToWatchedStopRoutesSaveFile];
-
-        for ( NSDictionary * stopDictionary in watchedStopDictionaries)
-        {
-            
-            NSString * savedStopID = [stopDictionary objectForKey:@"StopID"];
-            NSDate * savedLastRefreshedDate = [stopDictionary objectForKey:@"LastRefreshedDate"];
-            BOOL savedStopExists = [[stopDictionary objectForKey:@"StopExists"] boolValue];
-            NSArray * watchedStopRouteDictionaries = [stopDictionary objectForKey:@"StopRoutes"];
-            
-            Stop * stop = [TranslinkStopManager getStopWithNumber:savedStopID lastRefreshDate:savedLastRefreshedDate exists:savedStopExists];
-            
-            for ( NSDictionary * stopRouteDictionary in watchedStopRouteDictionaries)
-            {
-                NSString * savedRouteID = [stopRouteDictionary objectForKey:@"RouteID"];
-                NSString * savedDirection = [stopRouteDictionary objectForKey:@"Direction"];
-                NSString * savedRouteName = [stopRouteDictionary objectForKey:@"RouteName"];
-                NSArray * savedRouteTimes = [stopRouteDictionary objectForKey:@"Times"];
-                BOOL savedExists = [[stopRouteDictionary objectForKey:@"RouteExists"] boolValue];
-                
-                StopRoute * stopRoute = [[StopRoute alloc] initWithStop:stop direction:savedDirection routeID:savedRouteID routeName:savedRouteName times:savedRouteTimes exists:savedExists];
-                
-                [stop.routes addStopRoute:stopRoute];
-                
-                [self insertStopRoute:stopRoute];
-            }
-            
-        }
-        
-        NSLog(@"Loaded!");
-    }
-    else
-    {
-        watchedStopRoutes = [[WatchedStopRoutesCollection alloc] init];
-        NSLog(@"Save file not found.");
-    }
-    
-    [self.stopRoutesTableView reloadData];
-    
-
-}
 
 - (void)viewDidLoad
 {

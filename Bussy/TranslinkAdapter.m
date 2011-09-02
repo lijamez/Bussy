@@ -25,7 +25,7 @@
     
     NSString *responseString = [NSString stringWithFormat:@"%.*s", [response length], [response bytes]];
     
-    NSLog(@"Response: %@", responseString);
+    //NSLog(@"Response: %@", responseString);
     return responseString;
     
 }
