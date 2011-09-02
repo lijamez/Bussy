@@ -9,11 +9,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/Stop.h"
-         timestampString = "331187397.003933"
+         timestampString = "336648202.349156"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "13"
-         endingLineNumber = "13">
+         startingLineNumber = "14"
+         endingLineNumber = "14"
+         landmarkName = "@interface Stop"
+         landmarkType = "2">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -49,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/Stop.m"
-         timestampString = "335634570.657933"
+         timestampString = "336648202.349156"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "22"
-         endingLineNumber = "22"
+         startingLineNumber = "26"
+         endingLineNumber = "26"
          landmarkName = "-initWithAdapter:stopId:lastRefreshedDate:exists:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -119,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/Stop.h"
-         timestampString = "331878380.924348"
+         timestampString = "336648202.349156"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "14"
-         endingLineNumber = "14"
+         startingLineNumber = "15"
+         endingLineNumber = "15"
          landmarkName = "@interface Stop"
          landmarkType = "2">
       </FileBreakpoint>
@@ -245,13 +247,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteDetailsViewController.m"
-         timestampString = "336642040.828031"
+         timestampString = "336648202.349156"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "14"
-         endingLineNumber = "14"
-         landmarkName = "@implementation StopRouteDetailsViewController"
-         landmarkType = "3">
+         startingLineNumber = "16"
+         endingLineNumber = "16"
+         landmarkName = "stopRouteNumberLabel,stopRouteNameLabel,stopNumberLabel,directionLabel,timesTableView,lastRefreshedLabel,exportBarButton,noServiceLabel"
+         landmarkType = "19">
          <Locations>
             <Location
                shouldBeEnabled = "No"
@@ -537,11 +539,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteDetailsViewController.m"
-         timestampString = "336642156.713693"
+         timestampString = "336649800.601715"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "184"
-         endingLineNumber = "184"
+         startingLineNumber = "193"
+         endingLineNumber = "193"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -551,11 +553,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteDetailsViewController.m"
-         timestampString = "336642156.713693"
+         timestampString = "336649800.601715"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "173"
-         endingLineNumber = "173"
+         startingLineNumber = "182"
+         endingLineNumber = "182"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -663,11 +665,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/Stop.m"
-         timestampString = "336027624.560478"
+         timestampString = "336648202.349156"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "44"
-         endingLineNumber = "44"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
          landmarkName = "-refreshAndCatchError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1417,12 +1419,110 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Bussy/StopRouteDetailsViewController.m"
-         timestampString = "336642580.613186"
+         timestampString = "336649800.601715"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
-         landmarkName = "-messageComposeViewController:didFinishWithResult:"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
+         landmarkName = "-tableView:numberOfRowsInSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Bussy/Stop.m"
+         timestampString = "336650851.180996"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
+         landmarkName = "-compareStopNumberDescending:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Bussy/StopRouteDetailsViewController.m"
+         timestampString = "336649800.601715"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "-openInMaps"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Bussy/StopRouteDetailsViewController.m"
+         timestampString = "336649823.576968"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
+         landmarkName = "-openInMaps"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Bussy/Stop.m"
+         timestampString = "336649865.807959"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
+         landmarkName = "-getCoordinates"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Bussy/Stop.m"
+         timestampString = "336650499.437771"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
+         landmarkName = "-getCoordinates"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Bussy/Stop.m"
+         timestampString = "336650851.180996"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
+         landmarkName = "-getCoordinates"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Bussy/Stop.m"
+         timestampString = "336650502.982984"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "88"
+         endingLineNumber = "88"
+         landmarkName = "-getCoordinates"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

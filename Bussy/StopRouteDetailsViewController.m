@@ -36,8 +36,14 @@
 
 - (void)openInMaps
 {
-    NSString * translinkUrlString = [NSString stringWithFormat:@"http://m.translink.ca/api/kml/stop/%@/", stopRoute.stop.stopID];
-    NSString * mapsAppUrlString = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", translinkUrlString];
+    //NSString * translinkUrlString = [NSString stringWithFormat:@"http://m.translink.ca/api/kml/stop/%@/", stopRoute.stop.stopID];
+    NSString * coordinates = [stopRoute.stop getCoordinates];
+    if (coordinates == nil)
+    {
+        return;
+    }
+    
+    NSString * mapsAppUrlString = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", coordinates];
     NSURL * url = [NSURL URLWithString:mapsAppUrlString];
     [[UIApplication sharedApplication] openURL:url];
 }

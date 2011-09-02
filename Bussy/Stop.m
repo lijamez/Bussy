@@ -80,6 +80,35 @@
 
 }
 
+- (NSString*) getCoordinates
+{
+    NSString * kml = [adapter requestStopLocation:self.stopID error:nil];
+    
+    NSString * coordinates = nil;
+
+    if (kml != nil)
+    {
+        NSRange beginTag = [kml rangeOfString:@"<coordinates>"];
+        NSRange endTag = [kml rangeOfString:@"</coordinates>"];
+        
+        NSRange coordinatesRange;
+        coordinatesRange.location = beginTag.location + beginTag.length;
+        coordinatesRange.length = endTag.location - coordinatesRange.location ;
+        
+        coordinates = [kml substringWithRange:coordinatesRange];
+        
+        //Coordinates are origignally given in longitude and latitude, so need to flip them.
+        NSRange commaRange = [coordinates rangeOfString:@","];
+        
+        NSString * longitude = [coordinates substringToIndex:commaRange.location];
+        NSString * latitude = [coordinates substringFromIndex:commaRange.location+1];
+        
+        coordinates = [NSString stringWithFormat:@"%@,%@", latitude, longitude];
+    }
+    
+    return coordinates;
+}
+
 - (NSComparisonResult) compareStopNumberAscending: (Stop*) otherStop
 {
     return [self.stopID compare: otherStop.stopID];
