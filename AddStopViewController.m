@@ -66,7 +66,14 @@ int const MAX_FIELD_CHARS = 5;
     
     if (error)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+        NSString * errorMessage = [error localizedDescription];
+        
+        if ([[error domain] isEqualToString:@"org.brautaset.SBJsonParser.ErrorDomain"])
+        {
+            errorMessage = NSLocalizedString(@"Message_ServiceUnavailable", nil);
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:errorMessage delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
         [alert show];
         [alert release];
         return;

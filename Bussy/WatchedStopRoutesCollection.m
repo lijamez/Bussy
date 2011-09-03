@@ -274,10 +274,12 @@
     return userInfo;
 }
 
-- (NSDictionary*) makeUpdateEndedUserInfoWithReason: (NSString*) reason
+- (NSDictionary*) makeUpdateEndedUserInfoWithReason: (NSString*) reason details: (NSString*) reasonDetails result: (RefreshCompletionResult) result
 {
     NSMutableDictionary * userInfo = [[NSMutableDictionary alloc] init];
     [userInfo setObject:reason forKey:REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_REASON];
+    [userInfo setObject:reasonDetails forKey:REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_REASON_DETAILS];
+    [userInfo setObject:[NSNumber numberWithInt:result] forKey:REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_RESULT];
     
     return userInfo;
 }
@@ -291,14 +293,12 @@
     if (numbersOfStopsToRefresh == nil) return;
         
     NSUInteger currentCount = 0;
+    NSMutableArray * failedStopNumbers = [[NSMutableArray alloc] init];
     
     for (NSString * stopNumber in numbersOfStopsToRefresh)
     {
         if (shouldCancel)
         {
-            NSDictionary * userInfo = [self makeUpdateEndedUserInfoWithReason:@"Cancelled"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_ENDED_NAME object:self userInfo: userInfo];
-            
             break;
         }
             
@@ -309,13 +309,42 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_NAME object:self userInfo: userInfo];
         
         Stop * stop = [self getStopByNumber:stopNumber];
-
-        [stop refreshAndCatchError:error];
+        
+        NSError * stopRefreshError = nil;
+        
+        [stop refreshAndCatchError:&stopRefreshError];
+        
+        if (stopRefreshError)
+        {
+            [failedStopNumbers addObject:stopNumber];
+        }
+        
     }
     
-    if (currentCount == [numbersOfStopsToRefresh count])
+    
+    if (shouldCancel)
     {
-        NSDictionary * userInfo = [self makeUpdateEndedUserInfoWithReason:@"Completed"];
+        NSDictionary * userInfo = [self makeUpdateEndedUserInfoWithReason:NSLocalizedString(@"HUDMessage_Cancelled", nil) details:@"" result:REFRESH_CANCELLED];
+        [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_ENDED_NAME object:self userInfo: userInfo];
+    }
+    else if ([failedStopNumbers count] > 0)
+    {
+        if ([failedStopNumbers count] >= [numbersOfStopsToRefresh count])
+        {
+            //Maximum failure
+            NSDictionary * userInfo = [self makeUpdateEndedUserInfoWithReason:NSLocalizedString(@"HUDMessage_Failed", nil) details:@"" result:REFRESH_COMPLETE_FAILURE];
+            [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_ENDED_NAME object:self userInfo: userInfo];
+        }
+        else
+        {
+            //Partial failure
+            NSDictionary * userInfo = [self makeUpdateEndedUserInfoWithReason:NSLocalizedString(@"HUDMessage_Failed", nil) details:NSLocalizedString(@"Message_ItemsFailedRefresh", nil) result:REFRESH_PARTIAL_FAILURE];
+            [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_ENDED_NAME object:self userInfo: userInfo];
+        }
+    }
+    else
+    {
+        NSDictionary * userInfo = [self makeUpdateEndedUserInfoWithReason:NSLocalizedString(@"HUDMessage_Completed", nil) details:@"" result:REFRESH_SUCCESS];
         [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_NOTIFICATION_UPDATE_ENDED_NAME object:self userInfo: userInfo];
     }
     

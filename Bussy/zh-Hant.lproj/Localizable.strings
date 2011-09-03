@@ -1,0 +1,68 @@
+/* 
+ Localizable.strings
+ Bussy
+ 
+ Created by James Li on 11-08-29.
+ Copyright (c) 2011 University of British Columbia. All rights reserved.
+ */
+
+//View Titles
+"ViewTitle_MyRoutes" = "我的路線";					
+"ViewTitle_RouteDetails" = "細節";				
+"ViewTitle_EnterStopNumber" = "站牌編號";		
+"ViewTitle_ChooseRoute" = "選擇路線";			
+"ViewTitle_About" = "關於";						
+"ViewTitle_NearMe" = "距離我最近的站牌";	
+
+//HUD Messages
+"HUDMessage_RouteAdded" = "路線成功增加";		
+"HUDMessage_RouteAlreadyAdded" = "路線已存在";	
+"HUDMessage_RefreshingRoutes" = "重新整理路線";		
+"HUDMessage_FetchingRoutes" = "載入路線中‧‧‧";			
+"HUDMessage_Completed" = "完成";						
+"HUDMessage_Cancelled" = "已取消";
+"HUDMessage_Failed" = "失敗";
+
+//General Messages
+"Message_ServiceUnavailable" = "無法連結 TransLink 行動服務，請稍候再重新嘗試。";
+"Message_ItemsFailedRefresh" = "有些項目無法重新整理。請稍候再嘗試";
+
+//General Terminology
+"ArrivalTimes" = "抵達時間";
+"Stop" = "站牌";					
+"StopNumber" = "站牌編號";		
+"Route" = "路線";					
+"RouteNumber" = "路線編號";		
+"Direction" = "方向";			
+"Copyright" = "著作權";			
+"Never" = "沒有此紀錄";					
+"Updated" = "更新日期";				
+"LastUpdated" = "最後一次更新日期";		
+"Version" = "版本";				
+
+//Navigation Words
+"Error" = "錯誤";					
+"OK" = "確定";						
+"Cancel" = "取消";				
+"Next" = "下一步";					
+
+//View-Specific Messages/Labels
+"ActionSheetLabel_SelectAnAction" = "請選擇一個指令";		
+"ActionSheetButton_ShowInMaps" = "顯示在地圖上";			
+"ActionSheetButton_ShareViaSMS" = "經由SMS分享";			
+
+"RoutesList_NoServiceAtThisTime" = "目前沒有公車服務";		
+"RoutesList_RouteNotInService" = "此路線已經停止服務";	
+"RoutesList_NoRoutes" = "找不到路線";								
+"RoutesList_NoRoutesDetails" = "按 + 來新增路線";	
+
+"StopRouteDetails_NoServiceMessage" = "目前此站牌沒有公車";	
+
+"AddRoute_EnterStopNumber" = "請輸入站牌編號";					
+
+"DialogMessage_StopNumberNotFound" = "找不到此編號";		
+"DialogMessage_MissingStopNumber" = "請確實輸入站牌編號";	
+"DialogMessage_InsufficientStopNumberDigits" = "站牌編號必須是5位數";	
+
+"About_AcknowledgementsHeader" = "聲明";
+"About_Disclaimer" = "正在從 TransLink 接收資料中。以下資料並不保證其正確或完整性。";

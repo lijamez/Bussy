@@ -30,7 +30,7 @@ typedef enum
 - (void) updateHUDWithText: (NSString*) text;
 - (void) updateHUDWithDetailsText:(NSString *)text;
 - (void) updateHUDWithMode: (MBProgressHUDMode) mode text: (NSString*) text detailsText: (NSString*) detailsText;
-- (void) updateHUDWithCompletionMessage: (NSString*) message;
--(void) showHUDWithCompletionMessage: (NSString*) message details: (NSString*) detailsMessage type: (CompletionHUDType) type target: (id) target;
+- (void) updateHUDWithCompletionMessage: (NSString*) message details: (NSString*) messageDetails type: (CompletionHUDType) type;
+- (void) showHUDWithCompletionMessage: (NSString*) message details: (NSString*) detailsMessage type: (CompletionHUDType) type target: (id) target;
 
 @end

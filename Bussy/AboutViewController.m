@@ -17,7 +17,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = NSLocalizedString(@"ViewTitle_About", nil);
     }
     return self;
 }
@@ -35,7 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    self.title = NSLocalizedString(@"ViewTitle_About", nil);
     
     versionLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Version", nil), [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
     acknowledgementsLabel.text = NSLocalizedString(@"About_AcknowledgementsHeader", nil);

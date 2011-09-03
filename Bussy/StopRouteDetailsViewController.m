@@ -36,10 +36,13 @@
 
 - (void)openInMaps
 {
-    //NSString * translinkUrlString = [NSString stringWithFormat:@"http://m.translink.ca/api/kml/stop/%@/", stopRoute.stop.stopID];
     NSString * coordinates = [stopRoute.stop getCoordinates];
     if (coordinates == nil)
     {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Message_ServiceUnavailable", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        
         return;
     }
     

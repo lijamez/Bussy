@@ -8,7 +8,7 @@
 
 #import "BussyConstants.h"
 
-NSUInteger const DEFAULT_MIN_AGE_FOR_AUTO_REFRESH_IN_SECS = 1200; //20 minutes
+NSUInteger const DEFAULT_MIN_AGE_FOR_AUTO_REFRESH_IN_SECS = 1800; //30 minutes
 
 NSString * const REFRESH_NOTIFICATION_UPDATE_NAME = @"RefreshNotificationUpdate";
 NSString * const REFRESH_NOTIFICATION_USERINFO_CURRENT_COUNT = @"CurrentCount";
@@ -16,3 +16,6 @@ NSString * const REFRESH_NOTIFICATION_USERINFO_TOTAL_COUNT = @"TotalCount";
 
 NSString * const REFRESH_NOTIFICATION_UPDATE_ENDED_NAME = @"RefreshNotificationUpdateEnded";
 NSString * const REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_REASON = @"RefreshNotificationUpdateEndedReason";
+NSString * const REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_REASON_DETAILS = @"RefreshNotificationUpdateEndedReasonDetails";
+NSString * const REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_RESULT = @"RefreshNotificationUpdateEndedResult";
+

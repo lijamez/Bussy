@@ -201,33 +201,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     [self presentModalViewController:addStopRouteNavigationController animated:YES];
 ;}
 
-- (void) refreshWatchedStopRoutes
-{    
-    if ([watchedStopRoutes countOfAllWatchedStopRoutes] <= 0) return;
-    if ([watchedStopRoutes isRefreshing]) return;
-    
-    UIBackgroundTaskIdentifier bti = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        [watchedStopRoutes requestCancel]; 
-    }];
-    
-    
-    NSError * error = nil;
-    
-    [watchedStopRoutes refreshAndCatchError:&error];
-    
-    [[UIApplication sharedApplication] endBackgroundTask:bti]; 
 
-    
-    if (error)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error String") message:[error localizedDescription] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK String") otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
-    
-    [self.stopRoutesTableView reloadData];
-
-}
 
 -(void) refreshStopsWithNumbers: (NSArray*) outdatedStopNumbers
 {
@@ -246,16 +220,20 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     [[UIApplication sharedApplication] endBackgroundTask:bti]; 
     
     if (error)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error String") message:[error localizedDescription] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK String") otherButtonTitles:nil];
+    {        
+        NSString * errorMessage = [error localizedDescription];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:errorMessage delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
         [alert show];
         [alert release];
     }
     
     [self.stopRoutesTableView reloadData];
-    
-    
+}
 
+- (void) refreshWatchedStopRoutes
+{    
+    [self refreshStopsWithNumbers:[watchedStopRoutes stopNumbers]];
 }
 
 - (void) refreshRoutesButtonWasTapped: (id) sender
@@ -296,7 +274,7 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 
     if (outdatedStopNumbers.count > 0 && ![watchedStopRoutes isRefreshing])
     {
-        [self showHUDWithSelector:@selector(refreshStopsWithNumbers:) mode:MBProgressHUDModeIndeterminate text:@"Refreshing" DimBackground:NO animated:YES onTarget:self withObject:outdatedStopNumbers];
+        [self showHUDWithSelector:@selector(refreshStopsWithNumbers:) mode:MBProgressHUDModeIndeterminate text:NSLocalizedString(@"HUDMessage_RefreshingRoutes", nil) DimBackground:NO animated:YES onTarget:self withObject:outdatedStopNumbers];
     }
     
 }
@@ -313,8 +291,35 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
 {
     NSDictionary * userInfo = notification.userInfo;
     NSString * reason = [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_REASON];
+    NSString * reasonDetails = [userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_REASON_DETAILS];
+    RefreshCompletionResult result = [[userInfo objectForKey:REFRESH_NOTIFICATION_USERINFO_UPDATE_ENDED_RESULT] intValue];
     
-    [self updateHUDWithCompletionMessage:reason];
+    CompletionHUDType hudType = HUD_TYPE_SUCCESS;
+    
+    if (result == REFRESH_SUCCESS)
+    {
+        hudType = HUD_TYPE_SUCCESS;
+    }
+    else if (result == REFRESH_PARTIAL_FAILURE)
+    {
+        hudType = HUD_TYPE_WARNING;
+    }
+    else if (result == REFRESH_COMPLETE_FAILURE)
+    {
+        hudType = HUD_TYPE_FAILURE;
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Message_ServiceUnavailable", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        
+    }
+    else if (result == REFRESH_CANCELLED)
+    {
+        hudType = HUD_TYPE_WARNING;
+    }
+    
+    [self updateHUDWithCompletionMessage:reason details:reasonDetails type: hudType];
+
 }
 
 

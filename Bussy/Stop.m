@@ -43,9 +43,20 @@
     
     NSString * json = [adapter requestStop:stopID error:error];
     
+    if (*error)
+        return;
+    
     SBJsonParser * parser = [[SBJsonParser alloc] init];
     
-    NSArray * entries = [parser objectWithString:json error:nil];
+    NSError * parsingError = nil;
+    
+    NSArray * entries = [parser objectWithString:json error:&parsingError];
+    
+    if (parsingError)
+    {
+        *error = parsingError;
+        return;
+    }
     
     BOOL stopFound = NO;
     
@@ -90,6 +101,11 @@
     {
         NSRange beginTag = [kml rangeOfString:@"<coordinates>"];
         NSRange endTag = [kml rangeOfString:@"</coordinates>"];
+        
+        if (beginTag.location == NSNotFound || endTag.location == NSNotFound)
+        {
+            return nil;
+        }
         
         NSRange coordinatesRange;
         coordinatesRange.location = beginTag.location + beginTag.length;

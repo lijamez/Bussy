@@ -15,6 +15,14 @@ typedef enum
     DESCENDING
 } SortMethod;
 
+typedef enum
+{
+    REFRESH_SUCCESS,
+    REFRESH_PARTIAL_FAILURE,
+    REFRESH_COMPLETE_FAILURE,
+    REFRESH_CANCELLED
+} RefreshCompletionResult;
+
 @interface WatchedStopRoutesCollection : NSObject
 {
     NSMutableDictionary * watchedRoutesByStopNumber;

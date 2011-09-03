@@ -183,6 +183,7 @@
 		A086330A140B785200D84D44 /* 37x-Cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Cross.png"; sourceTree = "<group>"; };
 		A0863311140B7DE700D84D44 /* 37x-Exclamation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Exclamation.png"; sourceTree = "<group>"; };
 		A0863312140B7DE700D84D44 /* 37x-Exclamation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Exclamation@2x.png"; sourceTree = "<group>"; };
+		A095EE1614120BD100DFE202 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A0A4263B140E0A6B0035ABAE /* 37x-Plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Plus@2x.png"; sourceTree = "<group>"; };
 		A0A4263C140E0A6B0035ABAE /* 37x-Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Plus.png"; sourceTree = "<group>"; };
 		A0A42643140E111D0035ABAE /* 37x-Add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Add@2x.png"; sourceTree = "<group>"; };
@@ -551,6 +552,7 @@
 			knownRegions = (
 				en,
 				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = A063461813BC537300CB5168;
 			productRefGroup = A063462413BC537300CB5168 /* Products */;
@@ -698,6 +700,7 @@
 			children = (
 				A037AB9F140B890100EDCBFF /* en */,
 				A037ABA1140B891100EDCBFF /* zh-Hans */,
+				A095EE1614120BD100DFE202 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

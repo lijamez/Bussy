@@ -27,6 +27,29 @@
     return self.view;
 }
 
+- (UIImageView*) imageLookupByHUDType: (CompletionHUDType) type
+{
+    if (type == HUD_TYPE_SUCCESS)
+    {
+        return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Check.png"]];
+    }
+    else if (type == HUD_TYPE_ADD)
+    {
+        return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Plus.png"]];
+    }
+    else if (type == HUD_TYPE_WARNING)
+    {
+        return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Exclamation.png"]];
+    }
+    else if (type == HUD_TYPE_FAILURE)
+    {
+        return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Cross.png"]];
+    }
+    
+    //Default
+    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Check.png"]];
+}
+
 - (void) showHUDWithSelector: (SEL)method mode:(MBProgressHUDMode) mode text: (NSString*) text DimBackground: (BOOL) dimBackground animated: (BOOL)animated onTarget:(id)target withObject:(id)object 
 {
     if (HUD != nil)
@@ -61,19 +84,18 @@
     HUD.detailsLabelText = detailsText;
 }
 
-- (void) updateHUDWithCompletionMessage: (NSString*) message
+- (void) updateHUDWithCompletionMessage: (NSString*) message details: (NSString*) messageDetails type: (CompletionHUDType) type
 {
     if (!HUD.taskInProgress) return;
     
     NSString * labelText = message;
-     
     if (labelText == nil)
         labelText = NSLocalizedString(@"HUDMessage_Completed", nil);
     
-    HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Check.png"]] autorelease];
+    HUD.customView = [self imageLookupByHUDType:type];
 	HUD.mode = MBProgressHUDModeCustomView;
 	HUD.labelText = labelText;
-    HUD.detailsLabelText = @"";
+    HUD.detailsLabelText = messageDetails;
     sleep(1);
 }
 
@@ -105,23 +127,7 @@
     }
     
     HUD.dimBackground = NO;
-    
-    if (type == HUD_TYPE_SUCCESS)
-    {
-        HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Check.png"]];
-    }
-    else if (type == HUD_TYPE_ADD)
-    {
-        HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Plus.png"]];
-    }
-    else if (type == HUD_TYPE_WARNING)
-    {
-        HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Exclamation.png"]];
-    }
-    else if (type == HUD_TYPE_FAILURE)
-    {
-        HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Cross.png"]];
-    }
+    HUD.customView = [self imageLookupByHUDType:type];
     
     HUD.mode = MBProgressHUDModeCustomView;
 

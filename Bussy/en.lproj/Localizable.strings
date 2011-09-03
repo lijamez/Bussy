@@ -20,6 +20,12 @@
 "HUDMessage_RefreshingRoutes" = "Refreshing Routes";
 "HUDMessage_FetchingRoutes" = "Fetching Routes...";
 "HUDMessage_Completed" = "Completed";
+"HUDMessage_Cancelled" = "Cancelled";
+"HUDMessage_Failed" = "Failed";
+
+//General Messages
+"Message_ServiceUnavailable" = "The TransLink mobile service is currently unavailable. Please try again later.";
+"Message_ItemsFailedRefresh" = "Some items have failed to refresh.";
 
 //General Terminology
 "ArrivalTimes" = "Arrival Times";
