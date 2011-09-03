@@ -45,7 +45,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{101, 20}, {199, 32}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="157202657"/>
 						<string key="NSReuseIdentifierKey">_NS:121</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -82,7 +81,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{101, 60}, {199, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="745780921"/>
 						<string key="NSReuseIdentifierKey">_NS:121</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -112,7 +110,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{101, 78}, {199, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="42769709"/>
 						<string key="NSReuseIdentifierKey">_NS:121</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -135,7 +132,6 @@
 						<int key="NSvFlags">269</int>
 						<string key="NSFrame">{{20, 347}, {285, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:121</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -167,7 +163,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 125}, {249, 18}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="219050187"/>
 						<string key="NSReuseIdentifierKey">_NS:121</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -198,7 +193,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 151}, {280, 77}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="604278367"/>
 						<string key="NSReuseIdentifierKey">_NS:121</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -223,7 +217,6 @@ cC1CaXRzIC0gVG9vbGJhciBJY29ucwpXZWlmb24gTGl1IC0gQ2hpbmVzZSBMb2NhbGl6YXRpb24</str
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 20}, {73, 79}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="268949576"/>
 						<string key="NSReuseIdentifierKey">_NS:366</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="985987045">
@@ -241,7 +234,6 @@ cC1CaXRzIC0gVG9vbGJhciBJY29ucwpXZWlmb24gTGl1IC0gQ2hpbmVzZSBMb2NhbGl6YXRpb24</str
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="579032041"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">10</int>
@@ -448,6 +440,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<string>-1.IBPluginDependency</string>
 					<string>-2.CustomClassName</string>
 					<string>-2.IBPluginDependency</string>
+					<string>1.IBAttributePlaceholdersKey</string>
 					<string>1.IBPluginDependency</string>
 					<string>12.IBPluginDependency</string>
 					<string>13.IBPluginDependency</string>
@@ -463,6 +456,11 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSMutableDictionary">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<reference key="dict.sortedKeys" ref="0"/>
+						<reference key="dict.values" ref="0"/>
+					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -564,7 +562,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
-			<integer value="3000" key="NS.object.0"/>
+			<real value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
