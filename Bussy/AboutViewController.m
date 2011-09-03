@@ -34,8 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.title = NSLocalizedString(@"ViewTitle_About", nil);
     
     versionLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Version", nil), [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
     acknowledgementsLabel.text = NSLocalizedString(@"About_AcknowledgementsHeader", nil);
@@ -49,6 +47,11 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)awakeFromNib
+{
+    self.title = NSLocalizedString(@"ViewTitle_About", nil);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

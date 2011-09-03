@@ -337,7 +337,6 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     [self setAddBarButton:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWatchedStopRoute:)]];
     self.navigationController.navigationBar.topItem.rightBarButtonItem = addBarButton;
     
-    self.title = NSLocalizedString(@"ViewTitle_MyRoutes", @"My Routes View Title");
     self.navigationController.navigationBar.tintColor = [TranslinkColors GetTranslinkBlue];;
     self.navigationController.navigationBar.topItem.leftBarButtonItem.enabled = YES;
     
@@ -657,6 +656,11 @@ CGFloat const TABLE_VIEW_CELL_HEIGHT = 80;
     [super didReceiveMemoryWarning];
     
     // Relinquish ownership any cached data, images, etc that aren't in use.
+}
+
+- (void) awakeFromNib
+{
+    self.title = NSLocalizedString(@"ViewTitle_MyRoutes", @"My Routes View Title");
 }
 
 - (void)viewDidUnload
