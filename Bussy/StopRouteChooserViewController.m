@@ -27,13 +27,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [stopRouteTableView release];
-    [stopRoutes release];
-    [super dealloc];
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -96,6 +89,13 @@
     [self.delegate didReceiveStopRoute:[stopRoutes.array objectAtIndex:[indexPath row]]];
     [self dismissModalViewControllerAnimated:YES];
     
+}
+
+- (void)dealloc
+{
+    [stopRouteTableView release];
+    [stopRoutes release];
+    [super dealloc];
 }
 
 @end
