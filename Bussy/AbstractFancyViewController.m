@@ -8,7 +8,7 @@
 
 #import "AbstractFancyViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
-
+#import "BussyConstants.h"
 
 @implementation AbstractFancyViewController
 
@@ -133,6 +133,140 @@
 
     
     [HUD showWhileExecuting:@selector(sleepForSecs:) onTarget:target withObject:[NSNumber numberWithInt:2] animated:YES];
+}
+
+- (UITableViewCell *) getFancyCellForTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UILabel *routeNumberLabel;
+    UILabel *routeTimesLabel;
+	UILabel *routeNameLabel;
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero] autorelease];
+        
+        //Indicator
+        UIImage * indicatorImage = [UIImage imageNamed:@"indicator.png"];
+        cell.accessoryView = [[[UIImageView alloc]
+                               initWithImage:indicatorImage]
+                              autorelease];
+        
+        const CGFloat ROUTE_NUMBER_LABEL_HEIGHT = 26;
+        const CGFloat ROUTE_NUMBER_LABEL_WIDTH = 48;
+        const CGFloat ROUTE_TIMES_LABEL_HEIGHT = 20;
+        const CGFloat ROUTE_NAME_LABEL_HEIGHT = 22;
+        
+        
+        //Route Number Label
+        routeNumberLabel =
+        [[[UILabel alloc]
+          initWithFrame:
+          CGRectMake(
+                     2.0 * cell.indentationWidth,
+                     tableView.rowHeight * 0.5 - ROUTE_NUMBER_LABEL_HEIGHT,
+                     ROUTE_NUMBER_LABEL_WIDTH,
+                     ROUTE_NUMBER_LABEL_HEIGHT)]
+         autorelease];
+        [cell.contentView addSubview:routeNumberLabel];
+        
+        routeNumberLabel.tag = ROUTE_NUMBER_LABEL_TAG;
+        routeNumberLabel.backgroundColor = [UIColor clearColor];
+        routeNumberLabel.textColor = [UIColor whiteColor];
+        routeNumberLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]+6];
+        routeNumberLabel.shadowColor = [UIColor blackColor];
+        
+        //Route Times Label
+        routeTimesLabel =
+        [[[UILabel alloc]
+          initWithFrame:
+          CGRectMake(
+                     2.0 * cell.indentationWidth + ROUTE_NUMBER_LABEL_WIDTH + cell.indentationWidth,
+                     tableView.rowHeight * 0.5 - ROUTE_TIMES_LABEL_HEIGHT,
+                     tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width - ROUTE_NUMBER_LABEL_WIDTH - cell.indentationWidth,
+                     ROUTE_TIMES_LABEL_HEIGHT)]
+         autorelease];
+        [cell.contentView addSubview:routeTimesLabel];
+        
+        routeTimesLabel.tag = ROUTE_TIMES_LABEL_TAG;
+        routeTimesLabel.backgroundColor = [UIColor clearColor];
+        routeTimesLabel.textColor = [UIColor whiteColor];
+        routeTimesLabel.font = [UIFont systemFontOfSize:[UIFont labelFontSize]-2];
+        routeTimesLabel.shadowColor = [UIColor blackColor];
+        [routeTimesLabel setAdjustsFontSizeToFitWidth:YES];
+        
+        //Route Name Label
+        routeNameLabel =
+        [[[UILabel alloc]
+          initWithFrame:
+          CGRectMake(
+                     2.0 * cell.indentationWidth,
+                     0.5 * (tableView.rowHeight),
+                     tableView.bounds.size.width - 4.0 * cell.indentationWidth - indicatorImage.size.width,
+                     ROUTE_NAME_LABEL_HEIGHT)]
+         autorelease];
+        [cell.contentView addSubview:routeNameLabel];
+        
+        // Bottom Label
+        routeNameLabel.tag = ROUTE_NAME_LABEL_TAG;
+        routeNameLabel.backgroundColor = [UIColor clearColor];
+        routeNameLabel.textColor = [UIColor colorWithRed:213.0/255.0 green:235.0/255.0 blue:253.0/255.0 alpha:1.0];
+        [routeNameLabel setAdjustsFontSizeToFitWidth:NO];
+        routeNameLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]-4];
+        routeNameLabel.shadowColor = [UIColor blackColor];
+        
+        //
+		// Create a background image view.
+		//
+		cell.backgroundView =
+        [[[UIImageView alloc] init] autorelease];
+		cell.selectedBackgroundView =
+        [[[UIImageView alloc] init] autorelease];
+    }
+    else
+    {
+        routeNumberLabel = (UILabel *)[cell viewWithTag:ROUTE_NUMBER_LABEL_TAG];
+		routeNameLabel = (UILabel *)[cell viewWithTag:ROUTE_NAME_LABEL_TAG];
+    }
+    
+    
+    
+    //Set the background
+	UIImage *rowBackground;
+	UIImage *selectionBackground;
+	NSInteger sectionRows = [tableView numberOfRowsInSection:[indexPath section]];
+	NSInteger row = [indexPath row];
+	if (row == 0 && row == sectionRows - 1)
+	{
+        //One and only one row
+		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
+		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
+	}
+	else if (row == 0)
+	{
+        //First Row
+		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
+		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
+	}
+	else if (row == sectionRows - 1)
+	{
+        //Last Row
+		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
+		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
+	}
+	else
+	{
+        //Middle Row
+		rowBackground = [UIImage imageNamed:@"topAndBottomRow.png"];
+		selectionBackground = [UIImage imageNamed:@"topAndBottomRowSelected.png"];
+	}
+    
+	((UIImageView *)cell.backgroundView).image = rowBackground;
+	((UIImageView *)cell.selectedBackgroundView).image = selectionBackground; 
+
+    
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning

@@ -32,5 +32,5 @@ typedef enum
 - (void) updateHUDWithMode: (MBProgressHUDMode) mode text: (NSString*) text detailsText: (NSString*) detailsText;
 - (void) updateHUDWithCompletionMessage: (NSString*) message details: (NSString*) messageDetails type: (CompletionHUDType) type;
 - (void) showHUDWithCompletionMessage: (NSString*) message details: (NSString*) detailsMessage type: (CompletionHUDType) type target: (id) target;
-
+- (UITableViewCell *) getFancyCellForTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
